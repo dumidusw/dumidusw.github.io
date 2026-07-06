@@ -1,0 +1,46 @@
+Welcome!
+
+If you're reading this, welcome!
+
+I'm a software developer who enjoys understanding how things work beneath the surface.
+
+This website is where I'll document that journey.
+
+Rather than simply showing how to do something, I prefer exploring why it works that way and how different pieces fit together.
+
+You can expect articles about:
+
+Linux and the Unix philosophy
+Arch Linux and system administration
+Python internals and the standard library
+Bash scripting and shell utilities
+Open-source projects I build
+Computer architecture and how computers really work
+Lessons learned while solving real-world problems
+
+Many of these articles will grow out of projects I'm actively working on.
+
+Sometimes they'll be tutorials.
+
+Sometimes they'll be design discussions.
+
+Sometimes they'll simply document an idea that I found useful and wanted to share.
+
+I believe that the best way to learn is to build things, ask questions, and explain what you've learned to others.
+
+If any of these topics interest you, I hope you'll find something useful here.
+
+Thanks for stopping by.
+
+What comes next?
+
+My first few articles will likely cover topics such as:
+
+Why I built arch_sysreport
+A practical workflow for safe Arch Linux updates
+Designing small Unix utilities
+Building passfzf
+Understanding relay computers from first principles
+Python internals and object model
+
+See you in the next post!
