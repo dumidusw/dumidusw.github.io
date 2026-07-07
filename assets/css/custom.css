@@ -125,3 +125,41 @@ pre {
   font-weight: 700;
   margin-bottom: 0.5rem;
 }
+
+/* ========================================
+   FIX HEADER OVERLAP
+   ======================================== */
+
+/* Make site title smaller */
+.site-title {
+  font-size: 1.2rem !important; /* Smaller title */
+  font-weight: 600;
+}
+
+/* Make navigation links smaller */
+.site-nav .page-link {
+  font-size: 0.85rem !important;
+}
+
+/* Reduce header padding */
+.site-header {
+  padding: 0.5rem 0 !important;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+/* Make the wrapper tighter */
+.wrapper {
+  max-width: 900px;
+  padding: 0 20px;
+}
+
+/* For very long titles on mobile */
+@media screen and (max-width: 600px) {
+  .site-title {
+    font-size: 1rem !important;
+  }
+
+  .site-nav .page-link {
+    font-size: 0.75rem !important;
+  }
+}
