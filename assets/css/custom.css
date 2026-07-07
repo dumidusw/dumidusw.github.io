@@ -1,21 +1,47 @@
 /* Custom fonts */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono&display=swap');
 
-/* Global font settings - keep header/nav normal */
-body {
+/* ========================================
+   FORCE INTER FONT EVERYWHERE
+   ======================================== */
+
+/* Force Inter on everything */
+html,
+body,
+p,
+li,
+blockquote,
+.post-content,
+.post-excerpt,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.site-title,
+.site-nav,
+.page-link,
+.post-meta,
+.post-title,
+.site-description,
+.wrapper {
   font-family:
     'Inter',
     -apple-system,
     BlinkMacSystemFont,
     'Segoe UI',
     Roboto,
-    sans-serif;
-  font-size: 16px; /* Keep default size for header/nav */
+    sans-serif !important;
+}
+
+/* Body */
+body {
+  font-size: 16px;
   line-height: 1.6;
 }
 
-/* Headings - keep normal sizes */
+/* Headings */
 h1 {
   font-size: 2rem;
 }
@@ -26,157 +52,163 @@ h3 {
   font-size: 1.3rem;
 }
 
-/* Code blocks */
-code,
-pre {
-  font-family:
-    'JetBrains Mono', 'SF Mono', Consolas, 'Liberation Mono', monospace;
-  font-size: 0.9em;
-}
-
 /* ========================================
-   POST CONTENT ONLY - Larger, more readable
+   POST CONTENT
    ======================================== */
 
-/* Main post content area */
 .post-content {
-  font-family:
-    'Inter',
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    sans-serif;
-  font-size: 1.5rem; /* Slightly larger for serif */
-  line-height: 1.9;
-  font-weight: 400;
+  font-size: 1.5rem !important;
+  line-height: 1.9 !important;
 }
 
-/* Post headings - keep in Inter font */
-.post-content h1,
-.post-content h2,
-.post-content h3,
-.post-content h4 {
-  font-family:
-    'Inter',
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    sans-serif;
-}
-
-/* Post headings within content */
 .post-content h1 {
-  font-size: 2.4rem;
+  font-size: 2.2rem !important;
   font-weight: 600;
-  margin-top: 2rem;
-  margin-bottom: 1rem;
 }
 
 .post-content h2 {
-  font-size: 2rem;
+  font-size: 2rem !important;
   font-weight: 600;
-  margin-top: 1.8rem;
-  margin-bottom: 0.8rem;
 }
 
 .post-content h3 {
-  font-size: 1.6rem;
+  font-size: 1.6rem !important;
   font-weight: 600;
-  margin-top: 1.5rem;
-  margin-bottom: 0.6rem;
 }
 
-/* Post paragraphs */
 .post-content p {
   margin-bottom: 1.2rem;
 }
 
-/* Post lists */
-.post-content ul,
-.post-content ol {
-  margin-bottom: 1.2rem;
-  padding-left: 1.5rem;
-}
+/* ========================================
+   CODE BLOCKS - JetBrains Mono
+   ======================================== */
 
-.post-content li {
-  margin-bottom: 0.5rem;
-}
-
-/* Post code blocks */
+code,
+pre,
+.post-content code,
 .post-content pre {
-  font-size: 0.95rem;
-  padding: 1rem;
-  border-radius: 6px;
-  overflow-x: auto;
-}
-
-.post-content code {
+  font-family:
+    'JetBrains Mono', 'SF Mono', Consolas, 'Liberation Mono', monospace !important;
   font-size: 0.9em;
 }
 
-/* Post blockquotes */
-.post-content blockquote {
-  font-size: 1.1rem;
-  border-left: 4px solid #ccc;
-  padding-left: 1.2rem;
-  margin-left: 0;
-  color: #555;
-}
-
-/* Site title - keep it clean */
-.site-title {
-  font-size: 1.4rem;
-  font-weight: 600;
-}
-
-/* Navigation links */
-.site-nav .page-link {
-  font-size: 0.95rem;
-}
-
-/* Post meta (date, categories) */
-.post-meta {
-  font-size: 0.9rem;
-  color: #666;
-}
-
-/* Post title on the post page */
-.post-title {
-  font-size: 2.2rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-}
-
 /* ========================================
-   FIX HEADER OVERLAP
+   HEADER
    ======================================== */
 
-/* Make site title smaller */
 .site-title {
-  font-size: 1.2rem !important; /* Smaller title */
+  font-size: 1.2rem !important;
   font-weight: 600;
 }
 
-/* Make navigation links smaller */
 .site-nav .page-link {
   font-size: 0.85rem !important;
 }
 
-/* Reduce header padding */
 .site-header {
   padding: 0.5rem 0 !important;
   border-bottom: 1px solid #e8e8e8;
 }
 
-/* Make the wrapper tighter */
+/* ========================================
+   LAYOUT
+   ======================================== */
+
 .wrapper {
   max-width: 900px;
   padding: 0 20px;
 }
 
-/* For very long titles on mobile */
+.post-meta {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.post-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+}
+
+/* ========================================
+   POST LIST ITEMS (Homepage)
+   ======================================== */
+
+.post-list-item {
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.post-list-item:last-child {
+  border-bottom: none;
+}
+
+.post-list-item h2 {
+  margin-bottom: 0.3rem;
+  font-size: 1.6rem;
+}
+
+.post-list-item h2 a {
+  color: #111;
+  text-decoration: none;
+}
+
+.post-list-item h2 a:hover {
+  color: #2a7ae2;
+}
+
+.post-excerpt {
+  margin-top: 0.5rem;
+  color: #555;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.post-excerpt .read-more {
+  color: #2a7ae2;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.post-excerpt .read-more:hover {
+  text-decoration: underline;
+}
+
+/* ========================================
+   FOOTER
+   ======================================== */
+
+.site-footer {
+  border-top: 1px solid #e8e8e8;
+  padding: 1.5rem 0;
+  margin-top: 2rem;
+}
+
+.footer-col-wrapper {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.footer-col {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.footer-col a {
+  color: #2a7ae2;
+  text-decoration: none;
+}
+
+.footer-col a:hover {
+  text-decoration: underline;
+}
+
+/* ========================================
+   MOBILE RESPONSIVE
+   ======================================== */
+
 @media screen and (max-width: 600px) {
   .site-title {
     font-size: 1rem !important;
@@ -185,4 +217,72 @@ pre {
   .site-nav .page-link {
     font-size: 0.75rem !important;
   }
+
+  .post-list-item h2 {
+    font-size: 1.3rem;
+  }
+
+  .post-excerpt {
+    font-size: 0.95rem;
+  }
+
+  .footer-col-wrapper {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+}
+
+/* ========================================
+   HOMEPAGE - INCREASED FONT SIZES
+   ======================================== */
+
+/* Post titles on homepage */
+.post-list-item h2 {
+  font-size: 2.4rem !important; /* Even larger titles */
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+
+.post-list-item h2 a {
+  color: #111;
+  text-decoration: none;
+  font-size: 2rem !important;
+}
+
+.post-list-item h2 a:hover {
+  color: #2a7ae2;
+}
+
+/* Post meta (date and categories) */
+.post-list-item .post-meta {
+  font-size: 1.15rem !important;
+  color: #888;
+  margin-bottom: 0.5rem;
+}
+
+.post-categories {
+  font-size: 1rem !important;
+  color: #aaa;
+  margin-left: 0.5rem;
+}
+
+/* Post excerpt text */
+.post-excerpt {
+  margin-top: 0.5rem;
+  color: #555;
+  font-size: 1.25rem !important;
+  line-height: 1.8;
+}
+
+/* "Read more →" link */
+.post-excerpt .read-more {
+  color: #2a7ae2;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1.2rem;
+}
+
+.post-excerpt .read-more:hover {
+  text-decoration: underline;
 }
