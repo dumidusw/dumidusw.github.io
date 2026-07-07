@@ -1,0 +1,67 @@
+/* Custom fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono&display=swap');
+
+/* Global font settings */
+body {
+  font-family:
+    'Inter',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
+  font-size: 18px;
+  line-height: 1.8;
+}
+
+/* Headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family:
+    'Inter',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
+  font-weight: 600;
+}
+
+h1 {
+  font-size: 2.2rem;
+}
+h2 {
+  font-size: 1.8rem;
+}
+h3 {
+  font-size: 1.4rem;
+}
+
+/* Code blocks */
+code,
+pre {
+  font-family:
+    'JetBrains Mono', 'SF Mono', Consolas, 'Liberation Mono', monospace;
+  font-size: 0.9em;
+}
+
+/* Post content */
+.post-content {
+  font-size: 1.1rem;
+  line-height: 1.9;
+}
+
+/* Site title */
+.site-title {
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+/* Navigation links */
+.site-nav .page-link {
+  font-size: 1rem;
+}
