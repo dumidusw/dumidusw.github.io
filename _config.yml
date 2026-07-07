@@ -24,15 +24,42 @@ description: >- # this means to ignore newlines until "baseurl:"
   Exploring Linux, Python, Bash, and software engineering fundamentals
   through practical projects.
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://dumidusw.github.io" 
 twitter_username: 
 github_username: dumidusw  
 
 # Build settings
 remote_theme: cotes2020/jekyll-theme-chirpy
+
+# Add Chirpy-specific settings
+timezone: Asia/Colombo # Set your timezone
+
+# Social settings
+social:
+  name: dumidusw
+  email: dumidu.github@gmail.com
+  links:
+    - https://github.com/dumidusw
+
+# Page settings
+lang: en
+
+# Theme settings (these are required for Chirpy)
+theme_mode: light # or dark
+
+# DO NOT change this section!
+webmaster_verifications:
+  google: 
+  bing: 
+  baidu: 
+  yandex:
+
 plugins:
   - jekyll-feed
   - jekyll-remote-theme
+  - jekyll-sitemap # Chirpy requires this
+  - jekyll-paginate # Chirpy requires this
+  - jekyll-seo-tag # Chirpy requires this
 
 # Exclude from processing.
 # The following items will not be processed, by default.
