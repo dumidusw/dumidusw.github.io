@@ -2,6 +2,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono&display=swap');
 
 /* ========================================
+   TYPE SCALE
+   One shared scale, used identically on the homepage list
+   and on individual post pages, so "H2 size" means the same
+   number everywhere instead of two separately-tuned values.
+   ======================================== */
+
+:root {
+  --fs-meta: 0.95rem; /* dates, categories */
+  --fs-body: 1.15rem; /* paragraph text: post-content p, post-excerpt */
+  --fs-h3: 1.6rem; /* post-content h3 */
+  --fs-h2: 2rem; /* post-content h2 AND homepage post-list-item title */
+  --fs-h1: 2.2rem; /* post-content h1 */
+}
+
+/* ========================================
    FORCE INTER FONT EVERYWHERE
    ======================================== */
 
@@ -39,38 +54,28 @@ body {
   line-height: 1.6;
 }
 
-/* Headings */
-h1 {
-  font-size: 2rem;
-}
-h2 {
-  font-size: 1.6rem;
-}
-h3 {
-  font-size: 1.3rem;
-}
-
 /* ========================================
    POST CONTENT (individual post pages)
+   Confirmed real: article.post > div.post-content.e-content
    ======================================== */
 
 .post-content {
-  font-size: 1.5rem;
+  font-size: var(--fs-body);
   line-height: 1.9;
 }
 
 .post-content h1 {
-  font-size: 2.2rem;
+  font-size: var(--fs-h1);
   font-weight: 600;
 }
 
 .post-content h2 {
-  font-size: 2rem;
+  font-size: var(--fs-h2);
   font-weight: 600;
 }
 
 .post-content h3 {
-  font-size: 1.6rem;
+  font-size: var(--fs-h3);
   font-weight: 600;
 }
 
@@ -78,8 +83,12 @@ h3 {
   margin-bottom: 1.2rem;
 }
 
+/* NOTE: .post-title is NOT yet confirmed against your actual markup —
+   need to see what's inside <header class="post-header"> before trusting
+   this selector. Leaving it in for now since it's harmless if unmatched,
+   but don't rely on it until confirmed. */
 .post-title {
-  font-size: 2.2rem;
+  font-size: var(--fs-h1);
   font-weight: 700;
 }
 
@@ -125,39 +134,73 @@ pre,
 
 /* ========================================
    HOMEPAGE POST LIST
-   Real minima markup: <ul class="post-list"><li>
-   <span class="post-meta">...</span><h3><a class="post-link">...</a></h3></li>
+   Confirmed real markup:
+   <div class="home">
+     <article class="post-list-item">
+       <h2><a class="post-link">...</a></h2>
+       <div class="post-meta">
+         <time>...</time>
+         <span class="post-categories">...</span>
+       </div>
+       <div class="post-excerpt">
+         ...excerpt text...
+         <a href="...">Read more →</a>   <!-- no class on this link -->
+       </div>
+     </article>
+   </div>
    ======================================== */
 
-.post-list li {
+.post-list-item {
   margin-bottom: 2.5rem;
   padding-bottom: 1.5rem;
   border-bottom: 1px solid #e8e8e8;
 }
 
-.post-list li:last-child {
+.post-list-item:last-child {
   border-bottom: none;
 }
 
-.post-list li h3 {
+.post-list-item h2 {
   margin-bottom: 0.3rem;
-  font-size: 2.4rem;
+  font-size: var(--fs-h2);
 }
 
-.post-list .post-link {
+.post-list-item .post-link {
   color: #111;
   text-decoration: none;
-  font-size: 2rem;
 }
 
-.post-list .post-link:hover {
+.post-list-item .post-link:hover {
   color: #2a7ae2;
 }
 
-.post-list .post-meta {
-  font-size: 1.15rem;
+.post-list-item .post-meta {
+  font-size: var(--fs-meta);
   color: #888;
   margin-bottom: 0.5rem;
+}
+
+.post-list-item .post-meta .post-categories {
+  margin-left: 0.4rem;
+  color: #aaa;
+}
+
+.post-list-item .post-excerpt {
+  font-size: var(--fs-body);
+  color: #555;
+  line-height: 1.8;
+}
+
+/* Read-more link has no class in your markup, so we scope by position
+   inside .post-excerpt rather than a class that doesn't exist */
+.post-list-item .post-excerpt a {
+  color: #2a7ae2;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.post-list-item .post-excerpt a:hover {
+  text-decoration: underline;
 }
 
 /* ========================================
@@ -181,7 +224,11 @@ pre,
     font-size: 0.75rem !important;
   }
 
-  .post-list li h3 {
-    font-size: 1.3rem;
+  .post-list-item h2 {
+    font-size: 1.4rem;
+  }
+
+  .post-list-item .post-excerpt {
+    font-size: 1rem;
   }
 }
