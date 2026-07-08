@@ -5,14 +5,12 @@
    FORCE INTER FONT EVERYWHERE
    ======================================== */
 
-/* Force Inter on everything */
 html,
 body,
 p,
 li,
 blockquote,
 .post-content,
-.post-excerpt,
 h1,
 h2,
 h3,
@@ -53,31 +51,36 @@ h3 {
 }
 
 /* ========================================
-   POST CONTENT
+   POST CONTENT (individual post pages)
    ======================================== */
 
 .post-content {
-  font-size: 1.5rem !important;
-  line-height: 1.9 !important;
+  font-size: 1.5rem;
+  line-height: 1.9;
 }
 
 .post-content h1 {
-  font-size: 2.2rem !important;
+  font-size: 2.2rem;
   font-weight: 600;
 }
 
 .post-content h2 {
-  font-size: 2rem !important;
+  font-size: 2rem;
   font-weight: 600;
 }
 
 .post-content h3 {
-  font-size: 1.6rem !important;
+  font-size: 1.6rem;
   font-weight: 600;
 }
 
 .post-content p {
   margin-bottom: 1.2rem;
+}
+
+.post-title {
+  font-size: 2.2rem;
+  font-weight: 700;
 }
 
 /* ========================================
@@ -120,88 +123,48 @@ pre,
   padding: 0 20px;
 }
 
-.post-meta {
-  font-size: 0.9rem;
-  color: #666;
-}
-
-.post-title {
-  font-size: 2.2rem;
-  font-weight: 700;
-}
-
 /* ========================================
-   POST LIST ITEMS (Homepage)
+   HOMEPAGE POST LIST
+   Real minima markup: <ul class="post-list"><li>
+   <span class="post-meta">...</span><h3><a class="post-link">...</a></h3></li>
    ======================================== */
 
-.post-list-item {
+.post-list li {
   margin-bottom: 2.5rem;
   padding-bottom: 1.5rem;
   border-bottom: 1px solid #e8e8e8;
 }
 
-.post-list-item:last-child {
+.post-list li:last-child {
   border-bottom: none;
 }
 
-.post-list-item h2 {
+.post-list li h3 {
   margin-bottom: 0.3rem;
-  font-size: 1.6rem;
+  font-size: 2.4rem;
 }
 
-.post-list-item h2 a {
+.post-list .post-link {
   color: #111;
   text-decoration: none;
+  font-size: 2rem;
 }
 
-.post-list-item h2 a:hover {
+.post-list .post-link:hover {
   color: #2a7ae2;
 }
 
-.post-excerpt {
-  margin-top: 0.5rem;
-  color: #555;
-  font-size: 1rem;
-  line-height: 1.7;
-}
-
-.post-excerpt .read-more {
-  color: #2a7ae2;
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.post-excerpt .read-more:hover {
-  text-decoration: underline;
+.post-list .post-meta {
+  font-size: 1.15rem;
+  color: #888;
+  margin-bottom: 0.5rem;
 }
 
 /* ========================================
    FOOTER
    ======================================== */
 
-.site-footer {
-  border-top: 1px solid #e8e8e8;
-  padding: 1.5rem 0;
-  margin-top: 2rem;
-}
-
-.footer-col-wrapper {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-}
-
-.footer-col {
-  font-size: 0.9rem;
-  color: #666;
-}
-
-.footer-col a {
-  color: #2a7ae2;
-  text-decoration: none;
-}
-
-.footer-col a:hover {
+.site-footer a:hover {
   text-decoration: underline;
 }
 
@@ -218,71 +181,7 @@ pre,
     font-size: 0.75rem !important;
   }
 
-  .post-list-item h2 {
+  .post-list li h3 {
     font-size: 1.3rem;
   }
-
-  .post-excerpt {
-    font-size: 0.95rem;
-  }
-
-  .footer-col-wrapper {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-}
-
-/* ========================================
-   HOMEPAGE - INCREASED FONT SIZES
-   ======================================== */
-
-/* Post titles on homepage */
-.post-list-item h2 {
-  font-size: 2.4rem !important; /* Even larger titles */
-  font-weight: 600;
-  margin-bottom: 0.3rem;
-}
-
-.post-list-item h2 a {
-  color: #111;
-  text-decoration: none;
-  font-size: 2rem !important;
-}
-
-.post-list-item h2 a:hover {
-  color: #2a7ae2;
-}
-
-/* Post meta (date and categories) */
-.post-list-item .post-meta {
-  font-size: 1.15rem !important;
-  color: #888;
-  margin-bottom: 0.5rem;
-}
-
-.post-categories {
-  font-size: 1rem !important;
-  color: #aaa;
-  margin-left: 0.5rem;
-}
-
-/* Post excerpt text */
-.post-excerpt {
-  margin-top: 0.5rem;
-  color: #555;
-  font-size: 1.25rem !important;
-  line-height: 1.8;
-}
-
-/* "Read more →" link */
-.post-excerpt .read-more {
-  color: #2a7ae2;
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 1.2rem;
-}
-
-.post-excerpt .read-more:hover {
-  text-decoration: underline;
 }
