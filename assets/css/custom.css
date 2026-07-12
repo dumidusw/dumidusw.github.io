@@ -160,6 +160,18 @@ a:hover {
   white-space: nowrap;
 }
 
+.post-meta time,
+.post-meta .reading-time {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.meta-icon {
+  color: var(--color-muted-light);
+  flex-shrink: 0;
+}
+
 /* ========================================
    INDIVIDUAL POST HEADER (post.html)
    ======================================== */

@@ -8,6 +8,7 @@ layout: default
     <h1 class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
     <div class="post-meta">
       <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
+        <svg class="meta-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
         {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
         {{ page.date | date: date_format }}
       </time>
@@ -15,7 +16,10 @@ layout: default
       {%- assign reading_time = words | divided_by: 200.0 | ceil -%}
       {%- if reading_time == 0 -%}{%- assign reading_time = 1 -%}{%- endif -%}
       <span class="dot-separator">&bull;</span>
-      <span class="reading-time">{{ reading_time }} min read</span>
+      <span class="reading-time">
+        <svg class="meta-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        {{ reading_time }} min read
+      </span>
       {%- if page.categories.size > 0 -%}
       <span class="post-categories">
         {%- for category in page.categories -%}
