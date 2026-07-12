@@ -12,11 +12,11 @@
   --font-serif: 'Fraunces', Georgia, 'Times New Roman', serif;
 
   /* Type scale */
-  --fs-meta: 0.95rem; /* dates, categories */
-  --fs-body: 1.15rem; /* paragraph text: post-content p, post-excerpt */
+  --fs-meta: 0.875rem; /* 14px — dates, categories: recede, don't compete with title */
+  --fs-body: 1.125rem; /* 18px — paragraph text: post-content p, post-excerpt */
   --fs-h3: 1.6rem; /* post-content h3 */
-  --fs-h2: 2rem; /* post-content h2 AND homepage post-list-item title */
-  --fs-h1: 2.2rem; /* post-content h1 */
+  --fs-h2: 2rem; /* 32px — post-content h2 AND homepage post-list-item title */
+  --fs-h1: 2.6rem; /* post-content h1 AND individual post-title */
 
   /* Color */
   --color-accent: #1f6f5c; /* deep teal — replaces Minima's default blue */
@@ -375,7 +375,7 @@ pre,
 .post-list-item .post-meta {
   font-size: var(--fs-meta);
   color: var(--color-muted);
-  margin-bottom: var(--space-sm);
+  margin-bottom: 1.1rem;
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -383,13 +383,13 @@ pre,
 }
 
 /* Category pills */
-.post-list-item .post-meta .post-categories {
+.post-meta .post-categories {
   display: inline-flex;
   gap: 0.35rem;
   margin-left: 0.2rem;
 }
 
-.post-list-item .post-meta .post-category-tag {
+.post-meta .post-category-tag {
   background: var(--color-tag-bg);
   color: var(--color-tag-text);
   font-size: 0.78rem;
@@ -397,6 +397,13 @@ pre,
   padding: 0.15rem 0.6rem;
   border-radius: 999px;
   letter-spacing: 0.01em;
+  transition: background-color 0.15s ease, transform 0.15s ease;
+}
+
+.post-meta .post-category-tag:hover {
+  background: var(--color-accent);
+  color: var(--color-bg);
+  transform: translateY(-1px);
 }
 
 .post-list-item .post-excerpt {
