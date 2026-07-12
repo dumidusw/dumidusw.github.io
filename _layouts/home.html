@@ -6,7 +6,7 @@ layout: default
   {%- if site.posts.size > 0 -%} {%- for post in site.posts -%}
   <article class="post-list-item">
     <h2>
-      <a class="post-link" href="{{ post.url | relative_url }}">
+      <a class="post-link stretched-link" href="{{ post.url | relative_url }}">
         {{ post.title | escape }}
       </a>
     </h2>
@@ -34,7 +34,7 @@ layout: default
     <div class="post-excerpt">
       <p>{{ post.content | strip_html | truncatewords: 50 }}</p>
       <a href="{{ post.url | relative_url }}" class="read-more">
-        Read more <span class="arrow">&rarr;</span>
+        Continue reading <span class="arrow">&rarr;</span>
       </a>
     </div>
   </article>
