@@ -26,12 +26,25 @@
   --color-muted-light: #9a9a9a; /* category text */
   --color-border: #e8e8e8;
   --color-tag-bg: #eef4f2;
+  --color-tag-pill-bg: var(--color-tag-bg); /* tag pill background — decoupled from code/selection use of tag-bg above */
   --color-tag-text: #55766e; /* muted, desaturated version of the accent — not a near-twin of it */
   --color-tag-label: var(--color-muted-light); /* resting tag text color — matches date/reading-time gray exactly */
   --color-bg: #ffffff;
   --color-bg-elevated: #f4f4f2;
   --card-shadow-rest: 0 2px 6px rgba(20, 20, 20, 0.08);
   --card-shadow-hover: 0 12px 28px rgba(20, 20, 20, 0.14);
+  --card-shadow-static: 0 1px 2px rgba(20, 20, 20, 0.04);
+
+  /* Syntax highlighting */
+  --syntax-keyword: #1f6f5c;
+  --syntax-string: #9a5b13;
+  --syntax-number: #7c5295;
+  --syntax-func: #1a5fb4;
+  --syntax-tag: #a6423e;
+  --syntax-diff-add: #1f7a4d;
+  --syntax-diff-add-bg: rgba(31, 122, 77, 0.1);
+  --syntax-diff-del: #c0392b;
+  --syntax-diff-del-bg: rgba(192, 57, 43, 0.1);
 
   /* Spacing rhythm */
   --space-xs: 0.4rem;
@@ -48,11 +61,24 @@
   --color-muted-light: #757575;
   --color-border: #303030;
   --color-tag-bg: #16302b;
+  --color-tag-pill-bg: #202521; /* nearly matches card background, just enough lift to read as a pill */
   --color-tag-text: #8fada3; /* muted, desaturated relative to the vivid dark accent */
   --color-bg: #14161a;
   --color-bg-elevated: #1c1f24;
   --card-shadow-rest: 0 2px 6px rgba(0, 0, 0, 0.35);
   --card-shadow-hover: 0 12px 28px rgba(0, 0, 0, 0.55);
+  --card-shadow-static: 0 1px 2px rgba(0, 0, 0, 0.2);
+
+  /* Syntax highlighting - dark */
+  --syntax-keyword: #4fb89a;
+  --syntax-string: #e0a458;
+  --syntax-number: #c49ee0;
+  --syntax-func: #7aa8e0;
+  --syntax-tag: #e08a86;
+  --syntax-diff-add: #6fd0b3;
+  --syntax-diff-add-bg: rgba(111, 208, 179, 0.12);
+  --syntax-diff-del: #ff8b82;
+  --syntax-diff-del-bg: rgba(255, 90, 79, 0.12);
 }
 
 /* ========================================
@@ -120,18 +146,61 @@ a:hover {
 .post-content h1 {
   font-size: var(--fs-h1);
   font-weight: 600;
+  margin-bottom: 1rem;
 }
 
 .post-content h2 {
+  position: relative;
   font-size: var(--fs-h2);
   font-weight: 600;
-  margin-top: var(--space-lg);
+  margin-top: 3.75rem;
+  margin-bottom: 0.85rem;
+}
+
+.post-content h2::after {
+  content: '';
+  display: block;
+  width: 24px;
+  height: 3px;
+  margin-top: 0.6rem;
+  background: var(--color-accent);
+  border-radius: 2px;
 }
 
 .post-content h3 {
-  font-size: var(--fs-h3);
-  font-weight: 600;
-  margin-top: var(--space-md);
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-top: 2.25rem;
+  margin-bottom: 0.65rem;
+}
+
+.post-content h4 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.post-content h5 {
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-muted);
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.post-content h6 {
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-muted-light);
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .post-content p {
@@ -147,6 +216,212 @@ a:hover {
 
 .post-content a:hover {
   text-decoration-color: var(--color-accent);
+}
+
+/* ========================================
+   LISTS
+   ======================================== */
+
+.post-content ul,
+.post-content ol {
+  margin: 0 0 1.4rem;
+  padding-left: 1.4rem;
+}
+
+.post-content li {
+  margin-bottom: 0.5rem;
+  line-height: 1.8;
+}
+
+.post-content li > ul,
+.post-content li > ol {
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+}
+
+.post-content ul {
+  list-style: disc;
+}
+
+.post-content ul ul {
+  list-style: circle;
+}
+
+.post-content ul ul ul {
+  list-style: square;
+}
+
+.post-content ul li::marker,
+.post-content ol li::marker {
+  color: var(--color-accent);
+}
+
+/* Task lists: hide the bullet on items that contain a checkbox,
+   since the checkbox itself is the marker */
+.post-content li:has(> input[type='checkbox']) {
+  list-style: none;
+}
+
+.post-content li input[type='checkbox'] {
+  margin-right: 0.5rem;
+  accent-color: var(--color-accent);
+  transform: translateY(1px);
+}
+
+/* ========================================
+   BLOCKQUOTES
+   ======================================== */
+
+.post-content blockquote {
+  margin: 1.5rem 0;
+  padding: 0.9rem 1.5rem;
+  border-left: 3px solid var(--color-accent);
+  background: var(--color-bg-elevated);
+  border-radius: 0 8px 8px 0;
+}
+
+.post-content blockquote p {
+  margin-bottom: 0.75rem;
+}
+
+.post-content blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+/* A blockquote that opens with a bold line (e.g. "**Tip**") reads
+   as a labeled callout - style that first line like a small label */
+.post-content blockquote p:first-of-type strong:only-child {
+  display: inline-block;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  color: var(--color-accent);
+}
+
+/* ========================================
+   HORIZONTAL RULE
+   ======================================== */
+
+.post-content hr {
+  border: none;
+  border-top: 1px solid var(--color-border);
+  margin: 2.5rem 0;
+}
+
+/* ========================================
+   TABLES
+   ======================================== */
+
+.post-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.95rem;
+}
+
+.post-content th,
+.post-content td {
+  padding: 0.6rem 1rem;
+  border: 1px solid var(--color-border);
+  text-align: left;
+}
+
+.post-content th {
+  background: var(--color-bg-elevated);
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+/* ========================================
+   KEYBOARD SHORTCUTS
+   ======================================== */
+
+.post-content kbd {
+  display: inline-block;
+  padding: 0.15em 0.5em;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85em;
+  color: var(--color-ink);
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-bottom-width: 2px;
+  border-radius: 5px;
+}
+
+/* ========================================
+   DEFINITION LISTS
+   ======================================== */
+
+.post-content dl {
+  margin: 1.5rem 0;
+}
+
+.post-content dt {
+  font-weight: 600;
+  color: var(--color-ink);
+  margin-top: 1rem;
+}
+
+.post-content dd {
+  margin: 0.25rem 0 0 1.5rem;
+  opacity: 0.85;
+}
+
+/* ========================================
+   IMAGES
+   ======================================== */
+
+.post-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  border: 1px solid var(--color-border);
+  margin: 1.5rem 0;
+  display: block;
+}
+
+/* A plain paragraph directly following an image paragraph reads as
+   its caption */
+.post-content p:has(> img) + p {
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--color-muted);
+  font-style: italic;
+  margin-top: -1rem;
+}
+
+/* ========================================
+   FOOTNOTES
+   ======================================== */
+
+.post-content .footnote,
+.post-content sup a {
+  color: var(--color-accent);
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0 0.15em;
+}
+
+.post-content .footnotes {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-border);
+  font-size: 0.9rem;
+  color: var(--color-muted);
+}
+
+.post-content .footnotes ol {
+  padding-left: 1.2rem;
+}
+
+.post-content .footnotes li {
+  margin-bottom: 0.5rem;
+}
+
+.post-content .reversefootnote {
+  color: var(--color-accent);
+  text-decoration: none;
+  margin-left: 0.3rem;
 }
 
 .post-title {
@@ -197,6 +472,11 @@ a:hover {
 
 .post-header {
   margin-bottom: var(--space-lg);
+  padding: 1.25rem 2rem;
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  background: var(--color-bg-elevated);
+  box-shadow: var(--card-shadow-static);
 }
 
 .post-header .post-meta {
@@ -236,11 +516,74 @@ pre,
   border-radius: 0;
 }
 
-[data-theme='dark'] .highlight,
-[data-theme='dark'] .highlighter-rouge .highlight,
-[data-theme='dark'] pre {
-  background: var(--color-bg-elevated) !important;
-  color: #d4d4d4;
+/* Fenced code block container - covers Rouge's wrapper markup
+   regardless of language (div.highlighter-rouge > div.highlight > pre) */
+.post-content .highlighter-rouge .highlight,
+.post-content pre.highlight,
+.post-content div.highlight {
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  padding: 1.25rem 1.5rem;
+  overflow-x: auto;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.post-content .highlight pre {
+  margin: 0;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+/* Rouge syntax token theme - light */
+.highlight .c, .highlight .c1, .highlight .cm, .highlight .cs {
+  color: var(--color-muted);
+  font-style: italic;
+}
+.highlight .k, .highlight .kc, .highlight .kd, .highlight .kn,
+.highlight .kp, .highlight .kr, .highlight .kt, .highlight .kv,
+.highlight .nb, .highlight .bp {
+  color: var(--syntax-keyword);
+  font-weight: 600;
+}
+.highlight .s, .highlight .sb, .highlight .sc, .highlight .sd,
+.highlight .s1, .highlight .s2, .highlight .se, .highlight .sh,
+.highlight .si, .highlight .sx, .highlight .ss {
+  color: var(--syntax-string);
+}
+.highlight .m, .highlight .mf, .highlight .mh, .highlight .mi,
+.highlight .mo, .highlight .il {
+  color: var(--syntax-number);
+}
+.highlight .nf, .highlight .nc, .highlight .nn, .highlight .na {
+  color: var(--syntax-func);
+}
+.highlight .nt {
+  color: var(--syntax-tag);
+}
+.highlight .nv, .highlight .vc, .highlight .vg, .highlight .vi,
+.highlight .n, .highlight .o, .highlight .ow, .highlight .p {
+  color: var(--color-ink);
+}
+.highlight .err {
+  color: #e5484d;
+  background: none;
+}
+.highlight .gd {
+  color: var(--syntax-diff-del);
+  background: var(--syntax-diff-del-bg);
+  display: block;
+}
+.highlight .gi {
+  color: var(--syntax-diff-add);
+  background: var(--syntax-diff-add-bg);
+  display: block;
+}
+.highlight .gh, .highlight .gu, .highlight .gp {
+  color: var(--color-muted);
+  font-weight: 600;
 }
 
 /* ========================================
@@ -255,17 +598,18 @@ pre,
 
 .theme-toggle {
   position: absolute;
-  top: 0;
-  right: 20px;
+  top: 50%;
+  right: 24px;
+  transform: translateY(-50%);
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   padding: 0;
   border: 1px solid var(--color-border);
   border-radius: 50%;
-  background: transparent;
+  background: var(--color-bg-elevated);
   color: var(--color-muted);
   cursor: pointer;
   transition: color 0.15s ease, border-color 0.15s ease, transform 0.25s ease;
@@ -274,7 +618,7 @@ pre,
 .theme-toggle:hover {
   color: var(--color-accent);
   border-color: var(--color-accent);
-  transform: rotate(20deg);
+  transform: translateY(-50%) rotate(20deg);
 }
 
 .theme-toggle .icon-moon {
@@ -417,7 +761,7 @@ pre,
 .post-meta .post-category-tag {
   position: relative;
   z-index: 2;
-  background: var(--color-tag-bg);
+  background: var(--color-tag-pill-bg);
   color: var(--color-tag-label);
   font-size: 0.78rem;
   font-weight: 500;
@@ -530,8 +874,13 @@ pre,
   }
 
   .theme-toggle {
-    top: 0;
-    right: 12px;
+    right: 14px;
+  }
+
+  .post-content table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
   }
 }
 
