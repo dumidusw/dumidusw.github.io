@@ -28,8 +28,10 @@ layout: default
       {%- endif -%}
     </div>
     <div class="post-excerpt">
-      {{ post.content | strip_html | truncatewords: 50 }}
-      <a href="{{ post.url | relative_url }}" class="read-more">Read more →</a>
+      <p>{{ post.content | strip_html | truncatewords: 50 }}</p>
+      <a href="{{ post.url | relative_url }}" class="read-more">
+        Read more <span class="arrow">&rarr;</span>
+      </a>
     </div>
   </article>
   {%- endfor -%} {%- endif -%}
