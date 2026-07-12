@@ -14,6 +14,11 @@ layout: default
       <time datetime="{{ post.date | date_to_xmlschema }}">
         {{ post.date | date: "%b %d, %Y" }}
       </time>
+      {%- assign words = post.content | strip_html | number_of_words -%}
+      {%- assign reading_time = words | divided_by: 200.0 | ceil -%}
+      {%- if reading_time == 0 -%}{%- assign reading_time = 1 -%}{%- endif -%}
+      <span class="dot-separator">&bull;</span>
+      <span class="reading-time">{{ reading_time }} min read</span>
       {%- if post.categories.size > 0 -%}
       <span class="post-categories">
         {%- for category in post.categories -%}
