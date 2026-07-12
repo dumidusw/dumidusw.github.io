@@ -2,18 +2,32 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono&display=swap');
 
 /* ========================================
-   TYPE SCALE
-   One shared scale, used identically on the homepage list
-   and on individual post pages, so "H2 size" means the same
-   number everywhere instead of two separately-tuned values.
+   DESIGN TOKENS
    ======================================== */
 
 :root {
+  /* Type scale */
   --fs-meta: 0.95rem; /* dates, categories */
   --fs-body: 1.15rem; /* paragraph text: post-content p, post-excerpt */
   --fs-h3: 1.6rem; /* post-content h3 */
   --fs-h2: 2rem; /* post-content h2 AND homepage post-list-item title */
   --fs-h1: 2.2rem; /* post-content h1 */
+
+  /* Color */
+  --color-accent: #1f6f5c; /* deep teal — replaces Minima's default blue */
+  --color-accent-hover: #164f41;
+  --color-ink: #1a1a1a; /* body/title text, slightly softer than pure black */
+  --color-muted: #6b6b6b; /* meta text */
+  --color-muted-light: #9a9a9a; /* category text */
+  --color-border: #e8e8e8;
+  --color-tag-bg: #eef4f2;
+  --color-tag-text: #2c5c50;
+
+  /* Spacing rhythm */
+  --space-xs: 0.4rem;
+  --space-sm: 0.8rem;
+  --space-md: 1.5rem;
+  --space-lg: 3rem;
 }
 
 /* ========================================
@@ -48,15 +62,27 @@ h6,
     sans-serif !important;
 }
 
-/* Body */
 body {
   font-size: 16px;
   line-height: 1.6;
+  color: var(--color-ink);
+}
+
+::selection {
+  background: var(--color-tag-bg);
+  color: var(--color-accent-hover);
+}
+
+a {
+  color: var(--color-accent);
+}
+
+a:hover {
+  color: var(--color-accent-hover);
 }
 
 /* ========================================
    POST CONTENT (individual post pages)
-   Confirmed real: article.post > div.post-content.e-content
    ======================================== */
 
 .post-content {
@@ -72,21 +98,34 @@ body {
 .post-content h2 {
   font-size: var(--fs-h2);
   font-weight: 600;
+  margin-top: var(--space-lg);
 }
 
 .post-content h3 {
   font-size: var(--fs-h3);
   font-weight: 600;
+  margin-top: var(--space-md);
 }
 
 .post-content p {
   margin-bottom: 1.2rem;
 }
 
-/* Confirmed real: <header class="post-header"><h1 class="post-title p-name"> */
+.post-content a {
+  text-decoration: underline;
+  text-decoration-color: rgba(31, 111, 92, 0.35);
+  text-underline-offset: 2px;
+  transition: text-decoration-color 0.15s ease;
+}
+
+.post-content a:hover {
+  text-decoration-color: var(--color-accent);
+}
+
 .post-title {
   font-size: var(--fs-h1);
   font-weight: 700;
+  color: var(--color-ink);
 }
 
 /* ========================================
@@ -102,22 +141,62 @@ pre,
   font-size: 0.9em;
 }
 
+.post-content code {
+  background: var(--color-tag-bg);
+  color: var(--color-tag-text);
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+}
+
+.post-content pre code {
+  background: none;
+  color: inherit;
+  padding: 0;
+  border-radius: 0;
+}
+
 /* ========================================
    HEADER
    ======================================== */
 
-.site-title {
-  font-size: 1.2rem !important;
-  font-weight: 600;
-}
-
-.site-nav .page-link {
-  font-size: 0.85rem !important;
-}
-
 .site-header {
-  padding: 0.5rem 0 !important;
-  border-bottom: 1px solid #e8e8e8;
+  padding: 2.5rem 0 2rem !important;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.site-header .wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.5rem;
+}
+
+.site-title {
+  float: none !important;
+  font-size: 1.5rem !important;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--color-ink) !important;
+  transition: color 0.15s ease;
+}
+
+.site-title:hover {
+  color: var(--color-accent) !important;
+}
+
+.site-description {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--color-muted);
+  font-weight: 400;
+  max-width: 480px;
+}
+
+/* No nav pages configured — hide the empty hamburger trigger
+   in case Minima's default header markup is ever restored */
+.site-nav {
+  display: none;
 }
 
 /* ========================================
@@ -125,85 +204,117 @@ pre,
    ======================================== */
 
 .wrapper {
-  max-width: 900px;
+  max-width: 780px;
   padding: 0 20px;
+}
+
+.page-content {
+  padding-top: var(--space-lg);
+  padding-bottom: var(--space-lg);
 }
 
 /* ========================================
    HOMEPAGE POST LIST
-   Confirmed real markup:
-   <div class="home">
-     <article class="post-list-item">
-       <h2><a class="post-link">...</a></h2>
-       <div class="post-meta">
-         <time>...</time>
-         <span class="post-categories">...</span>
-       </div>
-       <div class="post-excerpt">
-         ...excerpt text...
-         <a href="...">Read more →</a>   <!-- no class on this link -->
-       </div>
-     </article>
-   </div>
    ======================================== */
 
 .post-list-item {
-  margin-bottom: 2.5rem;
-  padding-bottom: 1.5rem;
-  border-bottom: 1px solid #e8e8e8;
+  margin-bottom: var(--space-lg);
+  padding-bottom: var(--space-md);
+  border-bottom: 1px solid var(--color-border);
+  transition: opacity 0.15s ease;
 }
 
 .post-list-item:last-child {
   border-bottom: none;
+  margin-bottom: 0;
 }
 
 .post-list-item h2 {
-  margin-bottom: 0.3rem;
+  margin-bottom: var(--space-xs);
   font-size: var(--fs-h2);
+  line-height: 1.25;
 }
 
 .post-list-item .post-link {
-  color: #111;
+  color: var(--color-ink);
   text-decoration: none;
+  transition: color 0.15s ease;
 }
 
 .post-list-item .post-link:hover {
-  color: #2a7ae2;
+  color: var(--color-accent);
 }
 
 .post-list-item .post-meta {
   font-size: var(--fs-meta);
-  color: #888;
-  margin-bottom: 0.5rem;
+  color: var(--color-muted);
+  margin-bottom: var(--space-sm);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
 }
 
+/* Category pills */
 .post-list-item .post-meta .post-categories {
-  margin-left: 0.4rem;
-  color: #aaa;
+  display: inline-flex;
+  gap: 0.35rem;
+  margin-left: 0.2rem;
+}
+
+.post-list-item .post-meta .post-category-tag {
+  background: var(--color-tag-bg);
+  color: var(--color-tag-text);
+  font-size: 0.78rem;
+  font-weight: 500;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  letter-spacing: 0.01em;
 }
 
 .post-list-item .post-excerpt {
   font-size: var(--fs-body);
-  color: #555;
+  color: #444;
   line-height: 1.8;
 }
 
 .post-list-item .read-more {
-  color: #2a7ae2;
+  color: var(--color-accent);
   text-decoration: none;
   font-weight: 500;
+  white-space: nowrap;
 }
 
 .post-list-item .read-more:hover {
   text-decoration: underline;
+  color: var(--color-accent-hover);
 }
 
 /* ========================================
    FOOTER
    ======================================== */
 
+.site-footer {
+  text-align: center;
+  padding: var(--space-md) 0;
+  border-top: 1px solid var(--color-border);
+  margin-top: var(--space-lg);
+}
+
+.site-footer p {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 0.9rem;
+}
+
+.site-footer a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
 .site-footer a:hover {
   text-decoration: underline;
+  color: var(--color-accent-hover);
 }
 
 /* ========================================
@@ -212,11 +323,11 @@ pre,
 
 @media screen and (max-width: 600px) {
   .site-title {
-    font-size: 1rem !important;
+    font-size: 1.2rem !important;
   }
 
-  .site-nav .page-link {
-    font-size: 0.75rem !important;
+  .site-description {
+    font-size: 0.85rem;
   }
 
   .post-list-item h2 {
@@ -225,5 +336,9 @@ pre,
 
   .post-list-item .post-excerpt {
     font-size: 1rem;
+  }
+
+  .post-list-item .post-meta {
+    font-size: 0.85rem;
   }
 }

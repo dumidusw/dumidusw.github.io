@@ -16,7 +16,9 @@ layout: default
       </time>
       {%- if post.categories.size > 0 -%}
       <span class="post-categories">
-        in {{ post.categories | join: ", " }}
+        {%- for category in post.categories -%}
+        <span class="post-category-tag">{{ category }}</span>
+        {%- endfor -%}
       </span>
       {%- endif -%}
     </div>

@@ -1,28 +1,10 @@
 <footer class="site-footer">
-  <div
-    class="wrapper"
-    style="
-      text-align: center;
-      padding: 1.5rem 0;
-      border-top: 1px solid #e8e8e8;
-      margin-top: 2rem;
-    "
-  >
-    <p style="margin: 0; color: #666; font-size: 0.9rem">
+  <div class="wrapper">
+    <p>
       &copy; {{ site.time | date: '%Y' }}
-      <a
-        href="{{ '/' | relative_url }}"
-        style="color: #2a7ae2; text-decoration: none"
-      >
-        {{ site.title | escape }}
-      </a>
+      <a href="{{ '/' | relative_url }}">{{ site.title | escape }}</a>
       &bull;
-      <a
-        href="https://github.com/{{ site.github_username }}"
-        style="color: #2a7ae2; text-decoration: none"
-      >
-        GitHub
-      </a>
+      <a href="https://github.com/{{ site.github_username }}">GitHub</a>
     </p>
   </div>
 </footer>
