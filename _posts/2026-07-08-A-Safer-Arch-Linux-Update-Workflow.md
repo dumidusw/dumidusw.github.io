@@ -6,8 +6,6 @@ categories: linux archlinux projects
 description: A step-by-step guide to updating Arch Linux safely, with tips on snapshots and handling potential issues.
 ---
 
-# A Practical Workflow for Safe Arch Linux Updates
-
 One of the first things new Arch Linux users hear is:
 
 "Updates can sometimes break your system."
