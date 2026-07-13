@@ -41,6 +41,13 @@
     '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
 
   document.querySelectorAll('.post-content .highlighter-rouge').forEach(function (block) {
+    // Kramdown/Rouge also stamps the "highlighter-rouge" + "language-*"
+    // classes onto inline code spans (e.g. `code`{: .language-text}).
+    // Those are plain <code> elements with no <pre> inside them - only
+    // real fenced code blocks (div.highlighter-rouge > .highlight > pre)
+    // should get a label bar.
+    if (!block.querySelector('pre')) return;
+
     var langClass = Array.prototype.find.call(block.classList, function (c) {
       return c.indexOf('language-') === 0;
     });

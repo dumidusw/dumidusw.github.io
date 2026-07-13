@@ -26,9 +26,13 @@
   --color-muted-light: #9a9a9a; /* category text */
   --color-border: #e8e8e8;
   --color-tag-bg: #eef4f2;
-  --color-tag-pill-bg: var(--color-tag-bg); /* tag pill background — decoupled from code/selection use of tag-bg above */
+  --color-tag-pill-bg: var(
+    --color-tag-bg
+  ); /* tag pill background — decoupled from code/selection use of tag-bg above */
   --color-tag-text: #55766e; /* muted, desaturated version of the accent — not a near-twin of it */
-  --color-tag-label: var(--color-muted-light); /* resting tag text color — matches date/reading-time gray exactly */
+  --color-tag-label: var(
+    --color-muted-light
+  ); /* resting tag text color — matches date/reading-time gray exactly */
   --color-bg: #ffffff;
   --color-bg-elevated: #f4f4f2;
   --card-shadow-rest: 0 2px 6px rgba(20, 20, 20, 0.08);
@@ -91,10 +95,6 @@ p,
 li,
 blockquote,
 .post-content,
-h1,
-h2,
-h3,
-h4,
 h5,
 h6,
 .site-title,
@@ -118,7 +118,9 @@ body {
   line-height: 1.6;
   color: var(--color-ink);
   background: var(--color-bg);
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
 }
 
 ::selection {
@@ -145,6 +147,7 @@ a:hover {
 }
 
 .post-content h1 {
+  font-family: var(--font-serif);
   font-size: var(--fs-h1);
   font-weight: 600;
   margin-bottom: 1rem;
@@ -152,6 +155,7 @@ a:hover {
 
 .post-content h2 {
   position: relative;
+  font-family: var(--font-serif);
   font-size: var(--fs-h2);
   font-weight: 600;
   margin-top: 3.75rem;
@@ -169,6 +173,7 @@ a:hover {
 }
 
 .post-content h3 {
+  font-family: var(--font-serif);
   font-size: 1.75rem;
   font-weight: 700;
   letter-spacing: -0.01em;
@@ -177,6 +182,7 @@ a:hover {
 }
 
 .post-content h4 {
+  font-family: var(--font-serif);
   font-size: 1.35rem;
   font-weight: 700;
   letter-spacing: -0.01em;
@@ -270,15 +276,20 @@ a:hover {
 }
 
 /* ========================================
-   BLOCKQUOTES
+   BLOCKQUOTES / CALLOUTS
    ======================================== */
 
+/* Shared shape for every callout - only the accent color (border +
+   label) changes between types, everything else stays identical so
+   the family reads as one deliberate system. */
 .post-content blockquote {
   margin: 1.5rem 0;
   padding: 0.9rem 1.5rem;
-  border-left: 3px solid var(--color-accent);
+  border-left: 3px solid var(--color-muted);
   background: var(--color-bg-elevated);
   border-radius: 0 8px 8px 0;
+  font-style: normal;
+  color: var(--color-ink);
 }
 
 .post-content blockquote p {
@@ -289,14 +300,54 @@ a:hover {
   margin-bottom: 0;
 }
 
-/* A blockquote that opens with a bold line (e.g. "**Tip**") reads
-   as a labeled callout - style that first line like a small label */
+/* A blockquote that opens with a bold line (e.g. "**TIP**") reads
+   as a labeled callout - style that first line like a small label.
+   Default color is neutral gray (matches the plain/Note treatment);
+   type modifiers below override it to their accent color. */
 .post-content blockquote p:first-of-type strong:only-child {
   display: inline-block;
   text-transform: uppercase;
   font-size: 0.8rem;
-  letter-spacing: 0.05em;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--color-muted);
+}
+
+/* Type modifiers - add the matching class via a kramdown IAL right
+   after the blockquote:
+     > **TIP**
+     >
+     > Keep your articles focused on one topic.
+     {: .callout-tip}
+   Reuses the existing syntax-highlight colors so Warning/Important
+   automatically stay correct in dark mode too. */
+
+.post-content blockquote.callout-note {
+  border-left-color: var(--color-muted);
+}
+.post-content blockquote.callout-note p:first-of-type strong:only-child {
+  color: var(--color-muted);
+}
+
+.post-content blockquote.callout-tip {
+  border-left-color: var(--color-accent);
+}
+.post-content blockquote.callout-tip p:first-of-type strong:only-child {
   color: var(--color-accent);
+}
+
+.post-content blockquote.callout-warning {
+  border-left-color: var(--syntax-string);
+}
+.post-content blockquote.callout-warning p:first-of-type strong:only-child {
+  color: var(--syntax-string);
+}
+
+.post-content blockquote.callout-important {
+  border-left-color: var(--syntax-func);
+}
+.post-content blockquote.callout-important p:first-of-type strong:only-child {
+  color: var(--syntax-func);
 }
 
 /* ========================================
@@ -534,7 +585,7 @@ pre,
    regardless of language (div.highlighter-rouge > div.highlight > pre).
    The box (border/radius/background) lives on the outer wrapper so a
    language label bar can sit above the code and share the same card. */
-.post-content .highlighter-rouge {
+.post-content div.highlighter-rouge {
   position: relative;
   border: 1px solid var(--color-border);
   border-radius: 10px;
@@ -543,7 +594,7 @@ pre,
   margin-bottom: 1.5rem;
 }
 
-.post-content .highlighter-rouge .highlight {
+.post-content div.highlighter-rouge .highlight {
   background: none;
   overflow-x: auto;
   padding: 0.875rem 1.5rem;
@@ -593,11 +644,13 @@ pre,
   font-weight: 600;
   cursor: pointer;
   opacity: 0;
-  transition: opacity 0.15s ease, color 0.15s ease;
+  transition:
+    opacity 0.15s ease,
+    color 0.15s ease;
 }
 
-.post-content .highlighter-rouge:hover .code-copy-btn,
-.post-content .highlighter-rouge:focus-within .code-copy-btn {
+.post-content div.highlighter-rouge:hover .code-copy-btn,
+.post-content div.highlighter-rouge:focus-within .code-copy-btn {
   opacity: 1;
 }
 
@@ -638,33 +691,64 @@ pre,
 }
 
 /* Rouge syntax token theme - light */
-.highlight .c, .highlight .c1, .highlight .cm, .highlight .cs {
+.highlight .c,
+.highlight .c1,
+.highlight .cm,
+.highlight .cs {
   color: var(--color-muted);
   font-style: italic;
 }
-.highlight .k, .highlight .kc, .highlight .kd, .highlight .kn,
-.highlight .kp, .highlight .kr, .highlight .kt, .highlight .kv,
-.highlight .nb, .highlight .bp {
+.highlight .k,
+.highlight .kc,
+.highlight .kd,
+.highlight .kn,
+.highlight .kp,
+.highlight .kr,
+.highlight .kt,
+.highlight .kv,
+.highlight .nb,
+.highlight .bp {
   color: var(--syntax-keyword);
   font-weight: 600;
 }
-.highlight .s, .highlight .sb, .highlight .sc, .highlight .sd,
-.highlight .s1, .highlight .s2, .highlight .se, .highlight .sh,
-.highlight .si, .highlight .sx, .highlight .ss {
+.highlight .s,
+.highlight .sb,
+.highlight .sc,
+.highlight .sd,
+.highlight .s1,
+.highlight .s2,
+.highlight .se,
+.highlight .sh,
+.highlight .si,
+.highlight .sx,
+.highlight .ss {
   color: var(--syntax-string);
 }
-.highlight .m, .highlight .mf, .highlight .mh, .highlight .mi,
-.highlight .mo, .highlight .il {
+.highlight .m,
+.highlight .mf,
+.highlight .mh,
+.highlight .mi,
+.highlight .mo,
+.highlight .il {
   color: var(--syntax-number);
 }
-.highlight .nf, .highlight .nc, .highlight .nn, .highlight .na {
+.highlight .nf,
+.highlight .nc,
+.highlight .nn,
+.highlight .na {
   color: var(--syntax-func);
 }
 .highlight .nt {
   color: var(--syntax-tag);
 }
-.highlight .nv, .highlight .vc, .highlight .vg, .highlight .vi,
-.highlight .n, .highlight .o, .highlight .ow, .highlight .p {
+.highlight .nv,
+.highlight .vc,
+.highlight .vg,
+.highlight .vi,
+.highlight .n,
+.highlight .o,
+.highlight .ow,
+.highlight .p {
   color: var(--color-ink);
 }
 .highlight .err {
@@ -681,7 +765,9 @@ pre,
   background: var(--syntax-diff-add-bg);
   display: block;
 }
-.highlight .gh, .highlight .gu, .highlight .gp {
+.highlight .gh,
+.highlight .gu,
+.highlight .gp {
   color: var(--color-muted);
   font-weight: 600;
 }
@@ -693,6 +779,7 @@ pre,
 .site-header {
   position: relative;
   padding: 2.5rem 0 2rem !important;
+  border-top: 5px solid var(--color-accent) !important;
   border-bottom: 1px solid var(--color-border);
 }
 
@@ -712,7 +799,10 @@ pre,
   background: var(--color-bg-elevated);
   color: var(--color-muted);
   cursor: pointer;
-  transition: color 0.15s ease, border-color 0.15s ease, transform 0.25s ease;
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.25s ease;
 }
 
 .theme-toggle:hover {
@@ -868,7 +958,9 @@ pre,
   padding: 0.15rem 0.6rem;
   border-radius: 999px;
   letter-spacing: 0.01em;
-  transition: background-color 0.15s ease, transform 0.15s ease;
+  transition:
+    background-color 0.15s ease,
+    transform 0.15s ease;
 }
 
 .post-meta .post-category-tag:hover {
@@ -928,18 +1020,27 @@ pre,
   margin-top: var(--space-lg);
 }
 
-.site-footer p {
+/* Legal metadata - quietly recedes, same treatment as post dates/meta,
+   with room below it so it reads as a separate line, not the first
+   item in the nav list */
+.site-footer .footer-copyright {
+  margin: 0 0 0.6rem;
+  color: var(--color-muted-light);
+  font-size: var(--fs-meta);
+}
+
+.site-footer .footer-nav {
   margin: 0;
   color: var(--color-muted);
   font-size: 0.9rem;
 }
 
-.site-footer a {
-  color: var(--color-accent);
+.site-footer .footer-nav a {
+  color: var(--color-muted);
   text-decoration: none;
 }
 
-.site-footer a:hover {
+.site-footer .footer-nav a:hover {
   text-decoration: underline;
   color: var(--color-accent-hover);
 }
