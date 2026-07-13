@@ -126,7 +126,8 @@ body {
   color: var(--color-accent-hover);
 }
 
-a {
+a,
+a:visited {
   color: var(--color-accent);
 }
 
@@ -457,17 +458,30 @@ a:hover {
    INDIVIDUAL POST HEADER (post.html)
    ======================================== */
 
-.back-link {
-  display: inline-block;
+.back-link,
+.back-link:visited {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
   font-size: 0.9rem;
+  font-weight: 500;
   color: var(--color-muted);
   text-decoration: none;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2.25rem;
   transition: color 0.15s ease;
 }
 
 .back-link:hover {
   color: var(--color-accent);
+  text-decoration: underline;
+}
+
+.back-icon {
+  transition: transform 0.15s ease;
+}
+
+.back-link:hover .back-icon {
+  transform: translateX(-3px);
 }
 
 .post-header {
@@ -517,17 +531,103 @@ pre,
 }
 
 /* Fenced code block container - covers Rouge's wrapper markup
-   regardless of language (div.highlighter-rouge > div.highlight > pre) */
-.post-content .highlighter-rouge .highlight,
-.post-content pre.highlight,
-.post-content div.highlight {
+   regardless of language (div.highlighter-rouge > div.highlight > pre).
+   The box (border/radius/background) lives on the outer wrapper so a
+   language label bar can sit above the code and share the same card. */
+.post-content .highlighter-rouge {
+  position: relative;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  background: var(--color-bg-elevated);
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+
+.post-content .highlighter-rouge .highlight {
+  background: none;
+  overflow-x: auto;
+  padding: 0.875rem 1.5rem;
+  line-height: 1.6;
+}
+
+/* Fallback for a plain fenced block with no language set - kramdown
+   doesn't wrap these in .highlighter-rouge, so they need their own box */
+.post-content > pre {
   background: var(--color-bg-elevated);
   border: 1px solid var(--color-border);
   border-radius: 10px;
-  padding: 1.25rem 1.5rem;
+  padding: 0.875rem 1.5rem;
   overflow-x: auto;
   margin-bottom: 1.5rem;
   line-height: 1.6;
+}
+
+.code-lang-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem 0.5rem 1.5rem;
+  background: var(--color-bg-elevated);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.code-lang-name {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.code-copy-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.3rem;
+  border: none;
+  background: none;
+  color: var(--color-muted);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.15s ease, color 0.15s ease;
+}
+
+.post-content .highlighter-rouge:hover .code-copy-btn,
+.post-content .highlighter-rouge:focus-within .code-copy-btn {
+  opacity: 1;
+}
+
+@media (hover: none) {
+  .code-copy-btn {
+    opacity: 0.6;
+  }
+}
+
+.code-copy-btn:hover {
+  color: var(--color-accent);
+}
+
+.code-copy-btn .copy-state-success {
+  display: none;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.code-copy-btn.copied {
+  opacity: 1;
+  color: var(--color-accent);
+}
+
+.code-copy-btn.copied .copy-state-default {
+  display: none;
+}
+
+.code-copy-btn.copied .copy-state-success {
+  display: inline-flex;
 }
 
 .post-content .highlight pre {
