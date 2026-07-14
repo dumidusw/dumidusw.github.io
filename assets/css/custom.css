@@ -338,10 +338,10 @@ a:hover {
 }
 
 .post-content blockquote.callout-important {
-  border-left-color: var(--syntax-func);
+  border-left-color: var(--syntax-diff-del);
 }
 .post-content blockquote.callout-important p:first-of-type strong:only-child {
-  color: var(--syntax-func);
+  color: var(--syntax-diff-del);
 }
 
 /* ========================================

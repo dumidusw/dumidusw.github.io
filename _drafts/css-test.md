@@ -78,12 +78,21 @@ Here is a sentence containing a [link to the Arch Wiki](https://wiki.archlinux.o
 > **Tip**
 >
 > Keep your articles focused on one topic.
+{: .callout-tip}
 
 ---
 
 > **Warning**
 >
 > Always read Arch Linux news before performing a full system upgrade.
+{: .callout-warning}
+
+---
+
+> **IMPORTANT**
+>
+> This will permanently delete your data.
+{: .callout-important}
 
 ---
 
