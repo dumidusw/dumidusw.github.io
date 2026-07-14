@@ -518,17 +518,177 @@ a:hover {
   font-weight: 500;
   color: var(--color-muted);
   text-decoration: none;
-  margin-bottom: 2.25rem;
   transition: color 0.15s ease;
+}
+
+.post-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 2.25rem;
+}
+
+.post-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.post-action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  background: var(--color-bg-elevated);
+  color: var(--color-muted);
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+
+.post-action-btn:hover {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.post-action-btn .bookmark-filled {
+  display: none;
+}
+
+.post-action-btn.is-bookmarked {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+  background: var(--color-tag-bg);
+}
+
+.post-action-btn.is-bookmarked .bookmark-outline {
+  display: none;
+}
+
+.post-action-btn.is-bookmarked .bookmark-filled {
+  display: block;
+}
+
+.share-wrapper {
+  position: relative;
+  display: inline-flex;
+}
+
+.post-action-btn .share-icon-check {
+  display: none;
+}
+
+.post-action-btn.is-copied {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.post-action-btn.is-copied .share-icon-default {
+  display: none;
+}
+
+.post-action-btn.is-copied .share-icon-check {
+  display: block;
+}
+
+.share-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 50;
+  width: 220px;
+  padding: 0.35rem;
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  box-shadow: var(--card-shadow-hover);
+}
+
+.share-menu-header {
+  padding: 0.5rem 0.6rem 0.4rem;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid var(--color-border);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-muted);
+}
+
+.share-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  width: 100%;
+  padding: 0.5rem 0.6rem;
+  border: none;
+  border-radius: 6px;
+  background: none;
+  color: var(--color-ink);
+  font-size: 0.88rem;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.share-menu-item svg {
+  flex-shrink: 0;
+  color: var(--color-muted);
+  transition: color 0.15s ease;
+}
+
+.share-menu-item:hover {
+  background: var(--color-bg);
+  color: var(--color-accent);
+}
+
+.share-menu-item:hover svg {
+  color: var(--color-accent);
+}
+
+.share-toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem;
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  color: var(--color-ink);
+  font-size: 0.85rem;
+  font-weight: 500;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  pointer-events: none;
+  box-shadow: var(--card-shadow-hover);
+}
+
+.share-toast svg {
+  flex-shrink: 0;
+  color: var(--color-accent);
+}
+
+.share-toast.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.back-icon {
+  transition: transform 0.15s ease;
 }
 
 .back-link:hover {
   color: var(--color-accent);
   text-decoration: underline;
-}
-
-.back-icon {
-  transition: transform 0.15s ease;
 }
 
 .back-link:hover .back-icon {
@@ -744,7 +904,6 @@ pre,
 .site-header {
   position: relative;
   padding: 2.5rem 0 2rem !important;
-  border-top: 5px solid var(--color-accent) !important;
   border-bottom: 1px solid var(--color-border);
 }
 
@@ -817,6 +976,15 @@ pre,
   color: var(--color-accent) !important;
 }
 
+.hero-accent-line {
+  display: block;
+  width: 40px;
+  height: 3px;
+  margin: 0.25rem auto 0;
+  background: var(--color-accent);
+  border-radius: 2px;
+}
+
 .site-description {
   margin: 0;
   font-size: 0.95rem;
@@ -843,6 +1011,115 @@ pre,
 .page-content {
   padding-top: var(--space-lg);
   padding-bottom: var(--space-lg);
+}
+
+/* ========================================
+   BOOKMARKS (HOMEPAGE)
+   ======================================== */
+
+.bookmarks-section {
+  margin-bottom: 2.5rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.bookmarks-heading {
+  position: relative;
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.85rem;
+}
+
+.bookmarks-heading::after {
+  content: '';
+  display: block;
+  width: 24px;
+  height: 3px;
+  margin-top: 0.6rem;
+  background: var(--color-accent);
+  border-radius: 2px;
+}
+
+.bookmark-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.bookmark-item {
+  position: relative;
+  padding: 9px 0.75rem;
+  margin: 0 -0.75rem;
+  border-bottom: 1px dashed var(--color-border);
+  border-radius: 8px;
+  transition: background 0.15s ease;
+}
+
+.bookmark-item:last-child {
+  border-bottom: none;
+}
+
+.bookmark-item:hover {
+  background: var(--color-bg-elevated);
+}
+
+.bookmark-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--color-ink);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.bookmark-item:hover .bookmark-link {
+  color: var(--color-accent);
+}
+
+.bookmark-row-icon {
+  flex-shrink: 0;
+  color: var(--color-accent);
+}
+
+.bookmark-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.15rem;
+  padding-left: 1.35rem;
+  font-size: 0.85rem;
+  color: var(--color-muted-light);
+}
+
+.bookmark-remove {
+  position: absolute;
+  top: 50%;
+  right: 0.75rem;
+  transform: translateY(-50%);
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: none;
+  border: none;
+  border-radius: 6px;
+  padding: 0;
+  color: var(--color-muted);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.15s ease, color 0.15s ease, background 0.15s ease;
+}
+
+.bookmark-item:hover .bookmark-remove {
+  opacity: 1;
+}
+
+.bookmark-remove:hover {
+  color: var(--color-accent);
+  background: var(--color-bg);
 }
 
 /* ========================================
@@ -1110,23 +1387,12 @@ pre,
    READING PROGRESS BAR
    ======================================== */
 
-.site-accent-bar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 3px;
-  background: var(--color-accent);
-  z-index: 1000;
-  pointer-events: none;
-}
-
 .reading-progress-track {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 3px;
+  height: 5px;
   background: transparent;
   z-index: 1000;
   pointer-events: none;

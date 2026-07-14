@@ -2,6 +2,27 @@
 layout: default
 ---
 
+<script type="application/json" id="all-posts-data">
+[
+  {%- for post in site.posts -%}
+  {%- assign words = post.content | strip_html | number_of_words -%}
+  {%- assign reading_time = words | divided_by: 200.0 | ceil -%}
+  {%- if reading_time == 0 -%}{%- assign reading_time = 1 -%}{%- endif -%}
+  {
+    "url": {{ post.url | relative_url | jsonify }},
+    "title": {{ post.title | jsonify }},
+    "date": {{ post.date | date: "%b %d, %Y" | jsonify }},
+    "readingTime": {{ reading_time | jsonify }}
+  }{%- unless forloop.last -%},{%- endunless -%}
+  {%- endfor -%}
+]
+</script>
+
+<section id="bookmarks-section" class="bookmarks-section" hidden>
+  <h2 class="bookmarks-heading">Bookmarks (<span id="bookmark-count">0</span>)</h2>
+  <ul id="bookmark-list" class="bookmark-list"></ul>
+</section>
+
 <div class="home">
   {%- if site.posts.size > 0 -%} {%- for post in site.posts -%}
   <article class="post-list-item">
@@ -40,3 +61,5 @@ layout: default
   </article>
   {%- endfor -%} {%- endif -%}
 </div>
+
+<script src="{{ "/assets/js/bookmarks-list.js" | relative_url }}" defer></script>
