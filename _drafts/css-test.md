@@ -75,6 +75,13 @@ Here is a sentence containing a [link to the Arch Wiki](https://wiki.archlinux.o
 
 ---
 
+> **NOTE**
+>
+> This command requires root privileges.
+{: .callout-note}
+
+---
+
 > **Tip**
 >
 > Keep your articles focused on one topic.

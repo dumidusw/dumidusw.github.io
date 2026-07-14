@@ -45,6 +45,7 @@
   --syntax-diff-add-bg: rgba(31, 122, 77, 0.1);
   --syntax-diff-del: #c0392b;
   --syntax-diff-del-bg: rgba(192, 57, 43, 0.1);
+  --color-warning: #c2610a; /* true orange for the Warning callout, decoupled from --syntax-string */
 
   /* Spacing rhythm */
   --space-xs: 0.4rem;
@@ -79,6 +80,7 @@
   --syntax-diff-add-bg: rgba(111, 208, 179, 0.12);
   --syntax-diff-del: #ff8b82;
   --syntax-diff-del-bg: rgba(255, 90, 79, 0.12);
+  --color-warning: #e8963f; /* true orange for the Warning callout, decoupled from --syntax-string */
 }
 
 /* ========================================
@@ -331,10 +333,10 @@ a:hover {
 }
 
 .post-content blockquote.callout-warning {
-  border-left-color: var(--syntax-string);
+  border-left-color: var(--color-warning);
 }
 .post-content blockquote.callout-warning p:first-of-type strong:only-child {
-  color: var(--syntax-string);
+  color: var(--color-warning);
 }
 
 .post-content blockquote.callout-important {
