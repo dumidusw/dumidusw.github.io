@@ -1,0 +1,95 @@
+{% if page.series %}
+
+  {% assign series_posts = site.posts | where: "series", page.series | sort: "order" %}
+  {% assign series_total = series_posts | size %}
+
+  <div class="series-box">
+    <div class="series-box-header">
+      <svg class="meta-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h10"></path></svg>
+      <span>Continue Reading</span>
+      <span class="series-box-count">{{ page.order }} of {{ series_total }}</span>
+    </div>
+    <ol class="series-box-list">
+      {% for post in series_posts %}
+        {% if post.url == page.url %}
+          <li class="series-current">
+            <span class="series-index series-index-current">&#9679;</span>
+            <span class="series-title">{{ post.title }}</span>
+          </li>
+        {% elsif post.order < page.order %}
+          <li>
+            <span class="series-index series-index-done">&#10003;</span>
+            <a class="series-title" href="{{ post.url | relative_url }}">{{ post.title }}</a>
+          </li>
+        {% else %}
+          <li class="series-upcoming">
+            <span class="series-index">{{ post.order }}</span>
+            <a class="series-title" href="{{ post.url | relative_url }}">{{ post.title }}</a>
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ol>
+  </div>
+
+{% else %}
+
+  {% assign maxRelated = 3 %}
+  {% assign related_count = 0 %}
+  {% assign related_html = "" %}
+
+  {% if page.related %}
+
+    {% for slug in page.related %}
+      {% assign slug_lower = slug | downcase %}
+      {% for post in site.posts %}
+        {% if post.url == page.url %}
+          {% continue %}
+        {% endif %}
+        {% assign post_slug_lower = post.slug | downcase %}
+        {% if post_slug_lower == slug_lower %}
+          {% capture related_html %}{{ related_html }}<li><a class="series-title" href="{{ post.url | relative_url }}">{{ post.title }}</a></li>{% endcapture %}
+          {% assign related_count = related_count | plus: 1 %}
+        {% endif %}
+      {% endfor %}
+    {% endfor %}
+
+  {% else %}
+
+    {% for post in site.posts %}
+      {% if post.url == page.url %}
+        {% continue %}
+      {% endif %}
+
+      {% assign matched = false %}
+      {% for category in post.categories %}
+        {% unless site.related_exclude_categories contains category %}
+          {% if page.categories contains category %}
+            {% assign matched = true %}
+          {% endif %}
+        {% endunless %}
+      {% endfor %}
+
+      {% if matched %}
+        {% capture related_html %}{{ related_html }}<li><a class="series-title" href="{{ post.url | relative_url }}">{{ post.title }}</a></li>{% endcapture %}
+        {% assign related_count = related_count | plus: 1 %}
+        {% if related_count >= maxRelated %}
+          {% break %}
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+
+  {% endif %}
+
+  {% if related_count > 0 %}
+    <div class="series-box">
+      <div class="series-box-header">
+        <svg class="meta-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4l3 3"></path></svg>
+        <span>Related Posts</span>
+      </div>
+      <ul class="series-box-list related-list">
+        {{ related_html }}
+      </ul>
+    </div>
+  {% endif %}
+
+{% endif %}

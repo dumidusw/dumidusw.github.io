@@ -15,6 +15,11 @@ plugins:
   - jekyll-feed
   - jekyll-seo-tag   
   - jekyll-sitemap  
+  - jekyll-paginate
+
+# Pagination (homepage only — jekyll-paginate only paginates the root index page)
+paginate: 5
+paginate_path: "/page:num/"
 
 # Custom styles
 sass:
@@ -23,3 +28,19 @@ sass:
 
 # Navigation - hide the About page
 header_pages: []
+
+exclude:
+  - _site
+  - .jekyll-cache
+  - "*.tar.gz"
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+
+# Categories too generic to count as a meaningful "related post" match
+# (still work normally for navigation/archives, just ignored by continue-reading.html)
+related_exclude_categories:
+  - misc
+  - introduction
+  - linux
+  - projects
