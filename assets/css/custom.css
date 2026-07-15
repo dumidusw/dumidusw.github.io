@@ -1673,16 +1673,18 @@ pre,
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  margin: 2.5rem 0 1rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--color-border, #e5e5e5);
+  margin: 3rem 0 2.5rem;
+  padding-top: 1rem;
 }
 
 .pagination-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
   font-weight: 600;
   font-size: 0.9rem;
   text-decoration: none;
-  color: var(--color-ink);
+  color: var(--color-accent);
   padding: 0.5rem 0.9rem;
   border-radius: 6px;
   transition: background 0.15s ease;
@@ -1690,20 +1692,44 @@ pre,
 
 .pagination-link:hover {
   background: var(--color-bg-elevated);
-  color: var(--color-accent);
+}
+
+.pagination-arrow {
+  display: inline-block;
+  transition: transform 0.15s ease;
+}
+
+.pagination-prev:hover .pagination-arrow {
+  transform: translateX(-4px);
+}
+
+.pagination-next:hover .pagination-arrow {
+  transform: translateX(4px);
 }
 
 .pagination-disabled {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
   font-weight: 600;
   font-size: 0.9rem;
   color: var(--color-muted-light);
   padding: 0.5rem 0.9rem;
-  opacity: 0.5;
   cursor: default;
 }
 
+/* Disabled state stays flat on hover — no background, no arrow movement */
+.pagination-disabled:hover {
+  background: none;
+}
+
+.pagination-disabled .pagination-arrow {
+  transition: none;
+}
+
 .pagination-status {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
+  font-weight: 400;
   color: var(--color-muted-light);
   white-space: nowrap;
 }
