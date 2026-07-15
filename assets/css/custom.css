@@ -65,7 +65,7 @@
   --color-tag-pill-bg: #202521; /* nearly matches card background, just enough lift to read as a pill */
   --color-tag-text: #8fada3; /* muted, desaturated relative to the vivid dark accent */
   --color-bg: #14161a;
-  --color-bg-elevated: #1c1f24;
+  --color-bg-elevated: #20242a;
   --card-shadow-rest: 0 2px 6px rgba(0, 0, 0, 0.35);
   --card-shadow-hover: 0 12px 28px rgba(0, 0, 0, 0.55);
   --card-shadow-static: 0 1px 2px rgba(0, 0, 0, 0.2);
