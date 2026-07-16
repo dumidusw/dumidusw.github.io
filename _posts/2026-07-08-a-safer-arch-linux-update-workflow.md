@@ -147,7 +147,7 @@ While following this workflow I noticed I was collecting the same information ev
 
 Eventually I automated that process.
 
-The result was [`arch_sysreport`](https://github.com/dumidusw/arch-sysreport), a small utility that collects the system information I often need when reviewing Arch News or asking for help.
+The result was [`arch-sysreport`](https://github.com/dumidusw/arch-sysreport), a small utility that collects the system information I often need when reviewing Arch News or asking for help.
 
 It doesn't analyze anything or make decisions for you.
 
