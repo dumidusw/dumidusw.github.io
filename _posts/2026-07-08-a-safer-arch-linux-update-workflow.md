@@ -8,36 +8,45 @@ series: Arch Linux
 order: 3
 ---
 
-One of the first things new Arch Linux users hear is:
 
-"Updates can sometimes break your system."
+Over the past few years, I've noticed that Arch Linux has become one of the most talked-about Linux distributions.
 
-That statement isn't entirely wrong.
+Many Linux enthusiasts recommend it for its simplicity, rolling-release model, and excellent documentation.
 
-But it also isn't the whole story.
+Along with that recommendation usually comes a warning:
 
-In my experience, most Arch Linux updates complete without any manual intervention.
+> **WARNING**
+>
+> Before updating your system, make sure you have a recent Timeshift snapshot or another reliable backup.
+{: .callout-warning}
 
-The challenge is that occasionally an update requires users to perform a manual step before or after upgrading.
+When I first started using Arch, that warning made updates feel much riskier than they actually are.
 
-These situations are usually announced through the Arch News.
+After using Arch for a while, I realized something interesting.
+
+Most system updates complete without any problems.
+
+Every so often, however, an upgrade requires a manual step before or after installation. These situations are usually announced through the Arch News.
 
 The difficult part isn't reading the announcement.
 
-The difficult part is determining whether it actually applies to your system.
+The difficult part is determining whether it actually applies to *your* system.
 
-That realization led me to rethink how I perform system updates.
+That realization led me to rethink how I update my system.
 
-## The goal
+The workflow below is the one I now follow whenever I update Arch Linux. It gives me a recovery plan if something goes wrong and a structured way to handle updates that require manual intervention.
+
+## The Goal
 
 I wanted a workflow that provides:
 
-- a recovery plan if something goes wrong
-- a structured way to review Arch News
-- a repeatable process instead of relying on memory
+* a recovery plan if something goes wrong
+* a structured way to review Arch News
+* a repeatable process instead of relying on memory
+
 
 ## My workflow
-<img src="/assets/images/safearchupdateworkflow.png" alt="My workflow diagram" width="800">
+<img src="/assets/images/safearchupdateworkflow.png" alt="arch linux update" width="800">
 
 ### 1. Create a Timeshift snapshot
 
@@ -49,7 +58,7 @@ If something unexpected happens during the update, I can always restore my files
 
 ### 2. Attempt the update
 
-```
+```bash
 sudo pacman -Syu
 ```
 
@@ -94,13 +103,13 @@ Examples include:
 
 ### 6. Mark the news as read
 
-```
+```bash
 sudo informant read --all
 ```
 
 ### 7. Update again
 
-```
+```bash
 sudo pacman -Syu
 ```
 At this point the update usually completes normally.
