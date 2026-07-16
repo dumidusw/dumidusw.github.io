@@ -1,46 +1,121 @@
 ---
 layout: post
-title:  "TITLE HERE"
-date:   YYYY-MM-DD HH:MM:SS +0530
-categories: category-one category-two
-description: One or two sentences summarizing the post — used for SEO and social sharing previews.
-# Aim for ~155 characters or less — Google truncates meta descriptions
-# past that point.
+title: "TITLE HERE"
+date: YYYY-MM-DD HH:MM:SS +0530
 
-# Optional social preview image (Open Graph / Twitter card). Falls back
-# to the site-wide default (`default-card.jpg`, set in the `defaults:`
-# block in _config.yml) if omitted.
-# image: /assets/images/your-post-cover.png
-# Uncomment if this post is part of a multi-part series.
-# See writing-a-post-notes.md for how series/order work.
-# series: Series Name
-# order: N
+# Categories determine where the post appears and are also used for
+# automatic "Related Posts" matching.
 #
-# Uncomment only if the automatic "Related Posts" matching (based on
-# shared categories) picks bad matches for this post. Value is the
-# filename slug of the related post(s) — everything after the date,
-# before .md.
+# Example:
+# categories: archlinux tmux dotfiles
+#
+# Note: "linux" and "projects" are in related_exclude_categories in
+# _config.yml — too generic to count toward related-post matching,
+# so avoid relying on them alone.
+#
+categories:
+
+# One or two sentences summarizing the article.
+# Used for:
+#   • Search engine snippets
+#   • Open Graph previews
+#   • Twitter/X cards
+#
+# Aim for ~155 characters or less.
+description:
+
+# Optional custom social preview image.
+# Falls back to the site-wide default (default-card.jpg) if omitted.
+#
+# image: /assets/images/your-post-cover.jpg
+
+# Uncomment if this post belongs to a multi-part series.
+#
+# series: Arch Linux
+# order: 2
+
+# Uncomment only if automatic "Related Posts" produces poor matches.
+# Use filename slugs (everything after the date, before .md).
+#
 # related:
-#   - some-post-slug
+#   - understanding-arch-news
+#   - installing-arch-linux
+#   - system-report-utility
 ---
 
 <!--
-  Write the intro here. One or two sentences that frame the problem
-  or question this post answers — this is what shows in the excerpt
-  on the homepage, so make it stand on its own.
+Introduction
+
+Write one or two paragraphs introducing the problem this article
+solves.
+
+This text becomes the homepage excerpt, so it should stand on its own
+and encourage readers to continue.
+
+Imagine someone only reads these two paragraphs.
+Would they understand what this article is about?
 -->
 
-## Section heading
+## First Heading
 
-Body content goes here.
+Write the content here.
 
-## Another section heading
+### Subheading
 
-More body content.
+More content.
+
+```bash
+command_here
+```
+
+Explain what the command does, why it is needed, and what readers
+should expect after running it.
+
+## Next Heading
+
+Continue writing...
 
 ---
 
-Got questions, corrections, or thoughts on this? Reach out on
-[GitHub](https://github.com/dumidusw) or by email at
-dumidu.github@gmail.com — always happy to hear from readers, since
-there's no comment section here.
+<!--
+Publishing checklist
+
+Content
+---------
+[ ] Clear title
+[ ] Introduction explains the problem
+[ ] Sections flow logically
+[ ] Commands tested
+[ ] Output verified
+[ ] Grammar and spelling checked
+
+Links
+------
+[ ] Internal links added where appropriate
+[ ] Related posts reviewed
+[ ] External links still valid
+
+Metadata
+---------
+[ ] Description written
+[ ] Categories correct
+[ ] Series/order set (if applicable)
+[ ] Custom image added (if needed)
+
+Final review
+------------
+[ ] Read the article from top to bottom once
+[ ] Check desktop layout
+[ ] Check mobile layout
+[ ] Verify code blocks render correctly
+-->
+
+Got questions, corrections, or suggestions?
+
+Open an issue on
+[GitHub](https://github.com/dumidusw)
+or email me at
+dumidu.github@gmail.com.
+
+There's no comment section on this blog, but I'm always happy to hear
+from readers.
