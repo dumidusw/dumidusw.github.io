@@ -4,8 +4,12 @@ title:  "TITLE HERE"
 date:   YYYY-MM-DD HH:MM:SS +0530
 categories: category-one category-two
 description: One or two sentences summarizing the post — used for SEO and social sharing previews.
+# Aim for ~155 characters or less — Google truncates meta descriptions
+# past that point.
+
 # Optional social preview image (Open Graph / Twitter card). Falls back
-# to the site-wide `logo:` in _config.yml if omitted.
+# to the site-wide default (`default-card.jpg`, set in the `defaults:`
+# block in _config.yml) if omitted.
 # image: /assets/images/your-post-cover.png
 # Uncomment if this post is part of a multi-part series.
 # See writing-a-post-notes.md for how series/order work.
