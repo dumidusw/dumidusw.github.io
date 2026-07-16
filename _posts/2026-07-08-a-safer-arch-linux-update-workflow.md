@@ -147,8 +147,8 @@ While following this workflow I noticed I was collecting the same information ev
 
 Eventually I automated that process.
 
-That became arch_sysreport.
+The result was [`arch_sysreport`](https://github.com/dumidusw/arch-sysreport), a small utility that collects the system information I often need when reviewing Arch News or asking for help.
 
-The tool doesn't analyze anything.
+It doesn't analyze anything or make decisions for you.
 
-It simply gathers the information that is often needed when reviewing Arch News or asking for help.
+It simply gathers the information that's usually needed to understand whether an announcement applies to your system.
