@@ -24,6 +24,8 @@ When I first started using Arch, that warning made updates feel much riskier tha
 
 After using Arch for a while, I realized something interesting.
 
+<!--more-->
+
 Most system updates complete without any problems.
 
 Every so often, however, an upgrade requires a manual step before or after installation. These situations are usually announced through the Arch News.

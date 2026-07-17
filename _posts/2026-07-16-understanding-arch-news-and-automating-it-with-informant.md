@@ -17,6 +17,8 @@ I've seen people say, "An update broke my system, so I'm leaving Arch."
 Sometimes the update itself isn't the real problem. 
 It was a manual intervention announced in the Arch News that went unnoticed.
 
+<!--more-->
+
 ## Why this is easy to skip
 
 `pacman -Syu` doesn't check the news for you. 
