@@ -26,11 +26,18 @@
   --color-muted-light: #9a9a9a; /* category text */
   --color-border: #e8e8e8;
   --color-tag-bg: #eef4f2;
-  --color-tag-pill-bg: var(--color-tag-bg); /* tag pill background — decoupled from code/selection use of tag-bg above */
+  --color-tag-pill-bg: var(
+    --color-tag-bg
+  ); /* tag pill background — decoupled from code/selection use of tag-bg above */
   --color-tag-text: #55766e; /* muted, desaturated version of the accent — not a near-twin of it */
-  --color-tag-label: var(--color-muted-light); /* resting tag text color — matches date/reading-time gray exactly */
+  --color-tag-label: var(
+    --color-muted-light
+  ); /* resting tag text color — matches date/reading-time gray exactly */
   --color-bg: #ffffff;
   --color-bg-elevated: #f4f4f2;
+  --color-inline-code-bg: #f3f9f7;
+  --color-inline-code-border: #d7e8e1;
+
   --card-shadow-rest: 0 2px 6px rgba(20, 20, 20, 0.08);
   --card-shadow-hover: 0 12px 28px rgba(20, 20, 20, 0.14);
   --card-shadow-static: 0 1px 2px rgba(20, 20, 20, 0.04);
@@ -66,6 +73,9 @@
   --color-tag-text: #8fada3; /* muted, desaturated relative to the vivid dark accent */
   --color-bg: #14161a;
   --color-bg-elevated: #20242a;
+  --color-inline-code-bg: #23332f;
+  --color-inline-code-border: #35584e;
+
   --card-shadow-rest: 0 2px 6px rgba(0, 0, 0, 0.35);
   --card-shadow-hover: 0 12px 28px rgba(0, 0, 0, 0.55);
   --card-shadow-static: 0 1px 2px rgba(0, 0, 0, 0.2);
@@ -116,7 +126,9 @@ body {
   line-height: 1.6;
   color: var(--color-ink);
   background: var(--color-bg);
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
 }
 
 ::selection {
@@ -154,7 +166,7 @@ a:hover {
   font-family: var(--font-serif);
   font-size: var(--fs-h2);
   font-weight: 600;
-  margin-top: 3.75rem;
+  margin-top: 3.5rem;
   margin-bottom: 0.85rem;
 }
 
@@ -482,6 +494,7 @@ a:hover {
   font-family: var(--font-serif) !important;
   font-size: var(--fs-h1);
   font-weight: 600;
+  line-height: 1.18;
   color: var(--color-ink);
   letter-spacing: -0.01em;
 }
@@ -550,7 +563,10 @@ a:hover {
   background: var(--color-bg-elevated);
   color: var(--color-muted);
   cursor: pointer;
-  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease,
+    background 0.15s ease;
 }
 
 .post-action-btn:hover {
@@ -634,7 +650,9 @@ a:hover {
   font-family: inherit;
   text-align: left;
   cursor: pointer;
-  transition: background 0.15s ease, color 0.15s ease;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
 }
 
 .share-menu-item svg {
@@ -669,7 +687,9 @@ a:hover {
   font-weight: 500;
   opacity: 0;
   transform: translateY(10px);
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
   pointer-events: none;
   box-shadow: var(--card-shadow-hover);
 }
@@ -717,39 +737,62 @@ a:hover {
 }
 
 /* ========================================
-   CODE BLOCKS - JetBrains Mono
+   CODE - Context Variables
    ======================================== */
 
+.post-content {
+  --inline-code-bg: var(--color-bg-elevated);
+  --inline-code-border: var(--color-border);
+}
+
+.post-excerpt {
+  --inline-code-bg: var(--color-inline-code-bg);
+  --inline-code-border: var(--color-inline-code-border);
+}
+
+/* ========================================
+   CODE - Global Base Styles
+   ======================================== */
+
+/* 1. Font & base for all code */
 code,
-pre,
-.post-content code,
-.post-content pre {
+pre {
   font-family:
     'JetBrains Mono', 'SF Mono', Consolas, 'Liberation Mono', monospace !important;
   font-size: 0.9em;
 }
 
-.post-content code,
-.post-excerpt code {
-  background: var(--color-tag-bg);
-  color: var(--color-tag-text);
+/* 2. Inline code - not inside pre blocks */
+code:not(pre code) {
+  background: var(--inline-code-bg);
+  color: var(--color-ink);
+  font-weight: 550;
   padding: 0.15em 0.4em;
   border-radius: 4px;
-  border-color: var(--color-border);
+  border: 1px solid var(--inline-code-border);
 }
 
-.post-content pre code {
-  background: none;
+/* 3. Code blocks (pre) */
+pre {
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  padding: 0.875rem 1.5rem;
+  overflow-x: auto;
+  line-height: 1.6;
+}
+
+/* 4. Reset styles inside pre */
+pre code {
+  background: none !important;
   color: inherit;
   padding: 0;
+  border: none;
   border-radius: 0;
 }
 
-/* Fenced code block container - covers Rouge's wrapper markup
-   regardless of language (div.highlighter-rouge > div.highlight > pre).
-   The box (border/radius/background) lives on the outer wrapper so a
-   language label bar can sit above the code and share the same card. */
-.post-content div.highlighter-rouge {
+/* 5. Fenced code block wrapper */
+div.highlighter-rouge {
   position: relative;
   border: 1px solid var(--color-border);
   border-radius: 10px;
@@ -758,25 +801,21 @@ pre,
   margin-bottom: 1.5rem;
 }
 
-.post-content div.highlighter-rouge .highlight {
+div.highlighter-rouge .highlight {
   background: none;
   overflow-x: auto;
   padding: 0.875rem 1.5rem;
   line-height: 1.6;
 }
 
-/* Fallback for a plain fenced block with no language set - kramdown
-   doesn't wrap these in .highlighter-rouge, so they need their own box */
-.post-content > pre {
-  background: var(--color-bg-elevated);
-  border: 1px solid var(--color-border);
-  border-radius: 10px;
-  padding: 0.875rem 1.5rem;
-  overflow-x: auto;
-  margin-bottom: 1.5rem;
-  line-height: 1.6;
+.highlight pre {
+  background: none !important;
+  border: none;
+  padding: 0;
+  margin: 0;
 }
 
+/* Language labels and copy buttons */
 .code-lang-label {
   display: flex;
   align-items: center;
@@ -808,11 +847,13 @@ pre,
   font-weight: 600;
   cursor: pointer;
   opacity: 0;
-  transition: opacity 0.15s ease, color 0.15s ease;
+  transition:
+    opacity 0.15s ease,
+    color 0.15s ease;
 }
 
-.post-content div.highlighter-rouge:hover .code-copy-btn,
-.post-content div.highlighter-rouge:focus-within .code-copy-btn {
+div.highlighter-rouge:hover .code-copy-btn,
+div.highlighter-rouge:focus-within .code-copy-btn {
   opacity: 1;
 }
 
@@ -845,41 +886,65 @@ pre,
   display: inline-flex;
 }
 
-.post-content .highlight pre {
-  margin: 0;
-  background: none;
-  border: none;
-  padding: 0;
-}
-
 /* Rouge syntax token theme - light */
-.highlight .c, .highlight .c1, .highlight .cm, .highlight .cs {
+.highlight .c,
+.highlight .c1,
+.highlight .cm,
+.highlight .cs {
   color: var(--color-muted);
   font-style: italic;
 }
-.highlight .k, .highlight .kc, .highlight .kd, .highlight .kn,
-.highlight .kp, .highlight .kr, .highlight .kt, .highlight .kv,
-.highlight .nb, .highlight .bp {
+.highlight .k,
+.highlight .kc,
+.highlight .kd,
+.highlight .kn,
+.highlight .kp,
+.highlight .kr,
+.highlight .kt,
+.highlight .kv,
+.highlight .nb,
+.highlight .bp {
   color: var(--syntax-keyword);
   font-weight: 600;
 }
-.highlight .s, .highlight .sb, .highlight .sc, .highlight .sd,
-.highlight .s1, .highlight .s2, .highlight .se, .highlight .sh,
-.highlight .si, .highlight .sx, .highlight .ss {
+.highlight .s,
+.highlight .sb,
+.highlight .sc,
+.highlight .sd,
+.highlight .s1,
+.highlight .s2,
+.highlight .se,
+.highlight .sh,
+.highlight .si,
+.highlight .sx,
+.highlight .ss {
   color: var(--syntax-string);
 }
-.highlight .m, .highlight .mf, .highlight .mh, .highlight .mi,
-.highlight .mo, .highlight .il {
+.highlight .m,
+.highlight .mf,
+.highlight .mh,
+.highlight .mi,
+.highlight .mo,
+.highlight .il {
   color: var(--syntax-number);
 }
-.highlight .nf, .highlight .nc, .highlight .nn, .highlight .na {
+.highlight .nf,
+.highlight .nc,
+.highlight .nn,
+.highlight .na {
   color: var(--syntax-func);
 }
 .highlight .nt {
   color: var(--syntax-tag);
 }
-.highlight .nv, .highlight .vc, .highlight .vg, .highlight .vi,
-.highlight .n, .highlight .o, .highlight .ow, .highlight .p {
+.highlight .nv,
+.highlight .vc,
+.highlight .vg,
+.highlight .vi,
+.highlight .n,
+.highlight .o,
+.highlight .ow,
+.highlight .p {
   color: var(--color-ink);
 }
 .highlight .err {
@@ -896,7 +961,9 @@ pre,
   background: var(--syntax-diff-add-bg);
   display: block;
 }
-.highlight .gh, .highlight .gu, .highlight .gp {
+.highlight .gh,
+.highlight .gu,
+.highlight .gp {
   color: var(--color-muted);
   font-weight: 600;
 }
@@ -926,7 +993,10 @@ pre,
   background: var(--color-bg-elevated);
   color: var(--color-muted);
   cursor: pointer;
-  transition: color 0.15s ease, border-color 0.15s ease, transform 0.25s ease;
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.25s ease;
 }
 
 .icon-btn:hover {
@@ -1114,7 +1184,10 @@ pre,
   color: var(--color-muted);
   cursor: pointer;
   opacity: 0;
-  transition: opacity 0.15s ease, color 0.15s ease, background 0.15s ease;
+  transition:
+    opacity 0.15s ease,
+    color 0.15s ease,
+    background 0.15s ease;
 }
 
 .bookmark-item:hover .bookmark-remove {
@@ -1211,7 +1284,9 @@ pre,
   padding: 0.15rem 0.6rem;
   border-radius: 999px;
   letter-spacing: 0.01em;
-  transition: background-color 0.15s ease, transform 0.15s ease;
+  transition:
+    background-color 0.15s ease,
+    transform 0.15s ease;
 }
 
 .post-meta .post-category-tag:hover {
@@ -1258,6 +1333,19 @@ pre,
 .post-list-item .read-more:hover .arrow,
 .post-list-item:hover .read-more .arrow {
   transform: translateX(3px);
+}
+
+/* ----------------------------------------
+   Excerpt layout adjustments
+   ---------------------------------------- */
+
+.post-excerpt p + div.highlighter-rouge {
+  margin-top: 1rem;
+}
+
+.post-excerpt p + ul,
+.post-excerpt p + ol {
+  margin-top: 1rem;
 }
 
 /* ========================================
@@ -1429,7 +1517,10 @@ pre,
   opacity: 0;
   visibility: hidden;
   transform: translateY(10px);
-  transition: opacity 0.2s ease, transform 0.2s ease, color 0.15s ease,
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    color 0.15s ease,
     border-color 0.15s ease;
   z-index: 999;
 }
@@ -1447,7 +1538,9 @@ pre,
 
 @media (prefers-reduced-motion: reduce) {
   .back-to-top {
-    transition: opacity 0.01ms, visibility 0.01ms;
+    transition:
+      opacity 0.01ms,
+      visibility 0.01ms;
   }
 }
 
@@ -1663,7 +1756,7 @@ pre,
 }
 
 .related-list li::before {
-  content: "•";
+  content: '•';
   color: var(--color-accent);
   position: absolute;
   left: 0;
