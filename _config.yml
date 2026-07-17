@@ -1,0 +1,83 @@
+title: Linux • Programming • Open Source • Software Engineering
+
+# Short brand phrase used in <title> tags (see _includes/head.html).
+# Keeps browser tabs / Google SERP titles concise without touching
+# the full `title` above, which still drives the homepage hero heading.
+short_title: Linux • Programming • Open Source
+
+# Also feeds jekyll-seo-tag's JSON-LD author/publisher output.
+# Using the object form (not a bare string) so this is treated as a
+# display name only — a bare string is read as a Twitter handle and
+# would emit an unintended twitter:creator tag.
+author:
+  name: Dumidu
+  twitter: ""
+
+email: dumidu.github@gmail.com
+description: >-
+  Exploring Linux, Python, Bash, and software engineering fundamentals
+  through practical projects.
+baseurl: ""
+url: "https://dumidusw.github.io"
+
+# Clean, lowercase, canonical-friendly URLs (SEO)
+permalink: /:year/:month/:day/:title/
+
+# Publisher logo used in structured data (JSON-LD) — not the same as
+# the social preview image fallback below, but worth setting too.
+logo: /assets/images/site-logo.png
+
+# Default social preview image (og:image / twitter:image) for any post
+# or page that doesn't set its own `image:` in front matter.
+defaults:
+  - scope:
+      path: ""
+    values:
+      image: /assets/images/default-card.jpg
+
+twitter:
+  card: summary_large_image
+github_username: dumidusw
+
+
+# Build settings
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag   
+  - jekyll-sitemap  
+  - jekyll-paginate
+
+# Pagination (homepage only — jekyll-paginate only paginates the root index page)
+paginate: 5
+paginate_path: "/page:num/"
+
+# Excerpts are cut at this marker (see post.excerpt in _layouts/home.html).
+# Every post in _posts must contain <!--more--> after its intro paragraph(s),
+# otherwise Jekyll falls back to using the ENTIRE post as its excerpt.
+excerpt_separator: "<!--more-->"
+
+# Custom styles
+sass:
+  sass_dir: assets/css
+  style: :compressed
+
+# Navigation - hide the About page
+header_pages: []
+
+exclude:
+  - _site
+  - .jekyll-cache
+  - "*.tar.gz"
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - _template
+
+# Categories too generic to count as a meaningful "related post" match
+# (still work normally for navigation/archives, just ignored by continue-reading.html)
+related_exclude_categories:
+  - misc
+  - introduction
+  - linux
+  - projects

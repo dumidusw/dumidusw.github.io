@@ -1,0 +1,1749 @@
+/* Custom fonts */
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono&display=swap');
+
+/* ========================================
+   DESIGN TOKENS
+   ======================================== */
+
+:root {
+  /* Fonts */
+  --font-sans:
+    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: 'Fraunces', Georgia, 'Times New Roman', serif;
+
+  /* Type scale */
+  --fs-meta: 0.875rem; /* 14px — dates, categories: recede, don't compete with title */
+  --fs-body: 1.125rem; /* 18px — paragraph text: post-content p, post-excerpt */
+  --fs-h3: 1.6rem; /* post-content h3 */
+  --fs-h2: 2rem; /* 32px — post-content h2 AND homepage post-list-item title */
+  --fs-h1: 2.6rem; /* post-content h1 AND individual post-title */
+
+  /* Color */
+  --color-accent: #1f6f5c; /* deep teal — replaces Minima's default blue */
+  --color-accent-hover: #164f41;
+  --color-ink: #1a1a1a; /* body/title text, slightly softer than pure black */
+  --color-muted: #6b6b6b; /* meta text */
+  --color-muted-light: #9a9a9a; /* category text */
+  --color-border: #e8e8e8;
+  --color-tag-bg: #eef4f2;
+  --color-tag-pill-bg: var(--color-tag-bg); /* tag pill background — decoupled from code/selection use of tag-bg above */
+  --color-tag-text: #55766e; /* muted, desaturated version of the accent — not a near-twin of it */
+  --color-tag-label: var(--color-muted-light); /* resting tag text color — matches date/reading-time gray exactly */
+  --color-bg: #ffffff;
+  --color-bg-elevated: #f4f4f2;
+  --card-shadow-rest: 0 2px 6px rgba(20, 20, 20, 0.08);
+  --card-shadow-hover: 0 12px 28px rgba(20, 20, 20, 0.14);
+  --card-shadow-static: 0 1px 2px rgba(20, 20, 20, 0.04);
+
+  /* Syntax highlighting */
+  --syntax-keyword: #1f6f5c;
+  --syntax-string: #9a5b13;
+  --syntax-number: #7c5295;
+  --syntax-func: #1a5fb4;
+  --syntax-tag: #a6423e;
+  --syntax-diff-add: #1f7a4d;
+  --syntax-diff-add-bg: rgba(31, 122, 77, 0.1);
+  --syntax-diff-del: #c0392b;
+  --syntax-diff-del-bg: rgba(192, 57, 43, 0.1);
+  --color-warning: #c2610a; /* true orange for the Warning callout, decoupled from --syntax-string */
+
+  /* Spacing rhythm */
+  --space-xs: 0.4rem;
+  --space-sm: 0.8rem;
+  --space-md: 1.5rem;
+  --space-lg: 3rem;
+}
+
+[data-theme='dark'] {
+  --color-accent: #4fb89a;
+  --color-accent-hover: #6fd0b3;
+  --color-ink: #e8e6e1;
+  --color-muted: #9d9d9d;
+  --color-muted-light: #757575;
+  --color-border: #303030;
+  --color-tag-bg: #16302b;
+  --color-tag-pill-bg: #202521; /* nearly matches card background, just enough lift to read as a pill */
+  --color-tag-text: #8fada3; /* muted, desaturated relative to the vivid dark accent */
+  --color-bg: #14161a;
+  --color-bg-elevated: #20242a;
+  --card-shadow-rest: 0 2px 6px rgba(0, 0, 0, 0.35);
+  --card-shadow-hover: 0 12px 28px rgba(0, 0, 0, 0.55);
+  --card-shadow-static: 0 1px 2px rgba(0, 0, 0, 0.2);
+
+  /* Syntax highlighting - dark */
+  --syntax-keyword: #4fb89a;
+  --syntax-string: #e0a458;
+  --syntax-number: #c49ee0;
+  --syntax-func: #7aa8e0;
+  --syntax-tag: #e08a86;
+  --syntax-diff-add: #6fd0b3;
+  --syntax-diff-add-bg: rgba(111, 208, 179, 0.12);
+  --syntax-diff-del: #ff8b82;
+  --syntax-diff-del-bg: rgba(255, 90, 79, 0.12);
+  --color-warning: #e8963f; /* true orange for the Warning callout, decoupled from --syntax-string */
+}
+
+/* ========================================
+   FORCE INTER FONT EVERYWHERE
+   ======================================== */
+
+html,
+body,
+p,
+li,
+blockquote,
+.post-content,
+h5,
+h6,
+.site-title,
+.site-nav,
+.page-link,
+.post-meta,
+.post-title,
+.site-description,
+.wrapper {
+  font-family:
+    'Inter',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    sans-serif !important;
+}
+
+body {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--color-ink);
+  background: var(--color-bg);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+::selection {
+  background: var(--color-tag-bg);
+  color: var(--color-accent-hover);
+}
+
+a,
+a:visited {
+  color: var(--color-accent);
+}
+
+a:hover {
+  color: var(--color-accent-hover);
+}
+
+/* ========================================
+   POST CONTENT (individual post pages)
+   ======================================== */
+
+.post-content {
+  font-size: var(--fs-body);
+  line-height: 1.9;
+}
+
+.post-content h1 {
+  font-family: var(--font-serif);
+  font-size: var(--fs-h1);
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.post-content h2 {
+  position: relative;
+  font-family: var(--font-serif);
+  font-size: var(--fs-h2);
+  font-weight: 600;
+  margin-top: 3.75rem;
+  margin-bottom: 0.85rem;
+}
+
+.post-content h2::after {
+  content: '';
+  display: block;
+  width: 24px;
+  height: 3px;
+  margin-top: 0.6rem;
+  background: var(--color-accent);
+  border-radius: 2px;
+}
+
+.post-content h3 {
+  font-family: var(--font-serif);
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-top: 2.25rem;
+  margin-bottom: 0.65rem;
+}
+
+.post-content h4 {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.post-content h5 {
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-muted);
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.post-content h6 {
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-muted-light);
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.post-content p {
+  margin-bottom: 1.2rem;
+}
+
+.post-content a {
+  text-decoration: underline;
+  text-decoration-color: rgba(31, 111, 92, 0.35);
+  text-underline-offset: 2px;
+  transition: text-decoration-color 0.15s ease;
+}
+
+.post-content a:hover {
+  text-decoration-color: var(--color-accent);
+}
+
+/* ========================================
+   LISTS
+   ======================================== */
+
+.post-content ul,
+.post-content ol {
+  margin: 0 0 1.4rem;
+  padding-left: 1.4rem;
+}
+
+.post-content li {
+  margin-bottom: 0.5rem;
+  line-height: 1.8;
+}
+
+.post-content li > ul,
+.post-content li > ol {
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+}
+
+.post-content ul {
+  list-style: disc;
+}
+
+.post-content ul ul {
+  list-style: circle;
+}
+
+.post-content ul ul ul {
+  list-style: square;
+}
+
+.post-content ul li::marker,
+.post-content ol li::marker {
+  color: var(--color-accent);
+}
+
+/* Task lists: hide the bullet on items that contain a checkbox,
+   since the checkbox itself is the marker */
+.post-content li:has(> input[type='checkbox']) {
+  list-style: none;
+}
+
+.post-content li input[type='checkbox'] {
+  margin-right: 0.5rem;
+  accent-color: var(--color-accent);
+  transform: translateY(1px);
+}
+
+/* ========================================
+   BLOCKQUOTES / CALLOUTS
+   ======================================== */
+
+/* Shared shape for every callout - only the accent color (border +
+   label) changes between types, everything else stays identical so
+   the family reads as one deliberate system. */
+.post-content blockquote {
+  margin: 1.5rem 0;
+  padding: 0.9rem 1.5rem;
+  border-left: 3px solid var(--color-muted);
+  background: var(--color-bg-elevated);
+  border-radius: 0 8px 8px 0;
+  font-style: normal;
+  color: var(--color-ink);
+}
+
+.post-content blockquote p {
+  margin-bottom: 0.75rem;
+}
+
+.post-content blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+/* A blockquote that opens with a bold line (e.g. "**TIP**") reads
+   as a labeled callout - style that first line like a small label.
+   Default color is neutral gray (matches the plain/Note treatment);
+   type modifiers below override it to their accent color. */
+.post-content blockquote p:first-of-type strong:only-child {
+  display: inline-block;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--color-muted);
+}
+
+/* Type modifiers - add the matching class via a kramdown IAL right
+   after the blockquote:
+     > **TIP**
+     >
+     > Keep your articles focused on one topic.
+     {: .callout-tip}
+   Reuses the existing syntax-highlight colors so Warning/Important
+   automatically stay correct in dark mode too. */
+
+.post-content blockquote.callout-note {
+  border-left-color: var(--color-muted);
+}
+.post-content blockquote.callout-note p:first-of-type strong:only-child {
+  color: var(--color-muted);
+}
+
+.post-content blockquote.callout-tip {
+  border-left-color: var(--color-accent);
+}
+.post-content blockquote.callout-tip p:first-of-type strong:only-child {
+  color: var(--color-accent);
+}
+
+.post-content blockquote.callout-warning {
+  border-left-color: var(--color-warning);
+}
+.post-content blockquote.callout-warning p:first-of-type strong:only-child {
+  color: var(--color-warning);
+}
+
+.post-content blockquote.callout-important {
+  border-left-color: var(--syntax-diff-del);
+}
+.post-content blockquote.callout-important p:first-of-type strong:only-child {
+  color: var(--syntax-diff-del);
+}
+
+/* ========================================
+   HORIZONTAL RULE
+   ======================================== */
+
+.post-content hr {
+  border: none;
+  border-top: 1px solid var(--color-border);
+  margin: 2.5rem 0;
+}
+
+/* ========================================
+   TABLES
+   ======================================== */
+
+.post-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.95rem;
+}
+
+.post-content th,
+.post-content td {
+  padding: 0.6rem 1rem;
+  border: 1px solid var(--color-border);
+  text-align: left;
+  background: var(--color-bg);
+  color: var(--color-ink);
+}
+
+.post-content th {
+  background: var(--color-bg-elevated);
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.post-content tbody tr:nth-child(even) td {
+  background: var(--color-bg-elevated);
+}
+
+/* ========================================
+   KEYBOARD SHORTCUTS
+   ======================================== */
+
+.post-content kbd {
+  display: inline-block;
+  padding: 0.15em 0.5em;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85em;
+  color: var(--color-ink);
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-bottom-width: 2px;
+  border-radius: 5px;
+}
+
+/* ========================================
+   DEFINITION LISTS
+   ======================================== */
+
+.post-content dl {
+  margin: 1.5rem 0;
+}
+
+.post-content dt {
+  font-weight: 600;
+  color: var(--color-ink);
+  margin-top: 1rem;
+}
+
+.post-content dd {
+  margin: 0.25rem 0 0 1.5rem;
+  opacity: 0.85;
+}
+
+/* ========================================
+   IMAGES
+   ======================================== */
+
+.post-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  border: 1px solid var(--color-border);
+  margin: 1.5rem 0;
+  display: block;
+}
+
+/* A plain paragraph directly following an image paragraph reads as
+   its caption */
+.post-content p:has(> img) + p {
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--color-muted);
+  font-style: italic;
+  margin-top: -1rem;
+}
+
+/* ========================================
+   FOOTNOTES
+   ======================================== */
+
+.post-content .footnote,
+.post-content sup a {
+  color: var(--color-accent);
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0 0.15em;
+}
+
+.post-content .footnotes {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-border);
+  font-size: 0.9rem;
+  color: var(--color-muted);
+}
+
+.post-content .footnotes ol {
+  padding-left: 1.2rem;
+}
+
+.post-content .footnotes li {
+  margin-bottom: 0.5rem;
+}
+
+.post-content .reversefootnote {
+  color: var(--color-accent);
+  text-decoration: none;
+  margin-left: 0.3rem;
+}
+
+.post-title {
+  font-family: var(--font-serif) !important;
+  font-size: var(--fs-h1);
+  font-weight: 600;
+  color: var(--color-ink);
+  letter-spacing: -0.01em;
+}
+
+.dot-separator {
+  color: var(--color-muted-light);
+}
+
+.reading-time {
+  white-space: nowrap;
+}
+
+.post-meta time,
+.post-meta .reading-time {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--color-muted-light);
+}
+
+.meta-icon {
+  color: var(--color-muted-light);
+  flex-shrink: 0;
+}
+
+/* ========================================
+   INDIVIDUAL POST HEADER (post.html)
+   ======================================== */
+
+.back-link,
+.back-link:visited {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-muted);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.post-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 2.25rem;
+}
+
+.post-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.post-action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  background: var(--color-bg-elevated);
+  color: var(--color-muted);
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+
+.post-action-btn:hover {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.post-action-btn .bookmark-filled {
+  display: none;
+}
+
+.post-action-btn.is-bookmarked {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+  background: var(--color-tag-bg);
+}
+
+.post-action-btn.is-bookmarked .bookmark-outline {
+  display: none;
+}
+
+.post-action-btn.is-bookmarked .bookmark-filled {
+  display: block;
+}
+
+.share-wrapper {
+  position: relative;
+  display: inline-flex;
+}
+
+.post-action-btn .share-icon-check {
+  display: none;
+}
+
+.post-action-btn.is-copied {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.post-action-btn.is-copied .share-icon-default {
+  display: none;
+}
+
+.post-action-btn.is-copied .share-icon-check {
+  display: block;
+}
+
+.share-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 50;
+  width: 220px;
+  padding: 0.35rem;
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  box-shadow: var(--card-shadow-hover);
+}
+
+.share-menu-header {
+  padding: 0.5rem 0.6rem 0.4rem;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid var(--color-border);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-muted);
+}
+
+.share-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  width: 100%;
+  padding: 0.5rem 0.6rem;
+  border: none;
+  border-radius: 6px;
+  background: none;
+  color: var(--color-ink);
+  font-size: 0.88rem;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.share-menu-item svg {
+  flex-shrink: 0;
+  color: var(--color-muted);
+  transition: color 0.15s ease;
+}
+
+.share-menu-item:hover {
+  background: var(--color-bg);
+  color: var(--color-accent);
+}
+
+.share-menu-item:hover svg {
+  color: var(--color-accent);
+}
+
+.share-toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem;
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  color: var(--color-ink);
+  font-size: 0.85rem;
+  font-weight: 500;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  pointer-events: none;
+  box-shadow: var(--card-shadow-hover);
+}
+
+.share-toast svg {
+  flex-shrink: 0;
+  color: var(--color-accent);
+}
+
+.share-toast.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.back-icon {
+  transition: transform 0.15s ease;
+}
+
+.back-link:hover {
+  color: var(--color-accent);
+  text-decoration: underline;
+}
+
+.back-link:hover .back-icon {
+  transform: translateX(-3px);
+}
+
+.post-header {
+  margin-bottom: var(--space-lg);
+  padding: 1.25rem 2rem;
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  background: var(--color-bg-elevated);
+  box-shadow: var(--card-shadow-static);
+}
+
+.post-header .post-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  font-size: var(--fs-meta);
+  color: var(--color-muted);
+  margin-top: 1rem;
+}
+
+/* ========================================
+   CODE BLOCKS - JetBrains Mono
+   ======================================== */
+
+code,
+pre,
+.post-content code,
+.post-content pre {
+  font-family:
+    'JetBrains Mono', 'SF Mono', Consolas, 'Liberation Mono', monospace !important;
+  font-size: 0.9em;
+}
+
+.post-content code,
+.post-excerpt code {
+  background: var(--color-tag-bg);
+  color: var(--color-tag-text);
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  border-color: var(--color-border);
+}
+
+.post-content pre code {
+  background: none;
+  color: inherit;
+  padding: 0;
+  border-radius: 0;
+}
+
+/* Fenced code block container - covers Rouge's wrapper markup
+   regardless of language (div.highlighter-rouge > div.highlight > pre).
+   The box (border/radius/background) lives on the outer wrapper so a
+   language label bar can sit above the code and share the same card. */
+.post-content div.highlighter-rouge {
+  position: relative;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  background: var(--color-bg-elevated);
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+
+.post-content div.highlighter-rouge .highlight {
+  background: none;
+  overflow-x: auto;
+  padding: 0.875rem 1.5rem;
+  line-height: 1.6;
+}
+
+/* Fallback for a plain fenced block with no language set - kramdown
+   doesn't wrap these in .highlighter-rouge, so they need their own box */
+.post-content > pre {
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  padding: 0.875rem 1.5rem;
+  overflow-x: auto;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.code-lang-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem 0.5rem 1.5rem;
+  background: var(--color-bg-elevated);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.code-lang-name {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.code-copy-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.3rem;
+  border: none;
+  background: none;
+  color: var(--color-muted);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.15s ease, color 0.15s ease;
+}
+
+.post-content div.highlighter-rouge:hover .code-copy-btn,
+.post-content div.highlighter-rouge:focus-within .code-copy-btn {
+  opacity: 1;
+}
+
+@media (hover: none) {
+  .code-copy-btn {
+    opacity: 0.6;
+  }
+}
+
+.code-copy-btn:hover {
+  color: var(--color-accent);
+}
+
+.code-copy-btn .copy-state-success {
+  display: none;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.code-copy-btn.copied {
+  opacity: 1;
+  color: var(--color-accent);
+}
+
+.code-copy-btn.copied .copy-state-default {
+  display: none;
+}
+
+.code-copy-btn.copied .copy-state-success {
+  display: inline-flex;
+}
+
+.post-content .highlight pre {
+  margin: 0;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+/* Rouge syntax token theme - light */
+.highlight .c, .highlight .c1, .highlight .cm, .highlight .cs {
+  color: var(--color-muted);
+  font-style: italic;
+}
+.highlight .k, .highlight .kc, .highlight .kd, .highlight .kn,
+.highlight .kp, .highlight .kr, .highlight .kt, .highlight .kv,
+.highlight .nb, .highlight .bp {
+  color: var(--syntax-keyword);
+  font-weight: 600;
+}
+.highlight .s, .highlight .sb, .highlight .sc, .highlight .sd,
+.highlight .s1, .highlight .s2, .highlight .se, .highlight .sh,
+.highlight .si, .highlight .sx, .highlight .ss {
+  color: var(--syntax-string);
+}
+.highlight .m, .highlight .mf, .highlight .mh, .highlight .mi,
+.highlight .mo, .highlight .il {
+  color: var(--syntax-number);
+}
+.highlight .nf, .highlight .nc, .highlight .nn, .highlight .na {
+  color: var(--syntax-func);
+}
+.highlight .nt {
+  color: var(--syntax-tag);
+}
+.highlight .nv, .highlight .vc, .highlight .vg, .highlight .vi,
+.highlight .n, .highlight .o, .highlight .ow, .highlight .p {
+  color: var(--color-ink);
+}
+.highlight .err {
+  color: #e5484d;
+  background: none;
+}
+.highlight .gd {
+  color: var(--syntax-diff-del);
+  background: var(--syntax-diff-del-bg);
+  display: block;
+}
+.highlight .gi {
+  color: var(--syntax-diff-add);
+  background: var(--syntax-diff-add-bg);
+  display: block;
+}
+.highlight .gh, .highlight .gu, .highlight .gp {
+  color: var(--color-muted);
+  font-weight: 600;
+}
+
+/* ========================================
+   HEADER
+   ======================================== */
+
+.site-header {
+  position: relative;
+  padding: 2.5rem 0 2rem !important;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.icon-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  background: var(--color-bg-elevated);
+  color: var(--color-muted);
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease, transform 0.25s ease;
+}
+
+.icon-btn:hover {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.theme-toggle {
+  right: 24px;
+}
+
+.theme-toggle:hover {
+  transform: translateY(-50%) rotate(20deg);
+}
+
+.search-toggle {
+  left: 24px;
+}
+
+.theme-toggle .icon-moon {
+  display: none;
+}
+
+[data-theme='dark'] .theme-toggle .icon-sun {
+  display: none;
+}
+
+[data-theme='dark'] .theme-toggle .icon-moon {
+  display: block;
+}
+
+.site-header .wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.5rem;
+}
+
+.site-title {
+  float: none !important;
+  font-family: var(--font-serif) !important;
+  font-size: 1.75rem !important;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--color-ink) !important;
+  transition: color 0.15s ease;
+}
+
+.site-title:hover {
+  color: var(--color-accent) !important;
+}
+
+.hero-accent-line {
+  display: block;
+  width: 40px;
+  height: 3px;
+  margin: 0.25rem auto 0;
+  background: var(--color-accent);
+  border-radius: 2px;
+}
+
+.site-description {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--color-muted);
+  font-weight: 400;
+  max-width: 480px;
+}
+
+/* No nav pages configured — hide the empty hamburger trigger
+   in case Minima's default header markup is ever restored */
+.site-nav {
+  display: none;
+}
+
+/* ========================================
+   LAYOUT
+   ======================================== */
+
+.wrapper {
+  max-width: 780px;
+  padding: 0 20px;
+}
+
+.page-content {
+  padding-top: var(--space-lg);
+  padding-bottom: var(--space-lg);
+}
+
+/* ========================================
+   BOOKMARKS (HOMEPAGE)
+   ======================================== */
+
+.bookmarks-section {
+  margin-bottom: 2.5rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.bookmarks-heading {
+  position: relative;
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.85rem;
+}
+
+.bookmarks-heading::after {
+  content: '';
+  display: block;
+  width: 24px;
+  height: 3px;
+  margin-top: 0.6rem;
+  background: var(--color-accent);
+  border-radius: 2px;
+}
+
+.bookmark-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.bookmark-item {
+  position: relative;
+  padding: 9px 0.75rem;
+  margin: 0 -0.75rem;
+  border-bottom: 1px dashed var(--color-border);
+  border-radius: 8px;
+  transition: background 0.15s ease;
+}
+
+.bookmark-item:last-child {
+  border-bottom: none;
+}
+
+.bookmark-item:hover {
+  background: var(--color-bg-elevated);
+}
+
+.bookmark-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--color-ink);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.bookmark-item:hover .bookmark-link {
+  color: var(--color-accent);
+}
+
+.bookmark-row-icon {
+  flex-shrink: 0;
+  color: var(--color-accent);
+}
+
+.bookmark-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.15rem;
+  padding-left: 1.35rem;
+  font-size: 0.85rem;
+  color: var(--color-muted-light);
+}
+
+.bookmark-remove {
+  position: absolute;
+  top: 50%;
+  right: 0.75rem;
+  transform: translateY(-50%);
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: none;
+  border: none;
+  border-radius: 6px;
+  padding: 0;
+  color: var(--color-muted);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.15s ease, color 0.15s ease, background 0.15s ease;
+}
+
+.bookmark-item:hover .bookmark-remove {
+  opacity: 1;
+}
+
+.bookmark-remove:hover {
+  color: var(--color-accent);
+  background: var(--color-bg);
+}
+
+/* ========================================
+   HOMEPAGE POST LIST
+   ======================================== */
+
+.post-list-item {
+  position: relative;
+  margin-bottom: 2.25rem;
+  padding: 1.75rem 2rem;
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  background: var(--color-bg-elevated);
+  box-shadow: var(--card-shadow-rest);
+  transition:
+    border-color 0.18s ease-out,
+    transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.2s ease-out;
+}
+
+/* Stretched link: the title's <a> gets an invisible layer that fills
+   the whole card, so clicking anywhere counts as clicking the title.
+   Anything else that needs its own click target (Read more, tags)
+   is lifted above it with position + z-index below. */
+.stretched-link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.post-list-item:hover {
+  transform: translateY(-2px);
+  border-color: var(--color-accent);
+  box-shadow: var(--card-shadow-hover);
+}
+
+.post-list-item:last-child {
+  margin-bottom: 0;
+}
+
+.post-list-item h2 {
+  font-family: var(--font-serif) !important;
+  margin-bottom: 0.9rem;
+  font-size: var(--fs-h2);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+.post-list-item .post-link {
+  color: var(--color-ink);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.post-list-item .post-link:hover {
+  color: var(--color-accent-hover);
+}
+
+.post-list-item .post-meta {
+  font-size: var(--fs-meta);
+  color: var(--color-muted);
+  margin-bottom: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+/* Category pills */
+.post-meta .post-categories {
+  display: inline-flex;
+  gap: 0.35rem;
+  margin-left: 0.625rem;
+}
+
+.post-meta .post-category-tag {
+  position: relative;
+  z-index: 2;
+  background: var(--color-tag-pill-bg);
+  color: var(--color-tag-label);
+  font-size: 0.78rem;
+  font-weight: 500;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  letter-spacing: 0.01em;
+  transition: background-color 0.15s ease, transform 0.15s ease;
+}
+
+.post-meta .post-category-tag:hover {
+  background: var(--color-accent);
+  color: var(--color-bg);
+  transform: translateY(-1px);
+}
+
+.post-list-item .post-excerpt {
+  font-size: var(--fs-body);
+  color: var(--color-ink);
+  line-height: 1.8;
+}
+
+.post-list-item .post-excerpt p {
+  margin: 0;
+  opacity: 0.82;
+}
+
+.post-list-item .read-more {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 1.1rem;
+  color: var(--color-muted-light);
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.post-list-item .read-more:hover,
+.post-list-item:hover .read-more {
+  color: var(--color-accent-hover);
+  text-decoration: underline;
+}
+
+.post-list-item .read-more .arrow {
+  transition: transform 0.15s ease;
+}
+
+.post-list-item .read-more:hover .arrow,
+.post-list-item:hover .read-more .arrow {
+  transform: translateX(3px);
+}
+
+/* ========================================
+   FOOTER
+   ======================================== */
+
+.site-footer {
+  text-align: center;
+  padding: var(--space-md) 0;
+  border-top: 1px solid var(--color-border);
+  margin-top: var(--space-lg);
+}
+
+/* Legal metadata - quietly recedes, same treatment as post dates/meta,
+   with room below it so it reads as a separate line, not the first
+   item in the nav list */
+.site-footer .footer-copyright {
+  margin: 0 0 0.6rem;
+  color: var(--color-muted-light);
+  font-size: var(--fs-meta);
+}
+
+.site-footer .footer-nav {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 0.9rem;
+}
+
+.site-footer .footer-nav a {
+  color: var(--color-muted);
+  text-decoration: none;
+}
+
+.site-footer .footer-nav a:hover {
+  text-decoration: underline;
+  color: var(--color-accent-hover);
+}
+
+/* ========================================
+   MOBILE RESPONSIVE
+   ======================================== */
+
+@media screen and (max-width: 600px) {
+  .site-title {
+    font-size: 1.4rem !important;
+  }
+
+  .site-description {
+    font-size: 0.85rem;
+  }
+
+  .post-list-item {
+    padding: 1.25rem 1.4rem;
+  }
+
+  .post-list-item h2 {
+    font-size: 1.4rem;
+  }
+
+  .post-list-item .post-excerpt {
+    font-size: 1rem;
+  }
+
+  .post-list-item .post-meta {
+    font-size: 0.85rem;
+  }
+
+  .theme-toggle {
+    right: 14px;
+  }
+
+  .post-content table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
+
+/* ========================================
+   ENTRANCE ANIMATION
+   ======================================== */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.site-header,
+.post-list-item,
+.post {
+  animation: fadeInUp 0.5s ease both;
+}
+
+.post-list-item:nth-child(1) {
+  animation-delay: 0.05s;
+}
+.post-list-item:nth-child(2) {
+  animation-delay: 0.12s;
+}
+.post-list-item:nth-child(3) {
+  animation-delay: 0.19s;
+}
+.post-list-item:nth-child(4) {
+  animation-delay: 0.26s;
+}
+.post-list-item:nth-child(5) {
+  animation-delay: 0.33s;
+}
+.post-list-item:nth-child(n + 6) {
+  animation-delay: 0.4s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ========================================
+   READING PROGRESS BAR
+   ======================================== */
+
+.reading-progress-track {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: transparent;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.reading-progress-bar {
+  height: 100%;
+  width: 0%;
+  background: var(--color-accent);
+}
+
+/* ========================================
+   BACK TO TOP BUTTON
+   ======================================== */
+
+.back-to-top {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-elevated);
+  color: var(--color-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity 0.2s ease, transform 0.2s ease, color 0.15s ease,
+    border-color 0.15s ease;
+  z-index: 999;
+}
+
+.back-to-top.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.back-to-top:hover {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .back-to-top {
+    transition: opacity 0.01ms, visibility 0.01ms;
+  }
+}
+
+/* ========================================
+   SEARCH OVERLAY
+   ======================================== */
+
+.search-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 2000;
+  padding: 10vh 20px 0;
+  justify-content: center;
+}
+
+.search-overlay.is-open {
+  display: flex;
+}
+
+.search-panel {
+  width: min(600px, 100%);
+  max-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  box-shadow: var(--card-shadow-hover);
+  overflow: hidden;
+}
+
+.search-input-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-muted);
+  flex-shrink: 0;
+}
+
+.search-input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  color: var(--color-ink);
+}
+
+.search-input::placeholder {
+  color: var(--color-muted-light);
+}
+
+.search-close {
+  border: none;
+  background: none;
+  padding: 0;
+  color: var(--color-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.15s ease;
+}
+
+.search-close:hover {
+  color: var(--color-accent);
+}
+
+.search-results {
+  overflow-y: auto;
+  padding: 0.5rem;
+}
+
+.search-result {
+  display: block;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.search-result:hover {
+  background: var(--color-bg-elevated);
+}
+
+.search-result-title {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--color-ink);
+  margin-bottom: 0.2rem;
+}
+
+.search-result-meta {
+  font-size: var(--fs-meta);
+  color: var(--color-muted-light);
+  margin-bottom: 0.35rem;
+}
+
+.search-result-meta .post-category-tag {
+  font-size: 0.75rem;
+}
+
+.search-result-excerpt {
+  font-size: 0.9rem;
+  color: var(--color-muted);
+}
+
+.search-empty {
+  padding: 2.5rem 1rem;
+  text-align: center;
+  color: var(--color-muted-light);
+}
+
+/* Series box (shown on posts that are part of a series) */
+.series-box {
+  background: var(--color-bg-elevated);
+  border-left: 3px solid var(--color-accent);
+  border-radius: 0 8px 8px 0;
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0 2rem;
+}
+
+.series-box-header {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--color-ink);
+  margin-bottom: 0.75rem;
+}
+
+.series-box-header .meta-icon {
+  color: var(--color-accent);
+  flex-shrink: 0;
+}
+
+.series-box-count {
+  margin-left: auto;
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: var(--color-muted-light);
+}
+
+.series-box-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.series-box-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.9rem;
+}
+
+.series-index {
+  flex-shrink: 0;
+  width: 1.4rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-muted-light);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.series-title {
+  color: var(--color-muted);
+  text-decoration: none;
+}
+
+.series-box-list li a.series-title:hover {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-decoration-color: var(--color-accent);
+}
+
+.series-current .series-title {
+  color: var(--color-ink);
+  font-weight: 700;
+}
+
+.series-index-done {
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+.series-index-current {
+  color: var(--color-accent);
+  font-size: 0.55rem;
+}
+
+.series-upcoming {
+  opacity: 0.8;
+}
+
+/* Related Posts variant (bullet style, no numbered index) */
+.related-list li {
+  position: relative;
+  padding-left: 1rem;
+}
+
+.related-list li::before {
+  content: "•";
+  color: var(--color-accent);
+  position: absolute;
+  left: 0;
+}
+
+/* Pagination (homepage) */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 3rem 0 2.5rem;
+  padding-top: 1rem;
+}
+
+.pagination-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+  color: var(--color-accent);
+  padding: 0.5rem 0.9rem;
+  border-radius: 6px;
+  transition: background 0.15s ease;
+}
+
+.pagination-link:hover {
+  background: var(--color-bg-elevated);
+}
+
+.pagination-arrow {
+  display: inline-block;
+  transition: transform 0.15s ease;
+}
+
+.pagination-prev:hover .pagination-arrow {
+  transform: translateX(-4px);
+}
+
+.pagination-next:hover .pagination-arrow {
+  transform: translateX(4px);
+}
+
+.pagination-disabled {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--color-muted-light);
+  padding: 0.5rem 0.9rem;
+  cursor: default;
+}
+
+/* Disabled state stays flat on hover — no background, no arrow movement */
+.pagination-disabled:hover {
+  background: none;
+}
+
+.pagination-disabled .pagination-arrow {
+  transition: none;
+}
+
+.pagination-status {
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: var(--color-muted-light);
+  white-space: nowrap;
+}
+
+@media (max-width: 500px) {
+  .pagination {
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+  }
+  .pagination-status {
+    order: 3;
+    width: 100%;
+  }
+}
