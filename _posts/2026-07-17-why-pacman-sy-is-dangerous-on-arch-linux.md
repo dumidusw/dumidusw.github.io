@@ -179,10 +179,6 @@ New package     current   ← brought in from current repositories
 Other packages  older
 ```
 
-Pacman will enforce the dependency requirements declared in package metadata, so it will not knowingly install a package when an explicitly versioned dependency is unsatisfied.
-
-However, package compatibility involves more than simply checking whether a dependency name exists.
-
 Software often relies on other packages and shared libraries in the same environment. If you update only part of the system, you can end up mixing newer packages with older ones that were not meant to work together.
 
 This is how a partial upgrade can leave your system in an inconsistent state.
@@ -198,9 +194,72 @@ sudo pacman -Syu package_name
 
 The `u` makes the crucial difference.
 
-Pacman refreshes the sync databases, upgrades installed packages for which newer versions are available, resolves the requested package and its dependencies, and performs the transaction together.
+- Pacman refreshes the sync databases 
+- Upgrades installed packages for which newer versions are available 
+- Resolves the requested package and its dependencies 
+- and performs the transaction together.
 
 Instead of pulling one piece from the current repository environment into an older system, you bring your installed system forward as a whole.
+
+## What about `pacman -S package_name`?
+
+There is one more command worth understanding:
+
+```bash
+sudo pacman -S package_name
+```
+
+Unlike `pacman -Syu package_name`, this command does **not** refresh the sync databases. Pacman uses the repository information it already has locally to find and install the package.
+
+This can be useful when installing several packages within a short period of time.
+
+For example, suppose I have just performed a full system upgrade:
+
+```bash
+sudo pacman -Syu
+```
+
+Later that day, I decide to install another package:
+
+```bash
+sudo pacman -S package_name
+```
+
+There is no need to download the repository databases again just for that installation. Pacman can use the sync databases it already has.
+
+But what if I haven't refreshed those databases for two weeks?
+
+In that case, `pacman -S package_name` still uses the old repository information stored on my computer. The package version recorded there may no longer be available on the current mirror, because Arch's repositories have continued moving forward.
+
+The installation may therefore fail when pacman tries to download a package version that has already been replaced.
+
+So my rule is simple: if my sync databases are old, I don't solve the problem by running:
+
+```bash
+sudo pacman -Sy package_name
+```
+
+Although this quickly refreshes my view of the repositories, it then selectively installs the requested package without upgrading the rest of the system. This can create that problematic partial upgrade.
+
+Instead, I bring my system and sync databases forward together:
+
+```bash
+sudo pacman -Syu package_name
+```
+
+So `pacman -S package_name` is useful when I already have reasonably current sync databases and don't need to refresh them again. If those databases have become old, I perform a full system upgrade rather than refreshing them only for a selective package installation.
+
+## Then why doesn't Arch block `pacman -Sy`?
+
+Okay, it's clear `pacman -Sy package_name` can lead to a partial upgrade, then you might wonder, why doesn't Arch simply prevent you from running it?
+
+Because `pacman -Sy` itself is not an invalid operation. It refreshes the sync databases, and there are legitimate situations where an administrator may need to do that without immediately upgrading the system.
+
+Arch generally gives you control over your system rather than trying to prevent every potentially unsafe operation. It assumes that you, as a system administrator, understand the consequences of the commands you run.
+
+Pacman gives you the tools. It does not make every system management decision for you.
+
+So, understand **why** `pacman -Sy package_name` is dangerous. Don't memorize it as a command that you shouldn't run.
 
 ---
 <!--
