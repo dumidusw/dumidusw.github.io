@@ -17,81 +17,190 @@ Imagine someone only reads these two paragraphs.
 Would they understand what this article is about?
 -->
 
-If you've spent any time on the Arch Wiki or community forums, you've probably come across this warning: never run `pacman -Sy package_name`. Never run `-Sy` on its own and walk away. The Arch community calls this a partial upgrade and often treats it almost like a superstition. You follow the rule because you were told to, not because you understand what's happening underneath.
+If you've spent any time on the Arch Wiki or community forums, you've probably come across this warning: 
+Never run `pacman -Sy package_name`. Never run `-Sy` on its own and walk away. The Arch community calls this a partial upgrade and often treats it almost like a superstition. You follow the rule because you were told to, not because you understand what's happening underneath.
+<!--more-->
 
 That's the part worth fixing. The rule is easy to remember. Understanding the mechanism behind it is what makes it stick. Once you see it, you'll understand exactly why `pacman -Syu` is the safe method to do your update.
 
-<!--more-->
+## Why Arch updates work differently
 
-## Two databases, one truth
+There are two main types of Linux distributions. They are point-release (or fixed-release) distributions and rolling-release distributions. Arch Linux follows the rolling-release model.
 
-We know there are two main types of Linux distributions: fixed-release distributions and rolling-release distributions. Arch Linux is a rolling-release distribution, where packages are updated continuously instead of being released in large, versioned batches.
+Now, let me show you the practical difference with an example.
 
-That raises an important question: how does pacman know what the current version of each package in the repositories is?
+Suppose I'm using Linux Mint or Debian and my web browser needs an urgent update. I can update the browser without upgrading every other package on my system. The rest of the system can remain at its current versions, and that's a normal part of how a fixed-release distribution is maintained.
 
-That's where the sync database comes in. It doesn't contain the packages themselves. Instead, it stores metadata about them, such as version numbers, dependency information, and checksums. This database tells pacman what is currently available in the repositories.
+Now suppose the same thing happens on Arch Linux. I need the latest version of my browser, but I haven't updated the rest of my system for a while. It might seem reasonable to upgrade only the browser and leave everything else alone.
 
-### `pacman -Sy`
+Technically, I can try to do that. But on Arch, packages in the repositories are continuously moving forward together. The latest browser package may have been built against newer versions of libraries and other packages than the ones currently installed on my system.
+
+If I refresh the package databases and install only the new browser, I mix packages from the current repository state with packages from an older system state. This is what Arch calls a partial upgrade, and partial upgrades are unsupported.
+
+So on Arch, if I need to upgrade a package from the official repositories, the safe approach is to update the system as a whole rather than selectively upgrading only that package.
+
+This difference is important because Arch's repositories are constantly changing. 
+Think of this as a remote package environment that is continuously moving forward.
+
+`pacman` command you type on your computer, is a program installed in your computer. 
+So how does `pacman` know which packages and which versions of those packages are currently available in the remote repositories?
+
+## How pacman knows what's available
+
+Pacman maintains two distinct types of package databases on your computer. Together, they allow pacman to know both **what is installed on your system** and **what is available from the repositories**.
+
+### 1. The sync databases — "What is available?"
+
+The sync databases contain information about packages available from the configured Arch repositories, such as `core` and `extra`.
+
+They are stored under:
+
+```note
+/var/lib/pacman/sync/
+```
+
+These are local copies of repository metadata. They contain information pacman needs about available packages, including their versions and dependencies.
+
+When you run:
 
 ```bash
 sudo pacman -Sy
 ```
-Now let's see what this command actually does.
 
-It refreshes the sync database. In other words, pacman downloads the latest metadata from the repositories and updates its local copy. It now knows the latest version of every package that's available.
+pacman refreshes these local sync databases using the current repository databases from your configured mirrors.
 
-Notice what it doesn't do. It doesn't install or upgrade any packages. It doesn't replace libraries, binaries, or configuration files. Your installed system remains exactly as it was.
+An important point is that refreshing the sync databases does **not** upgrade any installed packages. Pacman now has current information about what is available remotely, while your installed system remains unchanged.
 
-So after pacman -Sy, pacman has new information, but your system still contains the old packages.
+### 2. The local database — "What is installed?"
 
-By itself, that's not a problem. The danger only appears when you perform another package operation before bringing the rest of your system up to date.
+The local database records information about packages currently installed on your computer.
 
-## Where the danger actually comes from
+It is stored under:
 
-Packages in a package manager don't exist in isolation. They depend on one another—especially on shared libraries such as glibc, openssl, and many others. When a package is built, it's built against the versions of those libraries that are available in the repositories at that time.
-
-### `pacman -Sy package_name`
-
-```bash
-sudo pacman -Sy somegui
-```
-Now let's see what happens when you install a package after refreshing the sync database.
-
-Pacman uses the newly refreshed sync database to resolve somegui's dependencies. It installs the latest version of somegui along with any updated dependencies it requires.
-
-However, every other package on your system remains at its previous version. Only somegui and its dependencies move forward; the rest of the system stays where it was.
-
-If the new package expects newer versions of shared libraries than the rest of your system provides, you now have a partial upgrade. Nothing is corrupted, but your system is no longer version-consistent. That can lead to problems such as missing symbols, ABI mismatches, or programs that fail to start.
-
-This is why pacman -Sy package_name is dangerous. Refreshing the sync database isn't the problem. The problem is installing a package from that newly refreshed package set while the rest of your system is still using older versions.
-
-## The safe command: `pacman -Syu`
-
-```bash
-sudo pacman -Syu
+```note
+/var/lib/pacman/local/
 ```
 
-This command looks similar, but behaves differently. This also refreshes the sync database, but it immediately upgrades every installed package to match it. Instead of updating just one package, the entire system moves to the same set of package versions.
+When pacman installs, upgrades, or removes a package, it updates this database accordingly. It records information such as the installed package version, dependencies, and the files belonging to that package.
 
-As a result, your installed system stays consistent with the package versions in the repositories. That's the state Arch Linux is designed and tested to run.
+Because this information is stored locally, pacman can answer questions about your installed packages without contacting the Arch repositories.
 
-This is why the Arch Wiki is so clear: partial upgrades are unsupported. Arch expects the packages on your system to move together as a complete, consistent set.
+For example:
 
-## What this means in practice
+```bash
+pacman -Q
+```
 
-- pacman -Syy refreshes the sync database even if it's already up to date. It creates the same situation as pacman -Sy, so the same rule applies: follow it with a full system upgrade, not a single package installation.
-- The problem isn't -Sy itself. The problem is installing packages after refreshing the sync database without updating the rest of the system.
-- If you accidentally perform a partial upgrade, the solution is simple: run pacman -Syu as soon as possible. Don't try to fix individual packages one by one—bring the whole system back into a consistent state.
+can list your installed packages entirely from local information.
 
-## The other half of safe updates
+A simple way to remember the distinction is:
 
-Partial upgrades are only one thing you need to watch out for when updating Arch Linux.
+```note
+Sync databases  → What packages are available?
+Local database  → What packages are installed?
+```
 
-The other is updates that require manual intervention. Even though pacman -Syu keeps your system version-consistent, some updates still require you to perform additional steps before or after the upgrade. That's why Arch publishes important update notices as Arch News.
+Pacman uses these two views together when managing your system. Understanding the difference between them is the key to understanding what happens when you run `pacman -Sy` and why `pacman -Syu` behaves differently.
 
-A safe Arch update isn't just about running pacman -Syu. It's also about checking Arch News for updates that require manual intervention.
+## How a partial upgrade happens
 
-If you'd like to learn about the other half of safe Arch updates, read my article on Understanding Arch News (and Automating It with Informant).
+Let's see what happens when we run:
+
+```bash
+sudo pacman -Sy package_name
+```
+
+### Step 1: Pacman refreshes the sync databases
+
+The `-y` option refreshes the sync databases under:
+
+```note
+/var/lib/pacman/sync/
+```
+
+Pacman now has current information about the packages available in the configured repositories.
+
+But nothing installed on your system has been upgraded yet.
+
+At this point, pacman's view of the repositories is current, while your installed system may still contain package versions from the last time you performed a full system upgrade.
+
+### Step 2: Pacman looks up the requested package
+
+Pacman uses the newly refreshed sync databases to find `package_name` and determine its dependencies.
+
+The requested package therefore comes from the **current repository state**, not necessarily from the repository state that existed when you last upgraded your system.
+
+### Step 3: Pacman resolves the transaction
+
+Pacman checks the requested package's declared dependencies against the packages installed on your system and the packages currently available in the repositories.
+
+If dependencies need to be installed or upgraded to satisfy the transaction, pacman can include them.
+
+But this is the important part:
+
+```bash
+sudo pacman -Sy package_name
+```
+
+does **not** tell pacman to perform a full system upgrade.
+
+Pacman resolves the transaction needed for the package you requested, but unrelated installed packages are not automatically brought forward simply because newer versions exist.
+
+You can therefore end up mixing packages from the current repository state with packages from an older system state.
+
+That is a **partial upgrade**.
+
+## Why this can cause problems
+
+A useful mental model is to think of the Arch repositories as a package environment that is continuously moving forward.
+
+Packages in that environment are not isolated. They may depend on other packages or be built against shared libraries that are also evolving.
+
+Imagine your system was last fully upgraded some time ago:
+
+```note
+Your installed system          Current Arch repositories
+
+Application A   older         Application A   newer
+Library X       older         Library X       newer
+Library Y       older         Library Y       newer
+Other packages  older         Other packages  newer
+```
+
+You then refresh the sync databases and install one package from the current repositories:
+
+```note
+Your installed system
+
+Application A   older
+Library X       older
+Library Y       older
+New package     current   ← brought in from current repositories
+Other packages  older
+```
+
+Pacman will enforce the dependency requirements declared in package metadata, so it will not knowingly install a package when an explicitly versioned dependency is unsatisfied.
+
+However, package compatibility involves more than simply checking whether a dependency name exists.
+
+Software often relies on other packages and shared libraries in the same environment. If you update only part of the system, you can end up mixing newer packages with older ones that were not meant to work together.
+
+This is how a partial upgrade can leave your system in an inconsistent state.
+
+## The correct Arch approach
+
+Instead of refreshing the package databases and selectively installing a package:
+we can perform a full system upgrade while installing the package:
+
+```bash
+sudo pacman -Syu package_name
+```
+
+The `u` makes the crucial difference.
+
+Pacman refreshes the sync databases, upgrades installed packages for which newer versions are available, resolves the requested package and its dependencies, and performs the transaction together.
+
+Instead of pulling one piece from the current repository environment into an older system, you bring your installed system forward as a whole.
 
 ---
 <!--
