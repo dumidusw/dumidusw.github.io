@@ -54,9 +54,10 @@ layout: default
     </div>
 	<div class="post-excerpt post-content">
       {{ post.excerpt }}
-      <a href="{{ post.url | relative_url }}" class="read-more">
-        Continue reading <span class="arrow">&rarr;</span>
-      </a>
+   		<a href="{{ post.url | relative_url }}" class="read-more">
+		  <span class="read-more-text">Continue reading</span>
+		  <span class="read-more-arrow">&rarr;</span>
+		</a>
     </div>
   </article>
   {%- endfor -%} {%- endif -%}
