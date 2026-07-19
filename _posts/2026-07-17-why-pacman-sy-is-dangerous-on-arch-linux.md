@@ -18,7 +18,8 @@ Would they understand what this article is about?
 -->
 
 If you've spent any time on the Arch Wiki or community forums, you've probably come across this warning: 
-Never run `pacman -Sy package_name`. Never run `-Sy` on its own and walk away. The Arch community calls this a partial upgrade and often treats it almost like a superstition. You follow the rule because you were told to, not because you understand what's happening underneath.
+Never run `pacman -Sy package_name`. Never run `-Sy` on its own and walk away. 
+This is known as a partial upgrade. Some people follow this rule almost like a superstition. You avoid it because you've been told not to, not because you understand what's happening underneath.
 <!--more-->
 
 That's the part worth fixing. The rule is easy to remember. Understanding the mechanism behind it is what makes it stick. Once you see it, you'll understand exactly why `pacman -Syu` is the safe method to do your update.
