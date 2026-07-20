@@ -15,27 +15,27 @@ That's one of Arch's biggest strengths. New features, hardware support, and bug 
 <!--more-->
 Since Arch stays much closer to upstream software, changes reach you sooner. Most updates work perfectly, but every now and then an update can introduce a regression or create an unexpected compatibility issue in your system. It may be a little screen glitch to a complete boot failure. New Arch users hear such stories and naturally become nervous about running updates.
 
-Rather than worrying about whether an update _might_ break something, I prefer to think about what I'll do _if_ it does. Having a clear recovery plan removes most of the uncertainty. Instead of guessing, I simply work through the same two recovery steps every time.
+Rather than worrying about whether an update might break something, I prefer to think about what I'll do if it does. Having a clear recovery plan removes most of the uncertainty. Instead of guessing, I simply work through the same two recovery steps every time.
 
 My safety net has two layers. I first try an LTS kernel to determine whether the problem is limited to the latest kernel. If that doesn't help, I restore a Timeshift snapshot to return my system to a known-good state. Each layer serves a different purpose, and together they cover most of the problems I'm likely to encounter after an update.
 
 ## Safety net one: a second, older kernel
 
-The "kernel" is the core part of Linux that talks to your hardware — your graphics, your keyboard, your wifi, everything. Arch updates the kernel often, and once in a while a brand new kernel version has a bug that breaks something on your specific computer.
+The "kernel" is the core part of Linux that talks to your hardware, your graphics, your keyboard, your wifi, everything. Arch updates the kernel often, and once in a while a brand new kernel version has a bug that breaks something on your specific computer.
 
-The fix is simple: install a second kernel. Arch offers a package called `linux-lts` (LTS stands for "Long Term Support"). Unlike your regular kernel, this one barely changes — it gets small safety fixes but skips all the fast-moving updates. Because it changes so little, it's very unlikely to have the same bug that just broke your regular kernel.
+The fix is simple: install a second kernel. Arch offers a package called `linux-lts` (LTS stands for "Long Term Support"). Unlike your regular kernel, this one barely changes, it gets small safety fixes but skips all the fast-moving updates. Because it changes so little, it's very unlikely to have the same bug that just broke your regular kernel.
 
 Once installed, it shows up as an extra option in your boot menu (GRUB), usually under something like "Advanced options for Arch Linux."
 
 So here's what I do if something looks wrong after an update — screen won't turn on, system freezes, whatever:
 
-- Restart the computer.
-- In the boot menu, pick the LTS kernel instead of the normal one.
-- See what happens.
+1. Restart the computer.
+2. In the boot menu, pick the LTS kernel instead of the normal one.
+3. See what happens.
 
-If the LTS kernel boots up fine, I've learned something important: the problem is **most likely** related to the latest kernel. I can keep using LTS for a few days while waiting for a fix, or investigate the issue further.
+If the LTS kernel boots up fine, I've learned something important: the problem is most likely related to the latest kernel. I can keep using LTS for a few days while waiting for a fix, or investigate the issue further.
 
-If the LTS kernel has the _same_ problem, then I know it's not the kernel's fault at all — something else broke. Time for safety net number two.
+If the LTS kernel has the same problem, then I know it's not the kernel's fault at all, something else broke. Time for safety net number two.
 
 This step is quick and safe. You're not deleting anything or changing any settings. You're just trying a different, more stable kernel for one boot. That's why it's always my first move.
 
@@ -72,7 +72,7 @@ Each step tells you something the last one didn't, so you're never just guessing
 
 To be fair, this combo isn't magic. If your **boot menu itself** breaks, let's say GRUB gets misconfigured, neither of these will help, because you can't even get to the point of picking a kernel or restoring a backup. In that rare case, you'd need to boot from a USB drive and fix things manually. It's worth knowing that step exists too, even if you hopefully never need it.
 
-I don't expect to use these recovery tools very often. In fact, most Arch updates complete without any issues at all. The point isn't that Arch is unreliable—it's that having a recovery plan removes the uncertainty when something unexpected does happen.
+I don't expect to use these recovery tools very often. In fact, most Arch updates complete without any issues at all. The point isn't that Arch is unreliable, it's that having a recovery plan removes the uncertainty when something unexpected does happen.
 
 Keeping an LTS kernel installed gives me a quick, non-destructive way to check whether the latest kernel is responsible. If it isn't, Timeshift lets me return my system to a known-good state in just a few minutes.
 
