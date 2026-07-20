@@ -6,7 +6,7 @@ date: 2026-07-19
 categories: [linux, arch]
 tags: [arch-linux, grub, kernel, timeshift, backups]
 series: Arch Linux
-order: 7
+order: 5
 ---
 
 Arch Linux is a rolling release distribution, so it doesn't have version numbers like Ubuntu 26.04, Linux Mint 22.3, or Fedora 44. Instead, new versions of packages are released continuously. Whenever you update your system, you receive the latest available software.
