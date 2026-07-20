@@ -46,11 +46,11 @@ This step is quick and safe. You're not deleting anything or changing any settin
 > After installing `linux-lts`, make sure your regular `linux` kernel is still your default boot entry. I prefer to keep the LTS kernel as an emergency fallback rather than my everyday kernel.
 {: .callout-warning}
 
-## Safety net two: Timeshift, a full system backup tool
+## Safety net two: Recovering with Timeshift snapshots
 
 The LTS kernel only helps if the _kernel_ is the problem. But sometimes an update breaks something else — a setting, a program, a config file. In those cases, switching kernels won't fix anything.
 
-That's where [Timeshift](https://github.com/linuxmint/timeshift) comes in. It's a free tool that lets you create and restore snapshots of your system. I configure it to create regular snapshots, so I always have a recent restore point if an update goes wrong. I can roll my entire system back to how it was right before the problem started — settings, programs, everything.
+That's where [Timeshift](https://github.com/linuxmint/timeshift) comes in. It's a free, open source system snapshot tool originally created by Tony George and now maintained by the Linux Mint team. It lets you create and restore snapshots of your system, making it easy to return to a known-good state if an update causes problems. I configure it to create regular snapshots, so I always have a recent restore point available. If something goes wrong, I can roll my system back to how it was before the problem started—packages, configuration files, and system settings included.
 
 I keep Timeshift snapshots saved on a separate hard drive, just in case something happens to my main drive too.
 
