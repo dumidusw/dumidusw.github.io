@@ -2,6 +2,7 @@
 layout: post
 title: "My Two Layer Safety Net for Arch Linux"
 description: A simple two-layer recovery strategy using the Linux LTS kernel and Timeshift to recover from most Arch Linux update problems with confidence.
+image: /assets/images/posts/two-layer-safety-net-arch-linux.png
 date: 2026-07-19
 categories: [linux, arch]
 tags: [arch-linux, grub, kernel, timeshift, backups]
