@@ -4,6 +4,7 @@ title:  "Understanding Arch News (and Automating It with Informant)"
 date:   2026-07-16 09:00:00 +0530
 categories: linux archlinux projects
 description: Arch Linux announces breaking changes through its news page, not version numbers. Here's why that matters, and how Informant automates checking it.
+image: /assets/images/posts/understanding-arch-news-informant.png
 series: Arch Linux
 order: 2
 ---
