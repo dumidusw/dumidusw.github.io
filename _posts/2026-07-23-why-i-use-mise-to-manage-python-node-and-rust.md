@@ -240,10 +240,6 @@ Once you've made that separation, operating system updates and development toolc
 
 Got questions, corrections, or suggestions?
 
-Open an issue on
-[GitHub](https://github.com/dumidusw)
-or email me at
-dumidu.github@gmail.com.
+Open an issue on [GitHub](https://github.com/dumidusw) or [drop me an email](mailto:dumidu.github@gmail.com).
 
-There's no comment section on this blog, but I'm always happy to hear
-from readers.
+{% include author-bio.html %}

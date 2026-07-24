@@ -88,7 +88,6 @@ drive as everything else," that's the gap I was trying to close in this article.
 
 Got questions, corrections, or suggestions?
 
-Open an issue on
-[GitHub](https://github.com/dumidusw)
-or email me at
-dumidu.github@gmail.com.
+Open an issue on [GitHub](https://github.com/dumidusw) or [drop me an email](mailto:dumidu.github@gmail.com).
+
+{% include author-bio.html %}

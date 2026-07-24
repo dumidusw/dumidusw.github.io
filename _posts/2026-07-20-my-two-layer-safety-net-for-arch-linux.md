@@ -79,55 +79,10 @@ Keeping an LTS kernel installed gives me a quick, non-destructive way to check w
 
 For me, that simple two-step process has made updating Arch much less stressful.
 
-<!--
-Introduction
-
-Write one or two paragraphs introducing the problem this article
-solves.
-
-This text becomes the homepage excerpt, so it should stand on its own
-and encourage readers to continue.
-
-Imagine someone only reads these two paragraphs.
-Would they understand what this article is about?
--->
-
-<!--
-Publishing checklist
-
-Content
----------
-[ ] Clear title
-[ ] Introduction explains the problem
-[ ] Sections flow logically
-[ ] Commands tested
-[ ] Output verified
-[ ] Grammar and spelling checked
-
-Links
-------
-[ ] Internal links added where appropriate
-[ ] Related posts reviewed
-[ ] External links still valid
-
-Metadata
----------
-[ ] Description written
-[ ] Categories correct
-[ ] Series/order set (if applicable)
-[ ] Custom image added (if needed)
-
-Final review
-------------
-[ ] Read the article from top to bottom once
-[ ] Check desktop layout
-[ ] Check mobile layout
-[ ] Verify code blocks render correctly
--->
 ------------------------
+
 Got questions, corrections, or suggestions?
 
-Open an issue on
-[GitHub](https://github.com/dumidusw)
-or email me at
-dumidu.github@gmail.com.
+Open an issue on [GitHub](https://github.com/dumidusw) or [drop me an email](mailto:dumidu.github@gmail.com).
+
+{% include author-bio.html %}

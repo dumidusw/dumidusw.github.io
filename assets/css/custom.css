@@ -1871,3 +1871,58 @@ div.highlighter-rouge:focus-within .code-copy-btn {
     width: 100%;
   }
 }
+
+/* ========================================
+   AUTHOR BIO
+   ======================================== */
+
+.author-bio {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-top: var(--space-md);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  box-shadow: var(--card-shadow-static);
+}
+
+.author-bio-avatar {
+  border-radius: 50%;
+  flex-shrink: 0;
+  border: 1px solid var(--color-border);
+}
+
+.author-bio-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.author-bio-name {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: var(--fs-body);
+  color: var(--color-ink);
+}
+
+.author-bio-links {
+  font-size: var(--fs-meta);
+  color: var(--color-muted);
+}
+
+.author-bio-links a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+.author-bio-links a:hover {
+  color: var(--color-accent-hover);
+  text-decoration: underline;
+}
+
+.author-bio-links .dot-separator {
+  margin: 0 0.35rem;
+  color: var(--color-muted-light);
+}
