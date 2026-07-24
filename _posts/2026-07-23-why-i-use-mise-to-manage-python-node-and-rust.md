@@ -2,7 +2,7 @@
 layout: post
 title:  "Why I Use mise to Manage Python, Node, and Rust"
 date:   2026-07-23 05:20:00 +0530
-categories: [linux,archlinux]
+categories: [linux,arch-linux]
 tags: [arch-linux, mise, python, node, rust, version-management, developer-tools]
 description: Learn why I use mise to manage Python, Node, and Rust on Arch Linux. Understand how it keeps project toolchains separate from the operating system while supporting multiple language versions.
 image: /assets/images/posts/mise-python-node-rust.png

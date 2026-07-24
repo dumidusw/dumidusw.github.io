@@ -2,7 +2,7 @@
 layout: post
 title:  "Why pacman -Sy Is Dangerous on Arch Linux"
 date:   2026-07-17 09:00:00 +0530
-categories: linux archlinux
+categories: [linux, arch-linux]
 description: pacman -Sy looks harmless because it only refreshes a package list, but running it alone can leave your system in a broken, version-inconsistent state. Here's the mechanism behind partial upgrades on Arch, and why -Syu is the only safe way to update.
 image: /assets/images/posts/why-pacman-sy-is-dangerous-on-arch-linux.png
 series: Arch Linux

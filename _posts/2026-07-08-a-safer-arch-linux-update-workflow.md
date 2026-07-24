@@ -2,7 +2,7 @@
 layout: post
 title:  "A Safer Arch Linux Update Workflow"
 date:   2026-07-08 10:00:00 +0530
-categories: linux archlinux projects
+categories: [linux, arch-linux]
 description: A step-by-step guide to updating Arch Linux safely, with tips on snapshots and handling potential issues.
 series: Arch Linux
 order: 1

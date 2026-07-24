@@ -2,7 +2,7 @@
 layout: post
 title:  "Timeshift: Snapshots Are Not Backups"
 date:   2026-07-16 10:00:00 +0530
-categories: linux archlinux projects
+categories: [linux, arch-linux]
 description: Timeshift protects your system state, not your personal files. Here's the real difference between snapshots and backups.
 image: /assets/images/posts/timeshift-snapshots-are-not-backups.png
 series: Arch Linux
