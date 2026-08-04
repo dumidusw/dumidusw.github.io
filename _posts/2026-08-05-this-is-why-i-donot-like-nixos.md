@@ -4,7 +4,7 @@ title:  "This is why I don't like NixOS"
 date:   2026-08-04 10:00:00 +0530
 categories: [nixos, arch-linux]
 description: NixOS promises declarative, reproducible systems, but its abstraction over the filesystem hierarchy means you're learning Nix, not Linux.
-image: /assets/images/posts/this-is-why-i-donot-like-nix-os.png
+image: /assets/images/posts/this-is-why-i-donot-like-nix-os.webp
 ---
 
 As I remember, it was around 2004 when I first installed Linux using a Red Hat CD bought from a local store. I spent days learning where configurations lived in `/etc`, where binaries sat in `/bin`, how shared libraries linked together via `/usr/lib`, and how text files drove the entire operating system, that beautiful concept of everything is a file. It took some time and effort, but learning those fundamentals paid off. 
