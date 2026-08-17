@@ -7,8 +7,7 @@ description: Why I built psmon, a lightweight interactive process monitor that b
 image: /assets/images/posts/psmon.webp
 ---
 
-Anyone who uses a Unix like operating system has probably come across tools like `top`, `htop`, or the graphically rich `btop`. They are indeed feature rich and powerful. They are capable of providing pretty much every system metric an experienced system administrator could ever ask for.
-But I wanted something simple, fast, and approachable.
+Anyone who uses a Unix like operating system has probably come across tools like `top`, `htop`, or the graphically rich `btop`. They are indeed feature rich and powerful. They are capable of providing pretty much every system metric an experienced system administrator could ever ask for. But I wanted something simple, fast, and approachable.
 
 <!--more-->
 
