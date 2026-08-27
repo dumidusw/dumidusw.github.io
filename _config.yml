@@ -18,7 +18,7 @@ description: >-
   Exploring Linux, Python, Bash, and software engineering fundamentals
   through practical projects.
 baseurl: ""
-url: "https://dumidusw.github.io"
+url: "https://dumidusw.dev"
 
 # Clean, lowercase, canonical-friendly URLs (SEO)
 permalink: /:year/:month/:day/:title/
