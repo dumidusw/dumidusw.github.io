@@ -11,7 +11,7 @@ Anyone who uses a Unix like operating system has probably come across tools like
 
 <!--more-->
 
-For new Linux users, or even experienced developers who just want to quickly figure out why their computer fan has gone into helicopter mode, these tools can feel overwhelming. They show a lot of numbers, graphs, and processes when all you really want is a straight answer. They are verbose. 
+For new Linux users, or even experienced developers who just want to quickly figure out why their computer fan has gone into "helicopter mode", these tools can feel overwhelming. They show a lot of numbers, graphs, and processes when all you really want is a straight answer. They are verbose. 
 
 Now if we look at the other end of the spectrum, we have the native `ps` command, which was developed in the early 1970s. It's a fantastic tool for process analysis. It's lightweight and very fast. But we don't get an eye-catching dashboard with it. Another limitation of `ps` is that it gives you a static snapshot. For example, let's say you want to find a memory hog, watch it live, and terminate it. You might start with `ps`, pipe the output through `grep` or `awk`, and repeat the command to see what's happening. Then, when you find the process you want, you still have to copy its PID and pass it to `kill`.
 
