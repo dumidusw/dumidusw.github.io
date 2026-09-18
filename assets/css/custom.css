@@ -24,21 +24,21 @@
   --color-accent: #1f6f5c; /* deep teal — replaces Minima's default blue */
   --color-accent-hover: #164f41;
   --color-ink: #1a1a1a; /* body/title text, slightly softer than pure black */
-  --color-muted: #6b6b6b; /* meta text */
-  --color-muted-light: #9a9a9a; /* category text */
+  --color-muted: #4b5563; /* meta text — dark slate, matches Doks' contrast level */
+  --color-muted-light: #7b8794; /* category text */
   --color-border: #e8e8e8;
-  --color-tag-bg: #eef4f2;
   --color-tag-pill-bg: var(
-    --color-tag-bg
-  ); /* tag pill background — decoupled from code/selection use of tag-bg above */
+    --color-inline-code-bg
+  ); /* tag pill now shares the neutral grey used by inline code */
   --color-tag-text: #55766e; /* muted, desaturated version of the accent — not a near-twin of it */
   --color-tag-label: var(
     --color-muted-light
   ); /* resting tag text color — matches date/reading-time gray exactly */
   --color-bg: #ffffff;
   --color-bg-elevated: #f4f4f2;
-  --color-inline-code-bg: #f3f9f7;
-  --color-inline-code-border: #d7e8e1;
+  --color-inline-code-bg: #eef1f4;
+  --color-inline-code-border: #e2e5ea;
+  --color-slate-text: #3d4a58; /* body/code/tag text — shared token so dark mode can override once */
 
   --card-shadow-rest: 0 2px 6px rgba(20, 20, 20, 0.08);
   --card-shadow-hover: 0 12px 28px rgba(20, 20, 20, 0.14);
@@ -75,8 +75,9 @@
   --color-tag-text: #8fada3; /* muted, desaturated relative to the vivid dark accent */
   --color-bg: #14161a;
   --color-bg-elevated: #20242a;
-  --color-inline-code-bg: #23332f;
-  --color-inline-code-border: #35584e;
+  --color-inline-code-bg: #363b44;
+  --color-inline-code-border: #454a54;
+  --color-slate-text: #c3cbd4; /* light slate — readable on dark card/code backgrounds */
 
   --card-shadow-rest: 0 2px 6px rgba(0, 0, 0, 0.35);
   --card-shadow-hover: 0 12px 28px rgba(0, 0, 0, 0.55);
@@ -723,16 +724,13 @@ a:hover {
 
 .post-header {
   margin-bottom: var(--space-lg);
-  padding: 1.25rem 2rem;
-  border: 1px solid var(--color-border);
-  border-radius: 14px;
-  background: var(--color-bg-elevated);
-  box-shadow: var(--card-shadow-static);
+  text-align: center;
 }
 
 .post-header .post-meta {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
   flex-wrap: wrap;
   font-size: var(--fs-meta);
@@ -763,15 +761,15 @@ code,
 pre {
   font-family:
     'JetBrains Mono', 'SF Mono', Consolas, 'Liberation Mono', monospace !important;
-  font-size: 0.9em;
+  font-size: 0.84em;
 }
 
 /* 2. Inline code - not inside pre blocks */
 code:not(pre code) {
   background: var(--inline-code-bg);
-  color: var(--color-ink);
-  font-weight: 550;
-  padding: 0.15em 0.4em;
+  color: var(--color-slate-text);
+  font-weight: 500;
+  padding: 0.2em 0.45em;
   border-radius: 4px;
   white-space: nowrap;
   border: 1px solid var(--inline-code-border);
@@ -794,6 +792,7 @@ pre code {
   padding: 0;
   border: none;
   border-radius: 0;
+  font-size: 1.05em;
 }
 
 /* 5. Fenced code block wrapper */
@@ -1088,7 +1087,7 @@ div.highlighter-rouge:focus-within .code-copy-btn {
 
 .site-description {
   margin: 0;
-  font-size: 0.95rem;
+  font-size: 1.125rem;
   color: var(--color-muted);
   font-weight: 400;
   max-width: 480px;
@@ -1111,7 +1110,7 @@ div.highlighter-rouge:focus-within .code-copy-btn {
 
 .page-content {
   padding-top: var(--space-lg);
-  padding-bottom: var(--space-lg);
+  padding-bottom: 1rem;
 }
 
 /* ========================================
@@ -1232,17 +1231,17 @@ div.highlighter-rouge:focus-within .code-copy-btn {
 
 .post-list-item {
   position: relative;
-  margin-bottom: 2.25rem;
+  margin-bottom: 1.5rem;
   padding: 1.75rem 2rem;
   border: 1px solid var(--color-border);
-  border-radius: 14px;
-  background: var(--color-bg-elevated);
-  box-shadow: var(--card-shadow-rest);
-  background: var(--color-bg); /* #ffffff instead of elevated */
+  border-radius: 8px;
+  background: var(--color-bg);
+  box-shadow: none;
+  will-change: transform;
   transition:
-    border-color 0.18s ease-out,
-    transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
-    box-shadow 0.2s ease-out;
+    transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
 }
 
 /* Stretched link: the title's <a> gets an invisible layer that fills
@@ -1257,9 +1256,9 @@ div.highlighter-rouge:focus-within .code-copy-btn {
 }
 
 .post-list-item:hover {
-  transform: translateY(-2px);
-  border-color: var(--color-accent);
-  box-shadow: var(--card-shadow-hover);
+  transform: scale(1.015);
+  border-color: rgba(31, 111, 92, 0.4);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
 }
 
 .post-list-item:last-child {
@@ -1268,10 +1267,11 @@ div.highlighter-rouge:focus-within .code-copy-btn {
 
 .post-list-item h2 {
   font-family: var(--font-sans) !important;
-  font-size: 2rem !important; /* ~32px: gives the title the dominant punch */
+  font-size: 2.525rem !important; /* 34px: dominant desktop heading */
   font-weight: 700 !important;
-  line-height: 1.25 !important;
-  letter-spacing: -0.02em;
+  line-height: 1.2 !important;
+  letter-spacing: -0.025em;
+  margin-top: 0;
   margin-bottom: 0.85rem;
 }
 
@@ -1286,12 +1286,13 @@ div.highlighter-rouge:focus-within .code-copy-btn {
 }
 
 .post-list-item .post-meta {
-  font-size: var(--fs-meta);
+  font-size: 0.9375rem;
   color: var(--color-muted);
-  margin-bottom: 1.1rem;
+  margin-top: 1.1rem;
+  margin-bottom: 0;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.75rem;
   flex-wrap: wrap;
 }
 
@@ -1306,7 +1307,7 @@ div.highlighter-rouge:focus-within .code-copy-btn {
   position: relative;
   z-index: 2;
   background: var(--color-tag-pill-bg);
-  color: var(--color-tag-label);
+  color: var(--color-slate-text);
   font-size: 0.78rem;
   font-weight: 500;
   padding: 0.15rem 0.6rem;
@@ -1324,28 +1325,20 @@ div.highlighter-rouge:focus-within .code-copy-btn {
 }
 
 .post-list-item .post-excerpt {
-  font-size: 1rem; /* 16px: widens the visual contrast with the title */
-  color: var(--color-ink);
-  line-height: 1.7;
+  font-size: var(
+    --fs-body
+  ); /* 18px: solid body scale matching Doks lead text */
+  color: var(--color-slate-text);
+  line-height: 1.65;
 }
 
 .post-list-item .post-excerpt p {
   margin: 0;
-  opacity: 0.82;
+  color: inherit;
 }
 
 .post-list-item .read-more {
-  position: relative;
-  z-index: 2;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  margin-top: 1.1rem;
-  color: var(--color-muted-light);
-  font-size: 0.9rem;
-  font-weight: 500;
-  text-decoration: none;
-  transition: color 0.15s ease;
+  display: none !important;
 }
 
 .post-list-item .read-more:hover,
@@ -1395,7 +1388,7 @@ div.highlighter-rouge:focus-within .code-copy-btn {
   text-align: center;
   padding: var(--space-md) 0;
   border-top: 1px solid var(--color-border);
-  margin-top: var(--space-lg);
+  margin-top: 0.75rem;
 }
 
 /* Legal metadata - quietly recedes, same treatment as post dates/meta,
@@ -1437,11 +1430,11 @@ div.highlighter-rouge:focus-within .code-copy-btn {
   }
 
   .post-list-item {
-    padding: 1.25rem 1.4rem;
+    padding: 1.5rem 1.25rem;
   }
 
   .post-list-item h2 {
-    font-size: 1.4rem;
+    font-size: 1.5rem !important;
   }
 
   .post-list-item .post-excerpt {
@@ -1481,7 +1474,7 @@ div.highlighter-rouge:focus-within .code-copy-btn {
 .site-header,
 .post-list-item,
 .post {
-  animation: fadeInUp 0.5s ease both;
+  animation: fadeInUp 0.5s ease backwards;
 }
 
 .post-list-item:nth-child(1) {
@@ -1807,7 +1800,7 @@ div.highlighter-rouge:focus-within .code-copy-btn {
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  margin: 3rem 0 2.5rem;
+  margin: 3rem 0 0.5rem;
   padding-top: 1rem;
 }
 
