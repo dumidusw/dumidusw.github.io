@@ -38,7 +38,7 @@ Internet
 
 I wanted to use a separate Brave profile for MITM testing. Because I use separate brave profiles as web apps on my arch computer.
 
-That way, my normal browsing profile would remain separate. The MITM profile would have its own cookies, extensions, storage, and browsing state. So I would simply open it using rofi and hyprland.
+That way, my normal browsing profile would remain separate. The MITM profile would have its own cookies, extensions, storage, and browsing state. So I would simply operate it using hyprland and rofi.
 
 I also wanted this profile to trust mitmproxy's CA certificate so that mitmproxy could decrypt HTTPS connections.
 
