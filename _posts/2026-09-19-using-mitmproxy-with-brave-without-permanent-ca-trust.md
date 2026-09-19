@@ -15,11 +15,11 @@ The interesting part wasn't the final fix. The interesting part was figuring out
 
 <!--more-->
 
-In this post I'm not going to talk about "What is mitmproxy" or "how to install mitmproxy". This is more about troubleshooting a problem where the first few solutions seem reasonable, but are actually fixing the wrong thing.
+In this post I'm not going to talk about "What is mitmproxy" or "how to install it". This is more about troubleshooting a problem where the first few solutions seem reasonable, but are actually fixing the wrong thing.
 
 ---
 
-The setup
+Okay this is the setup I wanted
 
 My goal was simple:
 
