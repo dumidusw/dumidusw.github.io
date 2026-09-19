@@ -7,7 +7,7 @@ description: Learn how I made mitmproxy's CA trust temporary in an isolated Brav
 image: /assets/images/posts/mitm-proxy-and-brave-profiles.png
 ---
 
-Recently I wanted to install mitmproxy on my one of my Arch Linux machines because I wanted to inspect HTTPS traffic while working on some scraping and automation projects.
+Recently I wanted to install mitmproxy on one of my Arch Linux machines because I wanted to inspect HTTPS traffic while working on some scraping and automation projects.
 
 Installing mitmproxy itself took only a few minutes, but getting Brave browser to trust mitmproxy's certificate took much longer.
 
