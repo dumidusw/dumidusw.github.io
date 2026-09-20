@@ -21,8 +21,8 @@
   --fs-h1: 2.6rem; /* post-content h1 AND individual post-title */
 
   /* Color */
-  --color-accent: #1f6f5c; /* deep teal — replaces Minima's default blue */
-  --color-accent-hover: #164f41;
+  --color-accent: #326080; /* navy — Marina palette accent */
+  --color-accent-hover: #1f3c52;
   --color-ink: #1a1a1a; /* body/title text, slightly softer than pure black */
   --color-muted: #4b5563; /* meta text — dark slate, matches Doks' contrast level */
   --color-muted-light: #7b8794; /* category text */
@@ -34,7 +34,8 @@
   --color-tag-label: var(
     --color-muted-light
   ); /* resting tag text color — matches date/reading-time gray exactly */
-  --color-bg: #ffffff;
+  --color-bg: #f5f5ef; /* warm paper tone instead of stark white */
+  --color-surface: #ffffff; /* cards/panels stay pure white against the page wash */
   --color-bg-elevated: #f4f4f2;
   --color-inline-code-bg: #eef1f4;
   --color-inline-code-border: #e2e5ea;
@@ -74,6 +75,7 @@
   --color-tag-pill-bg: #202521; /* nearly matches card background, just enough lift to read as a pill */
   --color-tag-text: #8fada3; /* muted, desaturated relative to the vivid dark accent */
   --color-bg: #14161a;
+  --color-surface: #14161a; /* unchanged for now — dark mode wasn't part of this ask */
   --color-bg-elevated: #20242a;
   --color-inline-code-bg: #363b44;
   --color-inline-code-border: #454a54;
@@ -389,7 +391,7 @@ a:hover {
   padding: 0.6rem 1rem;
   border: 1px solid var(--color-border);
   text-align: left;
-  background: var(--color-bg);
+  background: var(--color-surface);
   color: var(--color-ink);
 }
 
@@ -667,7 +669,7 @@ a:hover {
 }
 
 .share-menu-item:hover {
-  background: var(--color-bg);
+  background: var(--color-surface);
   color: var(--color-accent);
 }
 
@@ -1222,7 +1224,7 @@ div.highlighter-rouge:focus-within .code-copy-btn {
 
 .bookmark-remove:hover {
   color: var(--color-accent);
-  background: var(--color-bg);
+  background: var(--color-surface);
 }
 
 /* ========================================
@@ -1235,7 +1237,7 @@ div.highlighter-rouge:focus-within .code-copy-btn {
   padding: 1.75rem 2rem;
   border: 1px solid var(--color-border);
   border-radius: 8px;
-  background: var(--color-bg);
+  background: var(--color-surface);
   box-shadow: none;
   will-change: transform;
   transition:
@@ -1320,7 +1322,7 @@ div.highlighter-rouge:focus-within .code-copy-btn {
 
 .post-meta .post-category-tag:hover {
   background: var(--color-accent);
-  color: var(--color-bg);
+  color: var(--color-surface);
   transform: translateY(-1px);
 }
 
@@ -1599,7 +1601,7 @@ div.highlighter-rouge:focus-within .code-copy-btn {
   max-height: 70vh;
   display: flex;
   flex-direction: column;
-  background: var(--color-bg);
+  background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: 14px;
   box-shadow: var(--card-shadow-hover);
