@@ -32,9 +32,16 @@ layout: default
       </a>
     </h2>
 
-    <div class="post-excerpt">
-      {{ post.excerpt }}
-    </div>
+    <div class="post-card-body">
+      <div class="post-excerpt">
+        {{ post.excerpt }}
+      </div>
+      {%- if post.image -%}
+      <div class="post-card-thumb">
+        <img src="{{ post.image | relative_url }}" alt="{{ post.title | escape }}" loading="lazy">
+      </div>
+      {%- endif -%}
+	</div>
 
     <div class="post-meta">
       <time datetime="{{ post.date | date_to_xmlschema }}">
