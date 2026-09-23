@@ -14,48 +14,52 @@
   --font-serif: 'Fraunces', Georgia, 'Times New Roman', serif;
 
   /* Type scale */
-  --fs-meta: 0.875rem; /* 14px — dates, categories: recede, don't compete with title */
-  --fs-body: 1.125rem; /* 18px — paragraph text: post-content p, post-excerpt */
-  --fs-h3: 1.6rem; /* post-content h3 */
-  --fs-h2: 2rem; /* 32px — post-content h2 AND homepage post-list-item title */
-  --fs-h1: 2.6rem; /* post-content h1 AND individual post-title */
+  --fs-meta: 0.875rem;
+  --fs-body: 1.125rem;
+  --fs-h3: 1.6rem;
+  --fs-h2: 2rem;
+  --fs-h1: 2.6rem;
 
-  /* Color */
-  --color-accent: #326080; /* navy — Marina palette accent */
-  --color-accent-hover: #1f3c52;
-  --color-ink: #1a1a1a; /* body/title text, slightly softer than pure black */
-  --color-muted: #4b5563; /* meta text — dark slate, matches Doks' contrast level */
-  --color-muted-light: #7b8794; /* category text */
-  --color-border: #e8e8e8;
-  --color-tag-pill-bg: var(
-    --color-inline-code-bg
-  ); /* tag pill now shares the neutral grey used by inline code */
-  --color-tag-text: #55766e; /* muted, desaturated version of the accent — not a near-twin of it */
-  --color-tag-label: var(
-    --color-muted-light
-  ); /* resting tag text color — matches date/reading-time gray exactly */
-  --color-bg: #f5f5ef; /* warm paper tone instead of stark white */
-  --color-surface: #ffffff; /* cards/panels stay pure white against the page wash */
-  --color-bg-elevated: #f4f4f2;
-  --color-inline-code-bg: #eef1f4;
-  --color-inline-code-border: #e2e5ea;
-  --color-slate-text: #3d4a58; /* body/code/tag text — shared token so dark mode can override once */
+  /* Surfaces */
+  --color-bg: #eceae3; /* Tactile linen paper */
+  --color-surface: #f7f6f2; /* Very soft off-white cards */
+  --color-bg-elevated: #e2ded5; /* Neutral stone for tags, kbd, callouts */
+  --color-border: #d6d0c2; /* Visible editorial border line */
 
-  --card-shadow-rest: 0 2px 6px rgba(20, 20, 20, 0.08);
-  --card-shadow-hover: 0 12px 28px rgba(20, 20, 20, 0.14);
-  --card-shadow-static: 0 1px 2px rgba(20, 20, 20, 0.04);
+  /* Text */
+  --color-ink: #141413; /* Crisp printer's ink black */
+  --color-body: #2b2926; /* Warm deep charcoal for sustained reading */
+  --color-slate-text: #383531; /* Excerpts and secondary body */
+  --color-muted: #5e5b54; /* Secondary text */
+  --color-muted-light: #7d7971; /* Timestamps & read time */
 
-  /* Syntax highlighting */
-  --syntax-keyword: #1f6f5c;
-  --syntax-string: #9a5b13;
-  --syntax-number: #7c5295;
-  --syntax-func: #1a5fb4;
-  --syntax-tag: #a6423e;
-  --syntax-diff-add: #1f7a4d;
-  --syntax-diff-add-bg: rgba(31, 122, 77, 0.1);
-  --syntax-diff-del: #c0392b;
-  --syntax-diff-del-bg: rgba(192, 57, 43, 0.1);
-  --color-warning: #c2610a; /* true orange for the Warning callout, decoupled from --syntax-string */
+  /* Accents & Logo */
+  --color-accent: #e43d12; /* Punchy vermilion for logo, hovers, rules */
+  --color-accent-hover: #b82d08;
+
+  /* Tags & Inline Code */
+  --color-inline-code-bg: #f0eee8; /* Very soft, subtle warm tint */
+  --color-inline-code-border: #e3dfd5; /* Low-contrast hairline edge */
+  --color-tag-pill-bg: #edeae2; /* Soft warm chip background */
+  --color-tag-text: #5e5b54; /* Matches muted secondary text */
+  --color-tag-bg: #d6d0c2;
+  --color-tag-label: var(--color-muted);
+
+  --card-shadow-rest: 0 2px 5px rgba(20, 20, 19, 0.04);
+  --card-shadow-hover: 0 10px 22px rgba(20, 20, 19, 0.08);
+  --card-shadow-static: 0 1px 2px rgba(20, 20, 19, 0.03);
+
+  /* Syntax Highlighting (Rouge) */
+  --syntax-keyword: #9d0006; /* Gruvbox red */
+  --syntax-string: #79740e; /* Gruvbox olive green */
+  --syntax-number: #8f3f71; /* Gruvbox magenta/purple */
+  --syntax-func: #076678; /* Gruvbox slate aqua */
+  --syntax-tag: #b57614; /* Gruvbox yellow/ochre */
+  --syntax-diff-add: #79740e;
+  --syntax-diff-add-bg: rgba(121, 116, 14, 0.12);
+  --syntax-diff-del: #9d0006;
+  --syntax-diff-del-bg: rgba(157, 0, 6, 0.12);
+  --color-warning: #af3a03; /* Gruvbox warm orange */
 
   /* Spacing rhythm */
   --space-xs: 0.4rem;
@@ -129,7 +133,7 @@ h6,
 body {
   font-size: 16px;
   line-height: 1.6;
-  color: var(--color-ink);
+  color: var(--color-body);
   background: var(--color-bg);
   transition:
     background-color 0.2s ease,
@@ -227,11 +231,12 @@ a:hover {
 
 .post-content p {
   margin-bottom: 1.2rem;
+  color: var(--color-body);
 }
 
 .post-content a {
   text-decoration: underline;
-  text-decoration-color: rgba(31, 111, 92, 0.35);
+  text-decoration-color: rgba(228, 61, 18, 0.35);
   text-underline-offset: 2px;
   transition: text-decoration-color 0.15s ease;
 }
@@ -300,11 +305,12 @@ a:hover {
 .post-content blockquote {
   margin: 1.5rem 0;
   padding: 0.9rem 1.5rem;
-  border-left: 3px solid var(--color-muted);
-  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-inline-code-border);
+  border-left: 3px solid var(--color-accent);
+  background: var(--color-inline-code-bg);
   border-radius: 0 8px 8px 0;
   font-style: normal;
-  color: var(--color-ink);
+  color: var(--color-body);
 }
 
 .post-content blockquote p {
@@ -754,8 +760,8 @@ a:hover {
    ======================================== */
 
 .post-content {
-  --inline-code-bg: var(--color-bg-elevated);
-  --inline-code-border: var(--color-border);
+  --inline-code-bg: var(--color-inline-code-bg);
+  --inline-code-border: var(--color-inline-code-border);
 }
 
 .post-excerpt {
@@ -778,9 +784,10 @@ pre {
 /* 2. Inline code - not inside pre blocks */
 code:not(pre code) {
   background: var(--inline-code-bg);
-  color: var(--color-slate-text);
+  color: var(--color-ink);
   font-weight: 500;
-  padding: 0.2em 0.45em;
+  letter-spacing: -0.01em;
+  padding: 0.15em 0.4em;
   border-radius: 4px;
   white-space: nowrap;
   border: 1px solid var(--inline-code-border);
@@ -788,8 +795,8 @@ code:not(pre code) {
 
 /* 3. Code blocks (pre) */
 pre {
-  background: var(--color-bg-elevated);
-  border: 1px solid var(--color-border);
+  background: var(--color-inline-code-bg);
+  border: 1px solid var(--color-inline-code-border);
   border-radius: 10px;
   padding: 0.875rem 1.5rem;
   overflow-x: auto;
@@ -809,9 +816,9 @@ pre code {
 /* 5. Fenced code block wrapper */
 div.highlighter-rouge {
   position: relative;
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--color-inline-code-border);
   border-radius: 10px;
-  background: var(--color-bg-elevated);
+  background: var(--color-inline-code-bg);
   overflow: hidden;
   margin-bottom: 1.5rem;
 }
@@ -835,9 +842,9 @@ div.highlighter-rouge .highlight {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.5rem 1rem 0.5rem 1.5rem;
-  background: var(--color-bg-elevated);
-  border-bottom: 1px solid var(--color-border);
+  padding: 0.45rem 1rem 0.45rem 1.25rem;
+  background: rgba(0, 0, 0, 0.025);
+  border-bottom: 1px solid var(--color-inline-code-border);
 }
 
 .code-lang-name {
@@ -1055,13 +1062,13 @@ div.highlighter-rouge:focus-within .code-copy-btn {
 .site-title {
   float: none !important;
   font-family: var(--font-sans) !important;
-  font-size: 2.25rem !important; /* ~36px */
+  font-size: 1.85rem !important; /* ~29.6px — balanced masthead scale */
   font-weight: 700 !important;
-  line-height: 1.25 !important;
+  line-height: 1.28 !important;
   letter-spacing: -0.01em;
   color: var(--color-ink) !important;
   transition: color 0.15s ease;
-  max-width: 680px; /* lets it breathe across 2 balanced lines */
+  max-width: 620px; /* keeps the break clean and compact */
   margin: 0 auto;
 }
 
@@ -1069,39 +1076,23 @@ div.highlighter-rouge:focus-within .code-copy-btn {
   color: var(--color-accent) !important;
 }
 
-.site-logo {
-  width: 32px;
-  height: 32px;
-  margin: 0.6rem 0 0.3rem;
-}
-
-.site-logo-dark {
-  display: none;
-}
-
-[data-theme='dark'] .site-logo-light {
-  display: none;
-}
-
-[data-theme='dark'] .site-logo-dark {
-  display: block;
-}
-
 .hero-accent-line {
   display: block;
   width: 40px;
   height: 3px;
-  margin: 0.25rem auto 0;
+  margin: 0.75rem auto 0;
   background: var(--color-accent);
   border-radius: 2px;
 }
 
 .site-description {
-  margin: 0;
-  font-size: 1.125rem;
+  margin: 0.4rem auto 0;
+  font-size: 1.05rem;
   color: var(--color-muted);
   font-weight: 400;
-  max-width: 480px;
+  text-align: center;
+  max-width: 520px;
+  line-height: 1.5;
 }
 
 /* No nav pages configured — hide the empty hamburger trigger
@@ -1268,7 +1259,7 @@ div.highlighter-rouge:focus-within .code-copy-btn {
 
 .post-list-item:hover {
   transform: scale(1.015);
-  border-color: rgba(31, 111, 92, 0.4);
+  border-color: rgba(228, 61, 18, 0.35);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
 }
 
@@ -1318,20 +1309,24 @@ div.highlighter-rouge:focus-within .code-copy-btn {
   position: relative;
   z-index: 2;
   background: var(--color-tag-pill-bg);
-  color: var(--color-slate-text);
+  color: var(--color-tag-text);
   font-size: 0.78rem;
   font-weight: 500;
-  padding: 0.15rem 0.6rem;
+  padding: 0.2rem 0.65rem;
   border-radius: 999px;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.02em;
+  border: 1px solid var(--color-border);
   transition:
     background-color 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease,
     transform 0.15s ease;
 }
 
 .post-meta .post-category-tag:hover {
   background: var(--color-accent);
-  color: var(--color-surface);
+  border-color: var(--color-accent);
+  color: #ffffff;
   transform: translateY(-1px);
 }
 
