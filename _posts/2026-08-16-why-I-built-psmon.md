@@ -2,7 +2,7 @@
 layout: post
 title:  "Why I built psmon"
 date:   2026-08-16 00:00:00 +0530
-categories: [projects]
+categories: [zsh-plugin, arch-linux]
 description: Why I built psmon, a lightweight interactive process monitor that brings the simplicity of ps together with the interactivity of modern process monitors, using nothing but Zsh and standard Linux utilities. 
 image: /assets/images/posts/psmon.webp
 ---

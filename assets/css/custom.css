@@ -69,37 +69,46 @@
 }
 
 [data-theme='dark'] {
-  --color-accent: #4fb89a;
-  --color-accent-hover: #6fd0b3;
-  --color-ink: #e8e6e1;
-  --color-muted: #9d9d9d;
-  --color-muted-light: #757575;
-  --color-border: #303030;
-  --color-tag-bg: #16302b;
-  --color-tag-pill-bg: #202521; /* nearly matches card background, just enough lift to read as a pill */
-  --color-tag-text: #8fada3; /* muted, desaturated relative to the vivid dark accent */
-  --color-bg: #14161a;
-  --color-surface: #14161a; /* unchanged for now — dark mode wasn't part of this ask */
-  --color-bg-elevated: #20242a;
-  --color-inline-code-bg: #363b44;
-  --color-inline-code-border: #454a54;
-  --color-slate-text: #c3cbd4; /* light slate — readable on dark card/code backgrounds */
+  /* Surfaces */
+  --color-bg: #141413; /* Deep warm charcoal background (matches light mode ink) */
+  --color-surface: #1c1c1a; /* Subtle card surface elevation */
+  --color-bg-elevated: #242422; /* Elevated elements, buttons, kbd, code bg */
+  --color-border: #2e2e2a; /* Hairline warm boundary */
 
-  --card-shadow-rest: 0 2px 6px rgba(0, 0, 0, 0.35);
-  --card-shadow-hover: 0 12px 28px rgba(0, 0, 0, 0.55);
-  --card-shadow-static: 0 1px 2px rgba(0, 0, 0, 0.2);
+  /* Accents & Brand */
+  --color-accent: #ff5722; /* Vibrant editorial vermilion for dark theme */
+  --color-accent-hover: #ff784e; /* Lighter orange-red on hover */
 
-  /* Syntax highlighting - dark */
-  --syntax-keyword: #4fb89a;
-  --syntax-string: #e0a458;
-  --syntax-number: #c49ee0;
-  --syntax-func: #7aa8e0;
-  --syntax-tag: #e08a86;
-  --syntax-diff-add: #6fd0b3;
-  --syntax-diff-add-bg: rgba(111, 208, 179, 0.12);
-  --syntax-diff-del: #ff8b82;
-  --syntax-diff-del-bg: rgba(255, 90, 79, 0.12);
-  --color-warning: #e8963f; /* true orange for the Warning callout, decoupled from --syntax-string */
+  /* Text Hierarchy */
+  --color-ink: #f4f2ed; /* Bright, readable linen white for headings */
+  --color-body: #d5d1c8; /* Warm parchment text for comfortable reading */
+  --color-slate-text: #b8b3a8; /* Excerpt and secondary body */
+  --color-muted: #8e8a80; /* Secondary labels and icons */
+  --color-muted-light: #6e6a62; /* Timestamps and read times */
+
+  /* Tags & Inline Code */
+  --color-tag-bg: #2b1f1a; /* Deep warm tint for active tags/selection */
+  --color-tag-pill-bg: #232220; /* Muted pill chip background */
+  --color-tag-text: #c4beb3; /* Tag label text */
+  --color-inline-code-bg: #201f1d;
+  --color-inline-code-border: #2e2d29;
+
+  /* Shadows */
+  --card-shadow-rest: 0 2px 8px rgba(0, 0, 0, 0.45);
+  --card-shadow-hover: 0 12px 28px rgba(0, 0, 0, 0.65);
+  --card-shadow-static: 0 1px 3px rgba(0, 0, 0, 0.3);
+
+  /* Syntax Highlighting (Dark Gruvbox Warmth) */
+  --syntax-keyword: #fb4934; /* Red / orange keyword */
+  --syntax-string: #b8bb26; /* Warm olive green */
+  --syntax-number: #d3869b; /* Muted purple */
+  --syntax-func: #8ec07c; /* Aqua/cyan function names */
+  --syntax-tag: #fabd2f; /* Yellow/gold tags */
+  --syntax-diff-add: #b8bb26;
+  --syntax-diff-add-bg: rgba(184, 187, 38, 0.15);
+  --syntax-diff-del: #fb4934;
+  --syntax-diff-del-bg: rgba(251, 73, 52, 0.15);
+  --color-warning: #fe8019; /* Pure Gruvbox orange */
 }
 
 /* ========================================

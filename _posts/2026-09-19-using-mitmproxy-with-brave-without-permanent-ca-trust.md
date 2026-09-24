@@ -2,16 +2,14 @@
 layout: post
 title: "Using mitmproxy with Brave Without Permanent CA Trust"
 date:   2026-09-19 00:00:00 +0530
-categories: [projects]
+categories: [testing, automation]
 description: Learn how I made mitmproxy's CA trust temporary in an isolated Brave profile on Arch Linux, using the system trust store and a wrapper script that automatically removes the CA when the MITM session ends.
 image: /assets/images/posts/mitm-proxy-and-brave-profiles.png
 ---
 
-Recently I wanted to install mitmproxy on one of my Arch Linux machines because I wanted to inspect HTTPS traffic while working on some scraping and automation projects.
+Recently I wanted to install mitmproxy on one of my Arch Linux computers, because I wanted to inspect HTTPS traffic while working on some scraping and automation projects.
 
-Installing mitmproxy itself took only a few minutes, but getting Brave browser to trust mitmproxy's certificate took much longer.
-
-The interesting part wasn't the final fix. The interesting part was figuring out which layer was actually causing the problem.
+Installing mitmproxy itself took only a few minutes, but getting Brave browser to trust mitmproxy's certificate took much longer. The interesting part wasn't the final fix. The interesting part was figuring out which layer was actually causing the problem.
 
 <!--more-->
 
