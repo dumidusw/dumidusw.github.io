@@ -721,13 +721,3 @@ Start a controlled MITM session → temporarily establish trust → do the work 
 That turned out to be a much better solution for the way I use Brave.
 
 ---
-
-Got questions, corrections, or suggestions?
-
-Open an issue on
-[GitHub](https://github.com/dumidusw)
-or email me at
-dumidu.github@gmail.com.
-
-There's no comment section on this blog, but I'm always happy to hear
-from readers.

@@ -264,9 +264,3 @@ Pacman gives you the tools. It does not make every system management decision fo
 So, understand **why** `pacman -Sy package_name` is dangerous. Don't memorize it as a command that you shouldn't run.
 
 ---
-
-Got questions, corrections, or suggestions?
-
-Open an issue on [GitHub](https://github.com/dumidusw) or [drop me an email](mailto:dumidu.github@gmail.com).
-
-{% include author-bio.html %}

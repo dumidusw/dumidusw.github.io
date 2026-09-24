@@ -128,9 +128,3 @@ Informant makes sure you never miss the news. [`arch-sysreport`](https://github.
 faster to figure out what to do about it.
 
 ---
-
-Got questions, corrections, or suggestions?
-
-Open an issue on [GitHub](https://github.com/dumidusw) or [drop me an email](mailto:dumidu.github@gmail.com).
-
-{% include author-bio.html %}

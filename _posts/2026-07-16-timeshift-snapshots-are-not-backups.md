@@ -85,9 +85,3 @@ where are your snapshots actually stored? If the answer is "the same
 drive as everything else," that's the gap I was trying to close in this article.
 
 ---
-
-Got questions, corrections, or suggestions?
-
-Open an issue on [GitHub](https://github.com/dumidusw) or [drop me an email](mailto:dumidu.github@gmail.com).
-
-{% include author-bio.html %}

@@ -125,9 +125,3 @@ It includes a simple `./install.sh` script, or you can load it through your favo
 I'd love to hear what you think. If you find a bug or get an idea for a feature that keeps that balance between utility and simplicity, please feel free to open an issue or send a pull request. I'd genuinely appreciate it.
 
 ---
-
-Got questions, corrections, or suggestions?
-
-Open an issue on [GitHub](https://github.com/dumidusw) or [drop me an email](mailto:dumidu.github@gmail.com).
-
-{% include author-bio.html %}

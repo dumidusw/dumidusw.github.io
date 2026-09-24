@@ -237,9 +237,3 @@ The `mise` copy serves your projects.
 Once you've made that separation, operating system updates and development toolchain updates become completely independent. That's the boundary I wanted, and it's the reason I use `mise`.
 
 ---
-
-Got questions, corrections, or suggestions?
-
-Open an issue on [GitHub](https://github.com/dumidusw) or [drop me an email](mailto:dumidu.github@gmail.com).
-
-{% include author-bio.html %}

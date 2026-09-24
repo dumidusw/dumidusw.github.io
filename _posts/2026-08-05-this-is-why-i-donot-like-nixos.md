@@ -33,9 +33,3 @@ Of course, you can fix it. But instead of standard Linux tools, you're forced to
 If a beginner starts their Linux journey on NixOS today, they are not learning the universal laws of UNIX. They are learning a highly specific, bespoke abstraction layer. They are learning Nix, not Linux. The moment they log into an Ubuntu server at a new job or try to troubleshoot a standard Debian container, they will be paralyzed. They won't know where files actually live, because Nix hid the real Linux architecture behind a wall of hashes.
 
 ---
-
-Got questions, corrections, or suggestions?
-
-Open an issue on [GitHub](https://github.com/dumidusw) or [drop me an email](mailto:dumidu.github@gmail.com).
-
-{% include author-bio.html %}

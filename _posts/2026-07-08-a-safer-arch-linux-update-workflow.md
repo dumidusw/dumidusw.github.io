@@ -156,10 +156,3 @@ It doesn't analyze anything or make decisions for you.
 It simply gathers the information that's usually needed to understand whether an announcement applies to your system.
 
 ----
-
-Got questions, corrections, or suggestions?
-
-Open an issue on [GitHub](https://github.com/dumidusw) or [drop me an email](mailto:dumidu.github@gmail.com).
-
-{% include author-bio.html %}
-

@@ -1986,3 +1986,25 @@ div.highlighter-rouge:focus-within .code-copy-btn {
   margin: 0 0.35rem;
   color: var(--color-muted-light);
 }
+
+/* Comments Card Styling */
+.comments-card {
+  margin-top: var(--space-md);
+  padding: 2rem 2.5rem;
+}
+
+.comments-header {
+  margin-bottom: 1.5rem;
+}
+
+.comments-heading {
+  font-family: var(--font-sans) !important;
+  font-size: var(--fs-h3);
+  font-weight: 700;
+  color: var(--color-ink);
+  margin-bottom: 0.4rem;
+}
+
+.comments-card .hero-accent-line {
+  margin: 0.4rem 0 0 0;
+}

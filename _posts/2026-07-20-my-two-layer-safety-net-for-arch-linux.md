@@ -79,10 +79,4 @@ Keeping an LTS kernel installed gives me a quick, non-destructive way to check w
 
 For me, that simple two-step process has made updating Arch much less stressful.
 
-------------------------
-
-Got questions, corrections, or suggestions?
-
-Open an issue on [GitHub](https://github.com/dumidusw) or [drop me an email](mailto:dumidu.github@gmail.com).
-
-{% include author-bio.html %}
+---
