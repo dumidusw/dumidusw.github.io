@@ -1061,6 +1061,7 @@ div.highlighter-rouge:focus-within .code-copy-btn {
 
 .site-title {
   float: none !important;
+  display: inline-block;
   font-family: var(--font-sans) !important;
   font-size: 1.85rem !important; /* ~29.6px — balanced masthead scale */
   font-weight: 700 !important;
@@ -1068,7 +1069,7 @@ div.highlighter-rouge:focus-within .code-copy-btn {
   letter-spacing: -0.01em;
   color: var(--color-ink) !important;
   transition: color 0.15s ease;
-  max-width: 620px; /* keeps the break clean and compact */
+  max-width: 100%;
   margin: 0 auto;
 }
 
