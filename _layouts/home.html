@@ -59,7 +59,8 @@ layout: default
       {%- if post.categories.size > 0 -%}
       <span class="post-categories">
         {%- for category in post.categories -%}
-        <span class="post-category-tag">{{ category }}</span>
+        {%- assign cat_slug = category | slugify -%}
+        <a href="{{ '/categories/#' | append: cat_slug | relative_url }}" class="post-category-tag">{{ category }}</a>
         {%- endfor -%}
       </span>
       {%- endif -%}

@@ -1,0 +1,53 @@
+---
+layout: default
+title: Categories
+permalink: /categories/
+---
+
+<div class="post-card categories-page-card">
+  <header class="post-header">
+    <h1 class="post-title">Categories</h1>
+    <span class="hero-accent-line" aria-hidden="true"></span>
+  </header>
+
+  <!-- Category Quick Links / Cloud -->
+  <div class="category-pills-cloud">
+    {% assign categories_sorted = site.categories | sort %} {% for category in
+    categories_sorted %} {% assign cat_name = category[0] %} {% assign cat_posts
+    = category[1] %}
+    <a href="#{{ cat_name | slugify }}" class="post-category-tag">
+      {{ cat_name }} <span class="cat-count">({{ cat_posts | size }})</span>
+    </a>
+    {% endfor %}
+  </div>
+
+  <hr class="categories-divider" />
+
+  <!-- Grouped Posts -->
+  <div class="category-groups">
+    {% for category in categories_sorted %} {% assign cat_name = category[0] %}
+    {% assign cat_posts = category[1] %}
+    <section id="{{ cat_name | slugify }}" class="category-group-section">
+      <h2 class="category-group-title">
+        <span class="category-hash">#</span> {{ cat_name }}
+        <span class="category-group-count"
+          >{{ cat_posts | size }} {% if cat_posts.size == 1 %}post{% else
+          %}posts{% endif %}</span
+        >
+      </h2>
+      <ul class="category-post-list">
+        {% for post in cat_posts %}
+        <li class="category-post-item">
+          <span class="category-post-date"
+            >{{ post.date | date: "%b %d, %Y" }}</span
+          >
+          <a href="{{ post.url | relative_url }}" class="category-post-link"
+            >{{ post.title }}</a
+          >
+        </li>
+        {% endfor %}
+      </ul>
+    </section>
+    {% endfor %}
+  </div>
+</div>
