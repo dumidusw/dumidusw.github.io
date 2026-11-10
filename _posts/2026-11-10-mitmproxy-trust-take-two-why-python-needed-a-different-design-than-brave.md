@@ -4,7 +4,7 @@ title: "MITM Trust, Take Two: Why Python Needed a Different Design Than Brave"
 date:   2026-11-10 00:00:00 +0530
 categories: [testing, automation]
 description: How I built mitmpy, a small wrapper that routes one Python process through mitmproxy without touching the shell or system trust store, and why Brave needed a different design.
-image: /assets/images/posts/mitm-proxy-and-brave-profiles.png
+image: /assets/images/posts/mitm-proxy-python-and-brave-profiles.png
 ---
 In my last post, I wrote about getting mitmproxy to work with an isolated Brave profile without leaving a MITM certificate permanently trusted on my machine.
 That solved half the problem.
